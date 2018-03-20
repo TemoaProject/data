@@ -1,0 +1,2377 @@
+data ;
+
+set time_exist := 
+2016
+;
+
+set time_future := 
+2017
+2022
+2027
+2032
+2037
+;
+
+set time_season := 
+summer
+rain
+;
+
+set time_of_day := 
+day
+night
+;
+
+set tech_resource := 
+IMPDSL
+IMPWTR
+IMPSLR
+;
+set delay :=
+HY1
+HY2
+HY3
+HY4
+HY5
+;
+
+set tech_production := 
+TH1
+TH2
+TH3
+TH4
+TH5
+TH6
+TH7
+TH8
+TH9
+TH10
+TH11
+SO1
+SO2
+SO3
+SO4
+SO5
+SO6
+SO7
+SO8
+SO9
+SO10
+SO11
+SO12
+SO13
+HY1
+HY2
+HY3
+HY4
+HY5
+trans_Be_J
+trans_S_J
+trans_L_J
+trans_F_J
+trans_J_Y
+trans_J_T
+trans_J_B
+trans_Y_Ma
+trans_Ma_Ym
+trans_K_T
+trans_B_M
+trans_M_Bu
+trans_Th_Bu
+trans_B_R
+trans_R_W
+trans_W_Kj
+trans_Kj_A
+trans_P_M
+trans_Wa_W
+tech_Dem_J
+tech_Dem_Ym
+tech_Dem_Ma
+tech_Dem_Y
+tech_Dem_K
+tech_Dem_T
+tech_Dem_Bu
+tech_Dem_M
+tech_Dem_B
+tech_Dem_R
+tech_Dem_W
+tech_Dem_Kj
+tech_Dem_A
+curtailment
+;
+
+set tech_CapReduction := 
+TH1
+TH2
+TH3
+TH4
+TH5
+TH6
+TH7
+TH8
+TH9
+TH10
+TH11
+SO1
+SO2
+SO3
+SO4
+SO5
+SO6
+SO7
+SO8
+SO9
+SO10
+SO11
+SO12
+SO13
+HY1
+HY2
+HY3
+HY4
+HY5
+trans_Be_J
+trans_S_J
+trans_L_J
+trans_F_J
+trans_J_Y
+trans_J_T
+trans_J_B
+trans_Y_Ma
+trans_Ma_Ym
+trans_K_T
+trans_B_M
+trans_M_Bu
+trans_Th_Bu
+trans_B_R
+trans_R_W
+trans_W_Kj
+trans_Kj_A
+trans_P_M
+trans_Wa_W
+tech_Dem_J
+tech_Dem_Ym
+tech_Dem_Ma
+tech_Dem_Y
+tech_Dem_K
+tech_Dem_T
+tech_Dem_Bu
+tech_Dem_M
+tech_Dem_B
+tech_Dem_R
+tech_Dem_W
+tech_Dem_Kj
+tech_Dem_A
+curtailment
+;
+
+set commodity_physical := 
+ethos
+DSL
+WTR
+SLR
+ELC_Be
+ELC_S
+ELC_L
+ELC_F
+ELC_J
+ELC_Ym
+ELC_Ma
+ELC_Y
+ELC_K
+ELC_T
+ELC_Th
+ELC_Bu
+ELC_M
+ELC_B
+ELC_R
+ELC_W
+ELC_Kj
+ELC_A
+ELC_P
+ELC_Wa        #Wau Hpp
+;
+
+set commodity_demand := 
+Dem_J
+Dem_Ym
+Dem_Ma
+Dem_Y
+Dem_K
+Dem_T
+Dem_Bu
+Dem_M
+Dem_B
+Dem_R
+Dem_W
+Dem_Kj
+Dem_A
+;
+
+
+param SegFrac := 
+summer        day        0.25
+summer        night      0.25
+rain          day        0.25
+rain          night      0.25
+;
+
+param CapacityToActivity := 
+    TH1              8760    
+    TH2              8760    
+    TH3              8760    
+    TH4              8760    
+    TH5              8760    
+    TH6              8760    
+    TH7              8760    
+    TH8              8760    
+    TH9              8760    
+    TH10             8760    
+    TH11             8760
+    SO1              8760    
+    SO2              8760    
+    SO3              8760    
+    SO4              8760    
+    SO5              8760    
+    SO6              8760    
+    SO7              8760    
+    SO8              8760    
+    SO9              8760    
+    SO10             8760    
+    SO11             8760
+    SO12             8760
+    SO13             8760
+    HY1              8760    
+    HY2              8760    
+    HY3              8760    
+    HY4              8760    
+    HY5              8760    
+    trans_Be_J       8760  
+    trans_S_J        8760  
+    trans_L_J        8760  
+    trans_F_J        8760  
+    trans_J_Y        8760  
+    trans_J_T        8760  
+    trans_J_B        8760  
+    trans_Y_Ma       8760  
+    trans_Ma_Ym      8760  
+    trans_K_T        8760  
+    trans_B_M        8760  
+    trans_M_Bu       8760  
+    trans_Th_Bu      8760  
+    trans_B_R        8760  
+    trans_R_W        8760  
+    trans_W_Kj       8760  
+    trans_Kj_A       8760    
+    trans_P_M        8760
+    trans_Wa_W       8760
+    tech_Dem_J       8760
+    tech_Dem_Ym      8760
+    tech_Dem_Ma      8760
+    tech_Dem_Y       8760
+    tech_Dem_K       8760
+    tech_Dem_T       8760
+    tech_Dem_Bu      8760
+    tech_Dem_M       8760
+    tech_Dem_B       8760
+    tech_Dem_R       8760
+    tech_Dem_W       8760
+    tech_Dem_Kj      8760
+    tech_Dem_A       8760
+    curtailment      8760
+    IMPDSL           8760
+    IMPSLR           8760
+    IMPWTR           8760
+;
+
+param GlobalDiscountRate := 
+0.03
+;
+
+
+
+param LifetimeLoanTech  :=
+TH6                30.0
+TH11               30.0
+SO1                30.0
+SO2                30.0
+SO3                30.0
+SO4                30.0
+SO5                30.0
+SO6                30.0
+SO7                30.0
+SO8                30.0
+SO9                30.0
+SO10               30.0
+SO11               30.0
+SO12               30.0
+SO13               30.0
+HY1                30.0
+HY2                30.0
+HY3                30.0
+HY4                30.0
+HY5                30.0
+trans_Be_J         30.0
+trans_S_J          30.0
+trans_L_J          30.0
+trans_F_J          30.0
+trans_J_T          30.0
+trans_J_B          30.0
+trans_B_M          30.0
+trans_M_Bu         30.0
+trans_B_R          30.0
+trans_R_W          30.0
+trans_W_Kj         30.0
+trans_Kj_A         30.0
+trans_P_M          30.0
+trans_Wa_W         30.0
+trans_J_Y          30.0
+trans_Y_Ma         30.0
+trans_Ma_Ym        30.0
+trans_K_T          30.0
+trans_Th_Bu        30.0
+;
+ 
+
+
+
+param Demand := 
+# period     # tech       # Demand(GWh)
+2017      Dem_J    451.48 
+2017      Dem_T    33.04 
+2017      Dem_K    11.01 
+2017      Dem_Y    93.60 
+2017      Dem_Ma   38.54 
+2017      Dem_Ym   66.07 
+2017      Dem_B    71.58 
+2017      Dem_M    341.36 
+2017      Dem_Bu   38.54 
+2017      Dem_R    60.56 
+2017      Dem_W    110.12 
+2017      Dem_Kj   38.54 
+2017      Dem_A    60.56 
+2022      Dem_J    690.50 
+2022      Dem_T    53.12 
+2022      Dem_K    19.92 
+2022      Dem_Y    179.26 
+2022      Dem_Ma   86.31 
+2022      Dem_Ym   99.59 
+2022      Dem_B    126.63 
+2022      Dem_M    548.57 
+2022      Dem_Bu   73.59 
+2022      Dem_R    95.83 
+2022      Dem_W    191.66 
+2022      Dem_Kj   82.14 
+2022      Dem_A    136.90 
+2027      Dem_J    1061.01 
+2027      Dem_T    81.62 
+2027      Dem_K    30.61 
+2027      Dem_Y    275.46 
+2027      Dem_Ma   132.63 
+2027      Dem_Ym   153.03 
+2027      Dem_B    198.21 
+2027      Dem_M    873.83 
+2027      Dem_Bu   117.22 
+2027      Dem_R    151.04 
+2027      Dem_W    302.08 
+2027      Dem_Kj   129.46 
+2027      Dem_A    215.77 
+2032      Dem_J    1630.97 
+2032      Dem_T    125.46 
+2032      Dem_K    47.05 
+2032      Dem_Y    423.43 
+2032      Dem_Ma   203.87 
+2032      Dem_Ym   235.24 
+2032      Dem_B    297.97 
+2032      Dem_M    1285.96 
+2032      Dem_Bu   172.51 
+2032      Dem_R    219.55 
+2032      Dem_W    439.11 
+2032      Dem_Kj   188.19 
+2032      Dem_A    313.65 
+;
+
+param  MinCapacity  :=   
+# period     # tech    # value (GW)
+2017     TH1     0.012
+2017     TH2     0.002
+2017     TH3     0.0008
+2017     TH4     0.0012
+2017     TH5     0.0008
+2017     TH7     0.0048
+2017     TH8     0.002
+2017     TH9     0.002
+2017     TH10    0.002
+2022     TH1     0.012
+2022     TH2     0.002
+2022     TH3     0.0008
+2022     TH4     0.0012
+2022     TH5     0.0008
+2022     TH7     0.0048
+2022     TH8     0.002
+2022     TH9     0.002
+2022     TH10    0.002
+2027     TH1     0.012
+2027     TH2     0.002
+2027     TH3     0.0008
+2027     TH4     0.0012
+2027     TH5     0.0008
+2027     TH7     0.0048
+2027     TH8     0.002
+2027     TH9     0.002
+2027     TH10    0.002
+2032     TH1     0.012
+2032     TH2     0.002
+2032     TH3     0.0008
+2032     TH4     0.0012
+2032     TH5     0.0008
+2032     TH7     0.0048
+2032     TH8     0.002
+2032     TH9     0.002
+2032     TH10    0.002
+;
+
+param  MaxCapacity  :=   
+# period     # tech    # value (GW)
+2017     TH1     0.012
+2017     TH2     0.002
+2017     TH3     0.0008
+2017     TH4     0.0012
+2017     TH5     0.0008
+2017     TH6     0.24
+2017     TH7     0.0048
+2017     TH8     0.002
+2017     TH9     0.002
+2017     TH10    0.002
+2017     TH11    0.25
+2017     HY1     0.522
+2017     HY2     0.15
+2017     HY3     0.3
+2017     HY4     0.0385
+2017     HY5     0.0105
+2017     SO1     2
+2017     SO2     2
+2017     SO3     2
+2017     SO4     2
+2017     SO5     2
+2017     SO6     2
+2017     SO7     2
+2017     SO8     2
+2017     SO9     2
+2017     SO10    2
+2017     SO11    2
+2017     SO12    2
+2017     SO13    2
+2022     TH1     0.012
+2022     TH2     0.002
+2022     TH3     0.0008
+2022     TH4     0.0012
+2022     TH5     0.0008
+2022     TH6     0.24
+2022     TH7     0.0048
+2022     TH8     0.002
+2022     TH9     0.002
+2022     TH10    0.002
+2022     TH11    0.25
+2022     HY1     0.522
+2022     HY2     0.15
+2022     HY3     0.3
+2022     HY4     0.0385
+2022     HY5     0.0105
+2022     SO1     2
+2022     SO2     2
+2022     SO3     2
+2022     SO4     2
+2022     SO5     2
+2022     SO6     2
+2022     SO7     2
+2022     SO8     2
+2022     SO9     2
+2022     SO10    2
+2022     SO11    2
+2022     SO12    2
+2022     SO13    2
+2027     TH1     0.012
+2027     TH2     0.002
+2027     TH3     0.0008
+2027     TH4     0.0012
+2027     TH5     0.0008
+2027     TH6     0.24
+2027     TH7     0.0048
+2027     TH8     0.002
+2027     TH9     0.002
+2027     TH10    0.002
+2027     TH11    0.25
+2027     HY1     0.522
+2027     HY2     0.15
+2027     HY3     0.3
+2027     HY4     0.0385
+2027     HY5     0.0105
+2027     SO1     2
+2027     SO2     2
+2027     SO3     2
+2027     SO4     2
+2027     SO5     2
+2027     SO6     2
+2027     SO7     2
+2027     SO8     2
+2027     SO9     2
+2027     SO10    2
+2027     SO11    2
+2027     SO12    2
+2027     SO13    2
+2032     TH1     0.012
+2032     TH2     0.002
+2032     TH3     0.0008
+2032     TH4     0.0012
+2032     TH5     0.0008
+2032     TH6     0.24
+2032     TH7     0.0048
+2032     TH8     0.002
+2032     TH9     0.002
+2032     TH10    0.002
+2032     TH11    0.25
+2032     HY1     0.522
+2032     HY2     0.15
+2032     HY3     0.3
+2032     HY4     0.0385
+2032     HY5     0.0105
+2032     SO1     2
+2032     SO2     2
+2032     SO3     2
+2032     SO4     2
+2032     SO5     2
+2032     SO6     2
+2032     SO7     2
+2032     SO8     2
+2032     SO9     2
+2032     SO10    2
+2032     SO11    2
+2032     SO12    2
+2032     SO13    2
+
+;
+
+param LifetimeTech := 
+# tech             # value (year)
+    TH1            40
+    TH2            40
+    TH3            40
+    TH4            40
+    TH5            40
+    TH6            40
+    TH7            40
+    TH8            40
+    TH9            40
+    TH10           40
+    TH11           40
+    SO1            30
+    SO2            30
+    SO3            30
+    SO4            30
+    SO5            30
+    SO6            30
+    SO7            30
+    SO8            30
+    SO9            30
+    SO10           30
+    SO11           30
+    SO12           30
+    SO13           30
+    HY1            70
+    HY2            70
+    HY3            70
+    HY4            70
+    HY5            70
+    trans_Be_J     60
+    trans_S_J      60
+    trans_L_J      60
+    trans_F_J      60
+    trans_J_Y      60
+    trans_J_T      60
+    trans_J_B      60
+    trans_Y_Ma     60
+    trans_Ma_Ym    60
+    trans_K_T      60
+    trans_B_M      60
+    trans_M_Bu     60
+    trans_Th_Bu    60
+    trans_B_R      60
+    trans_R_W      60
+    trans_W_Kj     60
+    trans_Kj_A     60
+    trans_P_M      60
+    trans_Wa_W     60
+    IMPDSL         100
+    IMPWTR         100
+    IMPSLR         100
+    curtailment    60
+;
+
+param CapacityFactorTech := 
+#season         #timeoftheday     #tech       #value
+summer        day               TH1              0.75    
+summer        night             TH1              0.75    
+rain          day               TH1              0.75    
+rain          night             TH1              0.75    
+summer        day               TH2              0.75    
+summer        night             TH2              0.75    
+rain          day               TH2              0.75    
+rain          night             TH2              0.75    
+summer        day               TH3              0.75    
+summer        night             TH3              0.75    
+rain          day               TH3              0.75    
+rain          night             TH3              0.75    
+summer        day               TH4              0.75    
+summer        night             TH4              0.75    
+rain          day               TH4              0.75    
+rain          night             TH4              0.75    
+summer        day               TH5              0.75    
+summer        night             TH5              0.75    
+rain          day               TH5              0.75    
+rain          night             TH5              0.75    
+summer        day               TH6              0.75    
+summer        night             TH6              0.75    
+rain          day               TH6              0.75    
+rain          night             TH6              0.75    
+summer        day               TH7              0.75    
+summer        night             TH7              0.75    
+rain          day               TH7              0.75    
+rain          night             TH7              0.75    
+summer        day               TH8              0.75    
+summer        night             TH8              0.75    
+rain          day               TH8              0.75    
+rain          night             TH8              0.75    
+summer        day               TH9              0.75    
+summer        night             TH9              0.75    
+rain          day               TH9              0.75    
+rain          night             TH9              0.75    
+summer        day               TH10             0.75    
+summer        night             TH10             0.75    
+rain          day               TH10             0.75    
+rain          night             TH10             0.75    
+summer        day               TH11             0.75    
+summer        night             TH11             0.75    
+rain          day               TH11             0.75    
+rain          night             TH11             0.75    
+summer        day               SO1              0.3424
+summer        night             SO1              0.0
+rain          day               SO1              0.3424
+rain          night             SO1              0.0
+summer        day               SO2              0.3196
+summer        night             SO2              0.0
+rain          day               SO2              0.3196
+rain          night             SO2              0.0
+summer        day               SO3              0.3196
+summer        night             SO3              0.0
+rain          day               SO3              0.3196
+rain          night             SO3              0.0
+summer        day               SO4              0.3196
+summer        night             SO4              0.0
+rain          day               SO4              0.3196
+rain          night             SO4              0.0
+summer        day               SO5              0.3424
+summer        night             SO5              0.0
+rain          day               SO5              0.3424
+rain          night             SO5              0.0
+summer        day               SO6              0.3424
+summer        night             SO6              0.0
+rain          day               SO6              0.3424
+rain          night             SO6              0.0
+summer        day               SO7              0.3881
+summer        night             SO7              0.0
+rain          day               SO7              0.3881
+rain          night             SO7              0.0
+summer        day               SO8              0.3424
+summer        night             SO8              0.0
+rain          day               SO8              0.3424
+rain          night             SO8              0.0
+summer        day               SO9              0.3196
+summer        night             SO9              0.0
+rain          day               SO9              0.3196
+rain          night             SO9              0.0
+summer        day               SO10             0.3424
+summer        night             SO10             0.0
+rain          day               SO10             0.3424
+rain          night             SO10             0.0
+summer        day               SO11             0.3881
+summer        night             SO11             0.0
+rain          day               SO11             0.3881
+rain          night             SO11             0.0
+summer        day               SO12             0.3881
+summer        night             SO12             0.0
+rain          day               SO12             0.3881
+rain          night             SO12             0.0
+summer        day               SO13             0.4109
+summer        night             SO13             0.0
+rain          day               SO13             0.4109
+rain          night             SO13             0.0
+summer        day               HY1              0.3    
+summer        night             HY1              0.3    
+rain          day               HY1              0.3    
+rain          night             HY1              0.3    
+summer        day               HY2              0.32    
+summer        night             HY2              0.32    
+rain          day               HY2              0.32    
+rain          night             HY2              0.32    
+summer        day               HY3              0.28    
+summer        night             HY3              0.28    
+rain          day               HY3              0.28    
+rain          night             HY3              0.28    
+summer        day               HY4              0.65    
+summer        night             HY4              0.65    
+rain          day               HY4              0.65    
+rain          night             HY4              0.65    
+summer        day               HY5              0.33    
+summer        night             HY5              0.33    
+rain          day               HY5              0.33    
+rain          night             HY5              0.33    
+summer        day               trans_Be_J       1.0
+summer        night             trans_Be_J       1.0
+rain          day               trans_Be_J       1.0
+rain          night             trans_Be_J       1.0
+summer        day               trans_S_J        1.0
+summer        night             trans_S_J        1.0
+rain          day               trans_S_J        1.0
+rain          night             trans_S_J        1.0
+summer        day               trans_L_J        1.0
+summer        night             trans_L_J        1.0
+rain          day               trans_L_J        1.0
+rain          night             trans_L_J        1.0
+summer        day               trans_F_J        1.0
+summer        night             trans_F_J        1.0
+rain          day               trans_F_J        1.0
+rain          night             trans_F_J        1.0
+summer        day               trans_J_Y        1.0
+summer        night             trans_J_Y        1.0
+rain          day               trans_J_Y        1.0
+rain          night             trans_J_Y        1.0
+summer        day               trans_J_T        1.0
+summer        night             trans_J_T        1.0
+rain          day               trans_J_T        1.0
+rain          night             trans_J_T        1.0
+summer        day               trans_J_B        1.0
+summer        night             trans_J_B        1.0
+rain          day               trans_J_B        1.0
+rain          night             trans_J_B        1.0
+summer        day               trans_Y_Ma       1.0
+summer        night             trans_Y_Ma       1.0
+rain          day               trans_Y_Ma       1.0
+rain          night             trans_Y_Ma       1.0
+summer        day               trans_Ma_Ym      1.0
+summer        night             trans_Ma_Ym      1.0
+rain          day               trans_Ma_Ym      1.0
+rain          night             trans_Ma_Ym      1.0
+summer        day               trans_K_T        1.0
+summer        night             trans_K_T        1.0
+rain          day               trans_K_T        1.0
+rain          night             trans_K_T        1.0
+summer        day               trans_B_M        1.0
+summer        night             trans_B_M        1.0
+rain          day               trans_B_M        1.0
+rain          night             trans_B_M        1.0
+summer        day               trans_M_Bu       1.0
+summer        night             trans_M_Bu       1.0
+rain          day               trans_M_Bu       1.0
+rain          night             trans_M_Bu       1.0
+summer        day               trans_Th_Bu      1.0
+summer        night             trans_Th_Bu      1.0
+rain          day               trans_Th_Bu      1.0
+rain          night             trans_Th_Bu      1.0
+summer        day               trans_B_R        1.0
+summer        night             trans_B_R        1.0
+rain          day               trans_B_R        1.0
+rain          night             trans_B_R        1.0
+summer        day               trans_R_W        1.0
+summer        night             trans_R_W        1.0
+rain          day               trans_R_W        1.0
+rain          night             trans_R_W        1.0
+summer        day               trans_W_Kj       1.0
+summer        night             trans_W_Kj       1.0
+rain          day               trans_W_Kj       1.0
+rain          night             trans_W_Kj       1.0
+summer        day               trans_Kj_A       1.0
+summer        night             trans_Kj_A       1.0
+rain          day               trans_Kj_A       1.0
+rain          night             trans_Kj_A       1.0
+summer        day               trans_P_M        1.0
+summer        night             trans_P_M        1.0
+rain          day               trans_P_M        1.0
+rain          night             trans_P_M        1.0
+summer        day               trans_Wa_W       1.0
+summer        night             trans_Wa_W       1.0
+rain          day               trans_Wa_W       1.0
+rain          night             trans_Wa_W       1.0
+summer        day               tech_Dem_J       1.0
+summer        night             tech_Dem_J       1.0
+rain          day               tech_Dem_J       1.0
+rain          night             tech_Dem_J       1.0
+summer        day               tech_Dem_Ym      1.0
+summer        night             tech_Dem_Ym      1.0
+rain          day               tech_Dem_Ym      1.0
+rain          night             tech_Dem_Ym      1.0
+summer        day               tech_Dem_Ma      1.0
+summer        night             tech_Dem_Ma      1.0
+rain          day               tech_Dem_Ma      1.0
+rain          night             tech_Dem_Ma      1.0
+summer        day               tech_Dem_Y       1.0
+summer        night             tech_Dem_Y       1.0
+rain          day               tech_Dem_Y       1.0
+rain          night             tech_Dem_Y       1.0
+summer        day               tech_Dem_K       1.0
+summer        night             tech_Dem_K       1.0
+rain          day               tech_Dem_K       1.0
+rain          night             tech_Dem_K       1.0
+summer        day               tech_Dem_T       1.0
+summer        night             tech_Dem_T       1.0
+rain          day               tech_Dem_T       1.0
+rain          night             tech_Dem_T       1.0
+summer        day               tech_Dem_Bu      1.0
+summer        night             tech_Dem_Bu      1.0
+rain          day               tech_Dem_Bu      1.0
+rain          night             tech_Dem_Bu      1.0
+summer        day               tech_Dem_M       1.0
+summer        night             tech_Dem_M       1.0
+rain          day               tech_Dem_M       1.0
+rain          night             tech_Dem_M       1.0
+summer        day               tech_Dem_B       1.0
+summer        night             tech_Dem_B       1.0
+rain          day               tech_Dem_B       1.0
+rain          night             tech_Dem_B       1.0
+summer        day               tech_Dem_R       1.0
+summer        night             tech_Dem_R       1.0
+rain          day               tech_Dem_R       1.0
+rain          night             tech_Dem_R       1.0
+summer        day               tech_Dem_W       1.0
+summer        night             tech_Dem_W       1.0
+rain          day               tech_Dem_W       1.0
+rain          night             tech_Dem_W       1.0
+summer        day               tech_Dem_Kj      1.0
+summer        night             tech_Dem_Kj      1.0
+rain          day               tech_Dem_Kj      1.0
+rain          night             tech_Dem_Kj      1.0
+summer        day               tech_Dem_A       1.0
+summer        night             tech_Dem_A       1.0
+rain          day               tech_Dem_A       1.0
+rain          night             tech_Dem_A       1.0
+;
+
+param CapReduction :=
+#period     #tech      #value
+2017    TH1     1
+2017    TH2     1
+2017    TH3     1
+2017    TH4     1
+2017    TH5     1
+2017    TH6     1
+2017    TH7     1
+2017    TH8     1
+2017    TH9     1
+2017    TH10    1
+2017    TH11    1
+2017    SO1     1
+2017    SO2     1
+2017    SO3     1
+2017    SO4     1
+2017    SO5     1
+2017    SO6     1
+2017    SO7     1
+2017    SO8     1
+2017    SO9     1
+2017    SO10    1
+2017    SO11    1
+2017    SO12    1
+2017    SO13    1
+2017    HY1     1
+2017    HY2     1
+2017    HY3     1
+2017    HY4     1
+2017    HY5     1
+2022    TH1     1
+2022    TH2     1
+2022    TH3     1
+2022    TH4     1
+2022    TH5     1
+2022    TH6     1
+2022    TH7     1
+2022    TH8     1
+2022    TH9     1
+2022    TH10    1
+2022    TH11    1
+2022    SO1     1
+2022    SO2     1
+2022    SO3     1
+2022    SO4     1
+2022    SO5     1
+2022    SO6     1
+2022    SO7     1
+2022    SO8     1
+2022    SO9     1
+2022    SO10    1
+2022    SO11    1
+2022    SO12    1
+2022    SO13    1
+2022    HY1     1
+2022    HY2     1
+2022    HY3     1
+2022    HY4     1
+2022    HY5     1
+2027    TH1     1
+2027    TH2     1
+2027    TH3     1
+2027    TH4     1
+2027    TH5     1
+2027    TH6     1
+2027    TH7     1
+2027    TH8     1
+2027    TH9     1
+2027    TH10    1
+2027    TH11    1
+2027    SO1     1
+2027    SO2     1
+2027    SO3     1
+2027    SO4     1
+2027    SO5     1
+2027    SO6     1
+2027    SO7     1
+2027    SO8     1
+2027    SO9     1
+2027    SO10    1
+2027    SO11    1
+2027    SO12    1
+2027    SO13    1
+2027    HY1     1
+2027    HY2     1
+2027    HY3     1
+2027    HY4     1
+2027    HY5     1
+2032    TH1     1
+2032    TH2     1
+2032    TH3     1
+2032    TH4     1
+2032    TH5     1
+2032    TH6     1
+2032    TH7     1
+2032    TH8     1
+2032    TH9     1
+2032    TH10    1
+2032    TH11    1
+2032    SO1     1
+2032    SO2     1
+2032    SO3     1
+2032    SO4     1
+2032    SO5     1
+2032    SO6     1
+2032    SO7     1
+2032    SO8     1
+2032    SO9     1
+2032    SO10    1
+2032    SO11    1
+2032    SO12    1
+2032    SO13    1
+2032    HY1     1
+2032    HY2     1
+2032    HY3     1
+2032    HY4     1
+2032    HY5     1
+
+;
+
+param CostVarIncrease :=
+2017    TH1     1
+2017    TH2     1
+2017    TH3     1
+2017    TH4     1
+2017    TH5     1
+2017    TH6     1
+2017    TH7     1
+2017    TH8     1
+2017    TH9     1
+2017    TH10    1
+2017    TH11    1
+2017    SO1     1
+2017    SO2     1
+2017    SO3     1
+2017    SO4     1
+2017    SO5     1
+2017    SO6     1
+2017    SO7     1
+2017    SO8     1
+2017    SO9     1
+2017    SO10    1
+2017    SO11    1
+2017    SO12    1
+2017    SO13    1
+2017    HY1     1
+2017    HY2     1
+2017    HY3     1
+2017    HY4     1
+2017    HY5     1
+2017         IMPDSL           1.0
+2017         curtailment      1.0
+2022    TH1     1
+2022    TH2     1
+2022    TH3     1
+2022    TH4     1
+2022    TH5     1
+2022    TH6     1
+2022    TH7     1
+2022    TH8     1
+2022    TH9     1
+2022    TH10    1
+2022    TH11    1
+2022    SO1     1
+2022    SO2     1
+2022    SO3     1
+2022    SO4     1
+2022    SO5     1
+2022    SO6     1
+2022    SO7     1
+2022    SO8     1
+2022    SO9     1
+2022    SO10    1
+2022    SO11    1
+2022    SO12    1
+2022    SO13    1
+2022    HY1     1
+2022    HY2     1
+2022    HY3     1
+2022    HY4     1
+2022    HY5     1
+2022         IMPDSL           1.0
+2022         curtailment      1.0
+2027    TH1     1
+2027    TH2     1
+2027    TH3     1
+2027    TH4     1
+2027    TH5     1
+2027    TH6     1
+2027    TH7     1
+2027    TH8     1
+2027    TH9     1
+2027    TH10    1
+2027    TH11    1
+2027    SO1     1
+2027    SO2     1
+2027    SO3     1
+2027    SO4     1
+2027    SO5     1
+2027    SO6     1
+2027    SO7     1
+2027    SO8     1
+2027    SO9     1
+2027    SO10    1
+2027    SO11    1
+2027    SO12    1
+2027    SO13    1
+2027    HY1     1
+2027    HY2     1
+2027    HY3     1
+2027    HY4     1
+2027    HY5     1
+2027         IMPDSL           1.0
+2027         curtailment      1.0
+2032    TH1     1
+2032    TH2     1
+2032    TH3     1
+2032    TH4     1
+2032    TH5     1
+2032    TH6     1
+2032    TH7     1
+2032    TH8     1
+2032    TH9     1
+2032    TH10    1
+2032    TH11    1
+2032    SO1     1
+2032    SO2     1
+2032    SO3     1
+2032    SO4     1
+2032    SO5     1
+2032    SO6     1
+2032    SO7     1
+2032    SO8     1
+2032    SO9     1
+2032    SO10    1
+2032    SO11    1
+2032    SO12    1
+2032    SO13    1
+2032    HY1     1
+2032    HY2     1
+2032    HY3     1
+2032    HY4     1
+2032    HY5     1
+2032         IMPDSL           1.0
+2032         curtailment      1.0
+
+;
+
+param Efficiency := 
+# input carrier   # tech        # vintage        # output carrier   # eff. value
+    ethos           IMPDSL             2016         DSL             1.0
+    ethos           IMPWTR             2016         WTR             1.0
+    ethos           IMPSLR             2016         SLR             1.0
+    DSL             TH1                2016         ELC_J           0.42
+    DSL             TH2                2016         ELC_Ym          0.36
+    DSL             TH3                2016         ELC_Ma          0.34
+    DSL             TH4                2016         ELC_Y           0.35 
+    DSL             TH5                2016         ELC_K           0.34
+    DSL             TH6                2017         ELC_Th          0.46
+    DSL             TH6                2022         ELC_Th          0.46
+    DSL             TH6                2027         ELC_Th          0.46
+    DSL             TH6                2032         ELC_Th          0.46
+
+    DSL             TH7                2016         ELC_M           0.37
+    DSL             TH8                2016         ELC_B           0.36
+    DSL             TH9                2016         ELC_R           0.35
+    DSL             TH10               2016         ELC_W           0.34
+    DSL             TH11               2017         ELC_P           0.48
+    DSL             TH11               2022         ELC_P           0.48
+    DSL             TH11               2027         ELC_P           0.48
+    DSL             TH11               2032         ELC_P           0.48
+
+    SLR             SO1                2017         ELC_J           1.0        
+    SLR             SO1                2022         ELC_J           1.0        
+    SLR             SO2                2017         ELC_Ym          1.0        
+    SLR             SO2                2022         ELC_Ym          1.0        
+    SLR             SO3                2017         ELC_Ma          1.0        
+    SLR             SO3                2022         ELC_Ma          1.0        
+    SLR             SO4                2017         ELC_Y           1.0        
+    SLR             SO4                2022         ELC_Y           1.0        
+    SLR             SO5                2017         ELC_K           1.0        
+    SLR             SO5                2022         ELC_K           1.0        
+    SLR             SO6                2017         ELC_T           1.0        
+    SLR             SO6                2022         ELC_T           1.0        
+    SLR             SO7                2017         ELC_Bu          1.0        
+    SLR             SO7                2022         ELC_Bu          1.0        
+    SLR             SO8                2017         ELC_M           1.0        
+    SLR             SO8                2022         ELC_M           1.0        
+    SLR             SO9                2017         ELC_B           1.0        
+    SLR             SO9                2022         ELC_B           1.0        
+    SLR             SO10               2017         ELC_R           1.0        
+    SLR             SO10               2022         ELC_R           1.0        
+    SLR             SO11               2017         ELC_W           1.0        
+    SLR             SO11               2022         ELC_W           1.0        
+    SLR             SO12               2017         ELC_Kj          1.0        
+    SLR             SO12               2022         ELC_Kj          1.0        
+    SLR             SO13               2017         ELC_A           1.0        
+    SLR             SO13               2022         ELC_A           1.0        
+    SLR             SO1                2027         ELC_J           1.0        
+    SLR             SO1                2032         ELC_J           1.0        
+
+    SLR             SO2                2027         ELC_Ym          1.0        
+    SLR             SO2                2032         ELC_Ym          1.0        
+
+    SLR             SO3                2027         ELC_Ma          1.0        
+    SLR             SO3                2032         ELC_Ma          1.0        
+
+    SLR             SO4                2027         ELC_Y           1.0        
+    SLR             SO4                2032         ELC_Y           1.0        
+
+    SLR             SO5                2027         ELC_K           1.0        
+    SLR             SO5                2032         ELC_K           1.0        
+
+    SLR             SO6                2027         ELC_T           1.0        
+    SLR             SO6                2032         ELC_T           1.0        
+
+    SLR             SO7                2027         ELC_Bu          1.0        
+    SLR             SO7                2032         ELC_Bu          1.0        
+
+    SLR             SO8                2027         ELC_M           1.0        
+    SLR             SO8                2032         ELC_M           1.0        
+
+    SLR             SO9                2027         ELC_B           1.0        
+    SLR             SO9                2032         ELC_B           1.0        
+
+    SLR             SO10               2027         ELC_R           1.0        
+    SLR             SO10               2032         ELC_R           1.0        
+
+    SLR             SO11               2027         ELC_W           1.0        
+    SLR             SO11               2032         ELC_W           1.0        
+
+    SLR             SO12               2027         ELC_Kj          1.0        
+    SLR             SO12               2032         ELC_Kj          1.0        
+
+    SLR             SO13               2027         ELC_A           1.0        
+    SLR             SO13               2032         ELC_A           1.0        
+
+    WTR             HY1                2017         ELC_Be          0.9    
+    WTR             HY1                2022         ELC_Be          0.9    
+    WTR             HY2                2017         ELC_S           0.9    
+    WTR             HY2                2022         ELC_S           0.9    
+    WTR             HY3                2017         ELC_L           0.9    
+    WTR             HY3                2022         ELC_L           0.9    
+    WTR             HY4                2017         ELC_F           0.9    
+    WTR             HY4                2022         ELC_F           0.9    
+    WTR             HY5                2017         ELC_Wa          0.9    
+    WTR             HY5                2022         ELC_Wa          0.9    
+    WTR             HY1                2027         ELC_Be          0.9    
+    WTR             HY1                2032         ELC_Be          0.9    
+
+    WTR             HY2                2027         ELC_S           0.9    
+    WTR             HY2                2032         ELC_S           0.9    
+
+    WTR             HY3                2027         ELC_L           0.9    
+    WTR             HY3                2032         ELC_L           0.9    
+
+    WTR             HY4                2027         ELC_F           0.9    
+    WTR             HY4                2032         ELC_F           0.9    
+
+    WTR             HY5                2027         ELC_Wa          0.9    
+    WTR             HY5                2032         ELC_Wa          0.9    
+
+    ELC_Be          trans_Be_J         2017         ELC_J           0.952    
+    ELC_Be          trans_Be_J         2022         ELC_J           0.952    
+    ELC_S           trans_S_J          2017         ELC_J           0.977    
+    ELC_S           trans_S_J          2022         ELC_J           0.977    
+    ELC_L           trans_L_J          2017         ELC_J           0.968    
+    ELC_L           trans_L_J          2022         ELC_J           0.968    
+    ELC_F           trans_F_J          2017         ELC_J           0.93    
+    ELC_F           trans_F_J          2022         ELC_J           0.93    
+    ELC_J           trans_J_Y          2017         ELC_Y           0.975
+    ELC_J           trans_J_Y          2022         ELC_Y           0.975
+    ELC_Y           trans_J_Y          2017         ELC_J           0.975
+    ELC_Y           trans_J_Y          2022         ELC_J           0.975
+    ELC_J           trans_J_Y          2017         ELC_J           0.0001    
+    ELC_J           trans_J_Y          2022         ELC_J           0.0001    
+    ELC_Y           trans_J_Y          2017         ELC_Y           0.0001    
+    ELC_Y           trans_J_Y          2022         ELC_Y           0.0001    
+    ELC_J           trans_J_T          2017         ELC_T           0.978    
+    ELC_J           trans_J_T          2022         ELC_T           0.978    
+    ELC_T           trans_J_T          2017         ELC_J           0.978    
+    ELC_T           trans_J_T          2022         ELC_J           0.978    
+    ELC_J           trans_J_T          2017         ELC_J           0.0001    
+    ELC_J           trans_J_T          2022         ELC_J           0.0001    
+    ELC_T           trans_J_T          2017         ELC_T           0.0001    
+    ELC_T           trans_J_T          2022         ELC_T           0.0001    
+    ELC_J           trans_J_B          2017         ELC_B           0.977    
+    ELC_J           trans_J_B          2022         ELC_B           0.977    
+    ELC_B           trans_J_B          2017         ELC_J           0.95
+    ELC_B           trans_J_B          2022         ELC_J           0.95
+    ELC_J           trans_J_B          2017         ELC_J           0.0001
+    ELC_J           trans_J_B          2022         ELC_J           0.0001
+    ELC_B           trans_J_B          2017         ELC_B           0.0001
+    ELC_B           trans_J_B          2022         ELC_B           0.0001
+    ELC_Y           trans_Y_Ma         2017         ELC_Ma          0.95
+    ELC_Y           trans_Y_Ma         2022         ELC_Ma          0.95
+    ELC_Ma          trans_Y_Ma         2017         ELC_Y           0.95
+    ELC_Ma          trans_Y_Ma         2022         ELC_Y           0.95
+    ELC_Y           trans_Y_Ma         2017         ELC_Y           0.0001    
+    ELC_Y           trans_Y_Ma         2022         ELC_Y           0.0001    
+    ELC_Ma          trans_Y_Ma         2017         ELC_Ma          0.0001    
+    ELC_Ma          trans_Y_Ma         2022         ELC_Ma          0.0001    
+    ELC_Ma          trans_Ma_Ym        2017         ELC_Ym          0.95
+    ELC_Ma          trans_Ma_Ym        2022         ELC_Ym          0.95
+    ELC_Ym          trans_Ma_Ym        2017         ELC_Ma          0.95
+    ELC_Ym          trans_Ma_Ym        2022         ELC_Ma          0.95
+    ELC_Ma          trans_Ma_Ym        2017         ELC_Ma          0.0001    
+    ELC_Ma          trans_Ma_Ym        2022         ELC_Ma          0.0001    
+    ELC_Ym          trans_Ma_Ym        2017         ELC_Ym          0.0001    
+    ELC_Ym          trans_Ma_Ym        2022         ELC_Ym          0.0001    
+    ELC_K           trans_K_T          2017         ELC_T           0.95
+    ELC_K           trans_K_T          2022         ELC_T           0.95
+    ELC_T           trans_K_T          2017         ELC_K           0.95
+    ELC_T           trans_K_T          2022         ELC_K           0.95
+    ELC_K           trans_K_T          2017         ELC_K           0.0001    
+    ELC_K           trans_K_T          2022         ELC_K           0.0001    
+    ELC_T           trans_K_T          2017         ELC_T           0.0001    
+    ELC_T           trans_K_T          2022         ELC_T           0.0001    
+    ELC_B           trans_B_M          2017         ELC_M           0.955    
+    ELC_B           trans_B_M          2022         ELC_M           0.955    
+    ELC_M           trans_B_M          2017         ELC_B           0.95
+    ELC_M           trans_B_M          2022         ELC_B           0.95
+    ELC_B           trans_B_M          2017         ELC_B           0.0001
+    ELC_B           trans_B_M          2022         ELC_B           0.0001
+    ELC_M           trans_B_M          2017         ELC_M           0.0001
+    ELC_M           trans_B_M          2022         ELC_M           0.0001
+    ELC_M           trans_M_Bu         2017         ELC_Bu          0.95    
+    ELC_M           trans_M_Bu         2022         ELC_Bu          0.95    
+    ELC_Bu          trans_M_Bu         2017         ELC_M           0.95
+    ELC_Bu          trans_M_Bu         2022         ELC_M           0.95
+    ELC_M           trans_M_Bu         2017         ELC_M           0.0001    
+    ELC_M           trans_M_Bu         2022         ELC_M           0.0001    
+    ELC_Bu          trans_M_Bu         2017         ELC_Bu          0.0001    
+    ELC_Bu          trans_M_Bu         2022         ELC_Bu          0.0001    
+    ELC_Th          trans_Th_Bu        2017         ELC_Bu          0.95    
+    ELC_Th          trans_Th_Bu        2022         ELC_Bu          0.95    
+    ELC_B           trans_B_R          2017         ELC_R           0.982    
+    ELC_B           trans_B_R          2022         ELC_R           0.982    
+    ELC_R           trans_B_R          2017         ELC_B           0.982
+    ELC_R           trans_B_R          2022         ELC_B           0.982
+    ELC_B           trans_B_R          2017         ELC_B           0.0001
+    ELC_B           trans_B_R          2022         ELC_B           0.0001
+    ELC_R           trans_B_R          2017         ELC_R           0.0001
+    ELC_R           trans_B_R          2022         ELC_R           0.0001
+    ELC_R           trans_R_W          2017         ELC_W           0.969    
+    ELC_R           trans_R_W          2022         ELC_W           0.969    
+    ELC_W           trans_R_W          2017         ELC_R           0.969
+    ELC_W           trans_R_W          2022         ELC_R           0.969
+    ELC_R           trans_R_W          2017         ELC_R           0.0001    
+    ELC_R           trans_R_W          2022         ELC_R           0.0001    
+    ELC_W           trans_R_W          2017         ELC_W           0.0001    
+    ELC_W           trans_R_W          2022         ELC_W           0.0001    
+    ELC_W           trans_W_Kj         2017         ELC_Kj          0.972    
+    ELC_W           trans_W_Kj         2022         ELC_Kj          0.972    
+    ELC_Kj          trans_W_Kj         2017         ELC_W           0.972    
+    ELC_Kj          trans_W_Kj         2022         ELC_W           0.972    
+    ELC_W           trans_W_Kj         2017         ELC_W           0.0001    
+    ELC_W           trans_W_Kj         2022         ELC_W           0.0001    
+    ELC_Kj          trans_W_Kj         2017         ELC_Kj          0.0001    
+    ELC_Kj          trans_W_Kj         2022         ELC_Kj          0.0001    
+    ELC_Kj          trans_Kj_A         2017         ELC_A           0.964    
+    ELC_Kj          trans_Kj_A         2022         ELC_A           0.964    
+    ELC_A           trans_Kj_A         2017         ELC_Kj          0.964    
+    ELC_A           trans_Kj_A         2022         ELC_Kj          0.964    
+    ELC_A           trans_Kj_A         2017         ELC_A           0.0001    
+    ELC_A           trans_Kj_A         2022         ELC_A           0.0001    
+    ELC_Kj          trans_Kj_A         2017         ELC_Kj          0.0001    
+    ELC_Kj          trans_Kj_A         2022         ELC_Kj          0.0001    
+    ELC_P           trans_P_M          2017         ELC_M           0.95    
+    ELC_P           trans_P_M          2022         ELC_M           0.95    
+    ELC_Wa          trans_Wa_W         2017         ELC_W           0.95    
+    ELC_Wa          trans_Wa_W         2022         ELC_W           0.95    
+    ELC_Be          trans_Be_J         2027         ELC_J           0.952    
+    ELC_Be          trans_Be_J         2032         ELC_J           0.952    
+ 
+    ELC_S           trans_S_J          2027         ELC_J           0.977    
+    ELC_S           trans_S_J          2032         ELC_J           0.977    
+ 
+    ELC_L           trans_L_J          2027         ELC_J           0.968    
+    ELC_L           trans_L_J          2032         ELC_J           0.968    
+
+    ELC_F           trans_F_J          2027         ELC_J           0.93    
+    ELC_F           trans_F_J          2032         ELC_J           0.93    
+
+    ELC_J           trans_J_Y          2027         ELC_Y           0.975
+    ELC_J           trans_J_Y          2032         ELC_Y           0.975
+
+    ELC_Y           trans_J_Y          2027         ELC_J           0.975
+    ELC_Y           trans_J_Y          2032         ELC_J           0.975
+
+    ELC_J           trans_J_Y          2027         ELC_J           0.0001    
+    ELC_J           trans_J_Y          2032         ELC_J           0.0001    
+
+    ELC_Y           trans_J_Y          2027         ELC_Y           0.0001    
+    ELC_Y           trans_J_Y          2032         ELC_Y           0.0001    
+
+    ELC_J           trans_J_T          2027         ELC_T           0.978    
+    ELC_J           trans_J_T          2032         ELC_T           0.978    
+
+    ELC_T           trans_J_T          2027         ELC_J           0.978    
+    ELC_T           trans_J_T          2032         ELC_J           0.978    
+
+    ELC_J           trans_J_T          2027         ELC_J           0.0001    
+    ELC_J           trans_J_T          2032         ELC_J           0.0001    
+
+    ELC_T           trans_J_T          2027         ELC_T           0.0001    
+    ELC_T           trans_J_T          2032         ELC_T           0.0001    
+
+    ELC_J           trans_J_B          2027         ELC_B           0.977    
+    ELC_J           trans_J_B          2032         ELC_B           0.977    
+
+    ELC_B           trans_J_B          2027         ELC_J           0.95
+    ELC_B           trans_J_B          2032         ELC_J           0.95
+
+    ELC_J           trans_J_B          2027         ELC_J           0.0001
+    ELC_J           trans_J_B          2032         ELC_J           0.0001
+
+    ELC_B           trans_J_B          2027         ELC_B           0.0001
+    ELC_B           trans_J_B          2032         ELC_B           0.0001
+
+    ELC_Y           trans_Y_Ma         2027         ELC_Ma          0.95
+    ELC_Y           trans_Y_Ma         2032         ELC_Ma          0.95
+
+    ELC_Ma          trans_Y_Ma         2027         ELC_Y           0.95
+    ELC_Ma          trans_Y_Ma         2032         ELC_Y           0.95
+
+    ELC_Y           trans_Y_Ma         2027         ELC_Y           0.0001    
+    ELC_Y           trans_Y_Ma         2032         ELC_Y           0.0001    
+
+    ELC_Ma          trans_Y_Ma         2027         ELC_Ma          0.0001    
+    ELC_Ma          trans_Y_Ma         2032         ELC_Ma          0.0001    
+
+    ELC_Ma          trans_Ma_Ym        2027         ELC_Ym          0.95
+    ELC_Ma          trans_Ma_Ym        2032         ELC_Ym          0.95
+
+    ELC_Ym          trans_Ma_Ym        2027         ELC_Ma          0.95
+    ELC_Ym          trans_Ma_Ym        2032         ELC_Ma          0.95
+
+    ELC_Ma          trans_Ma_Ym        2027         ELC_Ma          0.0001    
+    ELC_Ma          trans_Ma_Ym        2032         ELC_Ma          0.0001    
+
+    ELC_Ym          trans_Ma_Ym        2027         ELC_Ym          0.0001    
+    ELC_Ym          trans_Ma_Ym        2032         ELC_Ym          0.0001    
+
+    ELC_K           trans_K_T          2027         ELC_T           0.95
+    ELC_K           trans_K_T          2032         ELC_T           0.95
+
+    ELC_T           trans_K_T          2027         ELC_K           0.95
+    ELC_T           trans_K_T          2032         ELC_K           0.95
+
+    ELC_K           trans_K_T          2027         ELC_K           0.0001    
+    ELC_K           trans_K_T          2032         ELC_K           0.0001    
+
+    ELC_T           trans_K_T          2027         ELC_T           0.0001    
+    ELC_T           trans_K_T          2032         ELC_T           0.0001    
+
+    ELC_B           trans_B_M          2027         ELC_M           0.955    
+    ELC_B           trans_B_M          2032         ELC_M           0.955    
+
+    ELC_M           trans_B_M          2027         ELC_B           0.95
+    ELC_M           trans_B_M          2032         ELC_B           0.95
+
+    ELC_B           trans_B_M          2027         ELC_B           0.0001
+    ELC_B           trans_B_M          2032         ELC_B           0.0001
+
+    ELC_M           trans_B_M          2027         ELC_M           0.0001
+    ELC_M           trans_B_M          2032         ELC_M           0.0001
+
+    ELC_M           trans_M_Bu         2027         ELC_Bu          0.95    
+    ELC_M           trans_M_Bu         2032         ELC_Bu          0.95    
+
+    ELC_Bu          trans_M_Bu         2027         ELC_M           0.95
+    ELC_Bu          trans_M_Bu         2032         ELC_M           0.95
+
+    ELC_M           trans_M_Bu         2027         ELC_M           0.0001    
+    ELC_M           trans_M_Bu         2032         ELC_M           0.0001    
+
+    ELC_Bu          trans_M_Bu         2027         ELC_Bu          0.0001    
+    ELC_Bu          trans_M_Bu         2032         ELC_Bu          0.0001    
+
+    ELC_Th          trans_Th_Bu        2027         ELC_Bu          0.95    
+    ELC_Th          trans_Th_Bu        2032         ELC_Bu          0.95    
+
+    ELC_B           trans_B_R          2027         ELC_R           0.982    
+    ELC_B           trans_B_R          2032         ELC_R           0.982    
+
+    ELC_R           trans_B_R          2027         ELC_B           0.982
+    ELC_R           trans_B_R          2032         ELC_B           0.982
+
+    ELC_B           trans_B_R          2027         ELC_B           0.0001
+    ELC_B           trans_B_R          2032         ELC_B           0.0001
+
+    ELC_R           trans_B_R          2027         ELC_R           0.0001
+    ELC_R           trans_B_R          2032         ELC_R           0.0001
+
+    ELC_R           trans_R_W          2027         ELC_W           0.969    
+    ELC_R           trans_R_W          2032         ELC_W           0.969    
+
+    ELC_W           trans_R_W          2027         ELC_R           0.969
+    ELC_W           trans_R_W          2032         ELC_R           0.969
+
+    ELC_R           trans_R_W          2027         ELC_R           0.0001    
+    ELC_R           trans_R_W          2032         ELC_R           0.0001    
+
+    ELC_W           trans_R_W          2027         ELC_W           0.0001    
+    ELC_W           trans_R_W          2032         ELC_W           0.0001    
+
+    ELC_W           trans_W_Kj         2027         ELC_Kj          0.972    
+    ELC_W           trans_W_Kj         2032         ELC_Kj          0.972    
+
+    ELC_Kj          trans_W_Kj         2027         ELC_W           0.972    
+    ELC_Kj          trans_W_Kj         2032         ELC_W           0.972    
+
+    ELC_W           trans_W_Kj         2027         ELC_W           0.0001    
+    ELC_W           trans_W_Kj         2032         ELC_W           0.0001    
+
+    ELC_Kj          trans_W_Kj         2027         ELC_Kj          0.0001    
+    ELC_Kj          trans_W_Kj         2032         ELC_Kj          0.0001    
+
+    ELC_Kj          trans_Kj_A         2027         ELC_A           0.964    
+    ELC_Kj          trans_Kj_A         2032         ELC_A           0.964    
+
+    ELC_A           trans_Kj_A         2027         ELC_Kj          0.964    
+    ELC_A           trans_Kj_A         2032         ELC_Kj          0.964    
+
+    ELC_A           trans_Kj_A         2027         ELC_A           0.0001    
+    ELC_A           trans_Kj_A         2032         ELC_A           0.0001    
+
+    ELC_Kj          trans_Kj_A         2027         ELC_Kj          0.0001    
+    ELC_Kj          trans_Kj_A         2032         ELC_Kj          0.0001    
+
+    ELC_P           trans_P_M          2027         ELC_M           0.95    
+    ELC_P           trans_P_M          2032         ELC_M           0.95    
+
+    ELC_Wa          trans_Wa_W         2027         ELC_W           0.95    
+    ELC_Wa          trans_Wa_W         2032         ELC_W           0.95    
+
+    ELC_J           tech_Dem_J         2016         Dem_J           1.0    
+    ELC_Ym          tech_Dem_Ym        2016         Dem_Ym          1.0    
+    ELC_Ma          tech_Dem_Ma        2016         Dem_Ma          1.0    
+    ELC_Y           tech_Dem_Y         2016         Dem_Y           1.0    
+    ELC_K           tech_Dem_K         2016         Dem_K           1.0    
+    ELC_T           tech_Dem_T         2016         Dem_T           1.0    
+    ELC_Bu          tech_Dem_Bu        2016         Dem_Bu          1.0    
+    ELC_M           tech_Dem_M         2016         Dem_M           1.0    
+    ELC_B           tech_Dem_B         2016         Dem_B           1.0    
+    ELC_R           tech_Dem_R         2016         Dem_R           1.0    
+    ELC_W           tech_Dem_W         2016         Dem_W           1.0    
+    ELC_Kj          tech_Dem_Kj        2016         Dem_Kj          1.0    
+    ELC_A           tech_Dem_A         2016         Dem_A           1.0    
+    ethos           curtailment        2016         ELC_J           1.0
+    ethos           curtailment        2016         ELC_Ym          1.0
+    ethos           curtailment        2016         ELC_Ma          1.0
+    ethos           curtailment        2016         ELC_Y           1.0
+    ethos           curtailment        2016         ELC_K           1.0
+    ethos           curtailment        2016         ELC_T           1.0
+    ethos           curtailment        2016         ELC_Bu          1.0
+    ethos           curtailment        2016         ELC_M           1.0
+    ethos           curtailment        2016         ELC_B           1.0
+    ethos           curtailment        2016         ELC_R           1.0
+    ethos           curtailment        2016         ELC_W           1.0
+    ethos           curtailment        2016         ELC_Kj          1.0
+    ethos           curtailment        2016         ELC_A           1.0
+;
+
+param ExistingCapacity :=  
+# tech                 # vintage       # capacity amount (GW)
+    IMPDSL             2016           100000
+    IMPWTR             2016           1000
+    IMPSLR             2016           1000
+    TH1                2016           0.012
+    TH2                2016           0.002
+    TH3                2016           0.0008
+    TH4                2016           0.0012
+    TH5                2016           0.0008
+    TH7                2016           0.0048
+    TH8                2016           0.002
+    TH9                2016           0.002
+    TH10               2016           0.002
+    tech_Dem_J         2016           1000
+    tech_Dem_Ym        2016           1000
+    tech_Dem_Ma        2016           1000
+    tech_Dem_Y         2016           1000
+    tech_Dem_K         2016           1000
+    tech_Dem_T         2016           1000
+    tech_Dem_Bu        2016           1000
+    tech_Dem_M         2016           1000
+    tech_Dem_B         2016           1000
+    tech_Dem_R         2016           1000
+    tech_Dem_W         2016           1000
+    tech_Dem_Kj        2016           1000
+    tech_Dem_A         2016           1000
+    curtailment        2016           1000
+;
+
+param CostInvest := 
+# tech          # vintage      # value ($mil/GW)
+TH6           2017      1500
+TH11          2017      1500
+SO1           2017      3350
+SO2           2017      3350
+SO3           2017      3350
+SO4           2017      3350
+SO5           2017      3350
+SO6           2017      3350
+SO7           2017      3350
+SO8           2017      3350
+SO9           2017      3350
+SO10          2017      3350
+SO11          2017      3350
+SO12          2017      3350
+SO13          2017      3350
+HY1           2017      2500
+HY2           2017      1800
+HY3           2017      2200
+HY4           2017      3700
+HY5           2017      13100
+trans_Be_J    2017      7.8
+trans_S_J     2017      49.4
+trans_L_J     2017      30
+trans_F_J     2017      26.4
+trans_J_T     2017      37.9
+trans_J_B     2017      59.6
+trans_B_M     2017      91.5
+trans_M_Bu    2017      42.2
+trans_B_R     2017      86.1
+trans_R_W     2017      82.6
+trans_W_Kj    2017      23.1
+trans_Kj_A    2017      16.2
+trans_P_M     2017      16.2
+trans_Wa_W    2017      16.2
+trans_J_Y     2017      0
+trans_Y_Ma    2017      0
+trans_Ma_Ym   2017      0
+trans_K_T     2017      0
+trans_Th_Bu   2017      0
+TH6           2022      1500
+TH11          2022      1500
+SO1           2022      3350
+SO2           2022      3350
+SO3           2022      3350
+SO4           2022      3350
+SO5           2022      3350
+SO6           2022      3350
+SO7           2022      3350
+SO8           2022      3350
+SO9           2022      3350
+SO10          2022      3350
+SO11          2022      3350
+SO12          2022      3350
+SO13          2022      3350
+HY1           2022      2500
+HY2           2022      1800
+HY3           2022      2200
+HY4           2022      3700
+HY5           2022      13100
+trans_Be_J    2022      7.8
+trans_S_J     2022      49.4
+trans_L_J     2022      30
+trans_F_J     2022      26.4
+trans_J_T     2022      37.9
+trans_J_B     2022      59.6
+trans_B_M     2022      91.5
+trans_M_Bu    2022      42.2
+trans_B_R     2022      86.1
+trans_R_W     2022      82.6
+trans_W_Kj    2022      23.1
+trans_Kj_A    2022      16.2
+trans_P_M     2022      16.2
+trans_Wa_W    2022      16.2
+trans_J_Y     2022      0
+trans_Y_Ma    2022      0
+trans_Ma_Ym   2022      0
+trans_K_T     2022      0
+trans_Th_Bu   2022      0
+TH6           2027      1500
+TH11          2027      1500
+SO1           2027      3350
+SO2           2027      3350
+SO3           2027      3350
+SO4           2027      3350
+SO5           2027      3350
+SO6           2027      3350
+SO7           2027      3350
+SO8           2027      3350
+SO9           2027      3350
+SO10          2027      3350
+SO11          2027      3350
+SO12          2027      3350
+SO13          2027      3350
+HY1           2027      2500
+HY2           2027      1800
+HY3           2027      2200
+HY4           2027      3700
+HY5           2027      13100
+trans_Be_J    2027      7.8
+trans_S_J     2027      49.4
+trans_L_J     2027      30
+trans_F_J     2027      26.4
+trans_J_T     2027      37.9
+trans_J_B     2027      59.6
+trans_B_M     2027      91.5
+trans_M_Bu    2027      42.2
+trans_B_R     2027      86.1
+trans_R_W     2027      82.6
+trans_W_Kj    2027      23.1
+trans_Kj_A    2027      16.2
+trans_P_M     2027      16.2
+trans_Wa_W    2027      16.2
+trans_J_Y     2027      0
+trans_Y_Ma    2027      0
+trans_Ma_Ym   2027      0
+trans_K_T     2027      0
+trans_Th_Bu   2027      0
+TH6           2032      1500
+TH11          2032      1500
+SO1           2032      3350
+SO2           2032      3350
+SO3           2032      3350
+SO4           2032      3350
+SO5           2032      3350
+SO6           2032      3350
+SO7           2032      3350
+SO8           2032      3350
+SO9           2032      3350
+SO10          2032      3350
+SO11          2032      3350
+SO12          2032      3350
+SO13          2032      3350
+HY1           2032      2500
+HY2           2032      1800
+HY3           2032      2200
+HY4           2032      3700
+HY5           2032      13100
+trans_Be_J    2032      7.8
+trans_S_J     2032      49.4
+trans_L_J     2032      30
+trans_F_J     2032      26.4
+trans_J_T     2032      37.9
+trans_J_B     2032      59.6
+trans_B_M     2032      91.5
+trans_M_Bu    2032      42.2
+trans_B_R     2032      86.1
+trans_R_W     2032      82.6
+trans_W_Kj    2032      23.1
+trans_Kj_A    2032      16.2
+trans_P_M     2032      16.2
+trans_Wa_W    2032      16.2
+trans_J_Y     2032      0
+trans_Y_Ma    2032      0
+trans_Ma_Ym   2032      0
+trans_K_T     2032      0
+trans_Th_Bu   2032      0
+
+;
+
+param CostFixed := 
+# period     # tech     # vintage       # value ($mil/GW-yr)
+2017         TH1         2016           20.0
+2022         TH1         2016           20.0
+2027         TH1         2016           20.0
+2032         TH1         2016           20.0
+
+2017         TH2         2016           20.0
+2022         TH2         2016           20.0
+2027         TH2         2016           20.0
+2032         TH2         2016           20.0
+
+2017         TH3         2016           20.0
+2022         TH3         2016           20.0
+2027         TH3         2016           20.0
+2032         TH3         2016           20.0
+
+2017         TH4         2016           20.0
+2022         TH4         2016           20.0
+2027         TH4         2016           20.0
+2032         TH4         2016           20.0
+
+2017         TH5         2016           20.0
+2022         TH5         2016           20.0
+2027         TH5         2016           20.0
+2032         TH5         2016           20.0
+
+2017         TH6         2017           20.0
+2022         TH6         2017           20.0
+2027         TH6         2017           20.0
+2032         TH6         2017           20.0
+
+2022         TH6         2022           20.0
+2027         TH6         2022           20.0
+2032         TH6         2022           20.0
+
+2027         TH6         2027           20.0
+2032         TH6         2027           20.0
+
+2017         TH7         2016           20.0
+2022         TH7         2016           20.0
+2027         TH7         2016           20.0
+2032         TH7         2016           20.0
+
+2017         TH8         2016           20.0
+2022         TH8         2016           20.0
+2027         TH8         2016           20.0
+2032         TH8         2016           20.0
+
+2017         TH9         2016           20.0
+2022         TH9         2016           20.0
+2027         TH9         2016           20.0
+2032         TH9         2016           20.0
+
+2017         TH10        2016           20.0
+2022         TH10        2016           20.0
+2027         TH10        2016           20.0
+2032         TH10        2016           20.0
+
+2017         TH11        2017           20.0
+2022         TH11        2017           20.0
+2027         TH11        2017           20.0
+2032         TH11        2017           20.0
+
+2022         TH11        2022           20.0
+2027         TH11        2022           20.0
+2032         TH11        2022           20.0
+
+2027         TH11        2027           20.0
+2032         TH11        2027           20.0
+
+2032         TH11        2032           20.0
+
+2017         SO1         2017           25.0      
+2022         SO1         2017           25.0      
+2027         SO1         2017           25.0      
+2032         SO1         2017           25.0      
+
+2022         SO1         2022           25.0      
+2027         SO1         2022           25.0      
+2032         SO1         2022           25.0      
+
+2027         SO1         2027           25.0      
+2032         SO1         2027           25.0      
+
+2032         SO1         2032           25.0      
+
+2017         SO2         2017           25.0      
+2022         SO2         2017           25.0      
+2027         SO2         2017           25.0      
+2032         SO2         2017           25.0      
+
+2022         SO2         2022           25.0      
+2027         SO2         2022           25.0      
+2032         SO2         2022           25.0      
+
+2027         SO2         2027           25.0      
+2032         SO2         2027           25.0      
+
+2032         SO2         2032           25.0      
+
+2017         SO3         2017           25.0      
+2022         SO3         2017           25.0      
+2027         SO3         2017           25.0      
+2032         SO3         2017           25.0      
+
+2022         SO3         2022           25.0      
+2027         SO3         2022           25.0      
+2032         SO3         2022           25.0      
+
+2027         SO3         2027           25.0      
+2032         SO3         2027           25.0      
+
+2032         SO3         2032           25.0      
+
+2017         SO4         2017           25.0      
+2022         SO4         2017           25.0      
+2027         SO4         2017           25.0      
+2032         SO4         2017           25.0      
+
+2022         SO4         2022           25.0      
+2027         SO4         2022           25.0      
+2032         SO4         2022           25.0      
+
+2027         SO4         2027           25.0      
+2032         SO4         2027           25.0      
+
+2032         SO4         2032           25.0      
+
+2017         SO5         2017           25.0      
+2022         SO5         2017           25.0      
+2027         SO5         2017           25.0      
+2032         SO5         2017           25.0      
+
+2022         SO5         2022           25.0      
+2027         SO5         2022           25.0      
+2032         SO5         2022           25.0      
+
+2027         SO5         2027           25.0      
+2032         SO5         2027           25.0      
+
+2032         SO5         2032           25.0      
+
+2017         SO6         2017           25.0      
+2022         SO6         2017           25.0      
+2027         SO6         2017           25.0      
+2032         SO6         2017           25.0      
+
+2022         SO6         2022           25.0      
+2027         SO6         2022           25.0      
+2032         SO6         2022           25.0      
+
+2027         SO6         2027           25.0      
+2032         SO6         2027           25.0      
+
+2032         SO6         2032           25.0      
+
+2017         SO7         2017           25.0      
+2022         SO7         2017           25.0      
+2027         SO7         2017           25.0      
+2032         SO7         2017           25.0      
+
+2022         SO7         2022           25.0      
+2027         SO7         2022           25.0      
+2032         SO7         2022           25.0      
+
+2027         SO7         2027           25.0      
+2032         SO7         2027           25.0      
+
+2032         SO7         2032           25.0      
+
+2017         SO8         2017           25.0      
+2022         SO8         2017           25.0      
+2027         SO8         2017           25.0      
+2032         SO8         2017           25.0      
+
+2022         SO8         2022           25.0      
+2027         SO8         2022           25.0      
+2032         SO8         2022           25.0      
+
+2027         SO8         2027           25.0      
+2032         SO8         2027           25.0      
+
+2032         SO8         2032           25.0      
+
+2017         SO9         2017           25.0      
+2022         SO9         2017           25.0      
+2027         SO9         2017           25.0      
+2032         SO9         2017           25.0      
+
+2022         SO9         2022           25.0      
+2027         SO9         2022           25.0      
+2032         SO9         2022           25.0      
+
+2027         SO9         2027           25.0      
+2032         SO9         2027           25.0      
+
+2032         SO9         2032           25.0      
+
+2017         SO10        2017           25.0      
+2022         SO10        2017           25.0      
+2027         SO10        2017           25.0      
+2032         SO10        2017           25.0      
+
+2022         SO10        2022           25.0      
+2027         SO10        2022           25.0      
+2032         SO10        2022           25.0      
+
+2027         SO10        2027           25.0      
+2032         SO10        2027           25.0      
+
+2032         SO10        2032           25.0      
+
+2017         SO11        2017           25.0      
+2022         SO11        2017           25.0      
+2027         SO11        2017           25.0      
+2032         SO11        2017           25.0      
+
+2022         SO11        2022           25.0      
+2027         SO11        2022           25.0      
+2032         SO11        2022           25.0      
+
+2027         SO11        2027           25.0      
+2032         SO11        2027           25.0      
+
+2032         SO11        2032           25.0      
+
+2017         SO12        2017           25.0      
+2022         SO12        2017           25.0      
+2027         SO12        2017           25.0      
+2032         SO12        2017           25.0      
+
+2022         SO12        2022           25.0      
+2027         SO12        2022           25.0      
+2032         SO12        2022           25.0      
+
+2027         SO12        2027           25.0      
+2032         SO12        2027           25.0      
+
+2032         SO12        2032           25.0      
+
+2017         SO13        2017           25.0      
+2022         SO13        2017           25.0      
+2027         SO13        2017           25.0      
+2032         SO13        2017           25.0      
+
+2022         SO13        2022           25.0      
+2027         SO13        2022           25.0      
+2032         SO13        2022           25.0      
+
+2027         SO13        2027           25.0      
+2032         SO13        2027           25.0      
+
+2032         SO13        2032           25.0      
+
+2017         HY1         2017           2.09     
+2022         HY1         2017           2.09     
+2027         HY1         2017           2.09     
+2032         HY1         2017           2.09     
+
+2022         HY1         2022           2.09     
+2027         HY1         2022           2.09     
+2032         HY1         2022           2.09     
+
+2027         HY1         2027           2.09     
+2032         HY1         2027           2.09     
+
+2032         HY1         2032           2.09     
+
+2017         HY2         2017           0.98      
+2022         HY2         2017           0.98      
+2027         HY2         2017           0.98      
+2032         HY2         2017           0.98      
+
+2022         HY2         2022           0.98      
+2027         HY2         2022           0.98      
+2032         HY2         2022           0.98      
+
+2027         HY2         2027           0.98      
+2032         HY2         2027           0.98      
+
+2032         HY2         2032           0.98      
+
+2017         HY3         2017           5.51      
+2022         HY3         2017           5.51      
+2027         HY3         2017           5.51      
+2032         HY3         2017           5.51      
+
+2022         HY3         2022           5.51      
+2027         HY3         2022           5.51      
+2032         HY3         2022           5.51      
+
+2027         HY3         2027           5.51      
+2032         HY3         2027           5.51      
+
+2032         HY3         2032           5.51      
+
+2017         HY4         2017           40.68      
+2022         HY4         2017           40.68      
+2027         HY4         2017           40.68      
+2032         HY4         2017           40.68      
+
+2022         HY4         2022           40.68      
+2027         HY4         2022           40.68      
+2032         HY4         2022           40.68      
+
+2027         HY4         2027           40.68      
+2032         HY4         2027           40.68      
+
+2032         HY4         2032           40.68      
+
+2017         HY5         2017           148.57      
+2022         HY5         2017           148.57      
+2027         HY5         2017           148.57      
+2032         HY5         2017           148.57      
+
+2022         HY5         2022           148.57      
+2027         HY5         2022           148.57      
+2032         HY5         2022           148.57      
+
+2027         HY5         2027           148.57      
+2032         HY5         2027           148.57      
+
+2032         HY5         2032           148.57      
+;
+
+param CostVariable := 
+# period     # tech             #vintage     # variable cost ($mil/GWh)
+2017         TH1                2016         0.04649388
+2022         TH1                2016         0.04649388
+2027         TH1                2016         0.04649388
+2032         TH1                2016         0.04649388
+
+2017         TH2                2016         0.04649388
+2022         TH2                2016         0.04649388
+2027         TH2                2016         0.04649388
+2032         TH2                2016         0.04649388
+
+2017         TH3                2016         0.04649388
+2022         TH3                2016         0.04649388
+2027         TH3                2016         0.04649388
+2032         TH3                2016         0.04649388
+
+2017         TH4                2016         0.04649388
+2022         TH4                2016         0.04649388
+2027         TH4                2016         0.04649388
+2032         TH4                2016         0.04649388
+
+2017         TH5                2016         0.04649388
+2022         TH5                2016         0.04649388
+2027         TH5                2016         0.04649388
+2032         TH5                2016         0.04649388
+
+2017         TH6                2017         0.0399964
+2022         TH6                2017         0.0399964
+2027         TH6                2017         0.0399964
+2032         TH6                2017         0.0399964
+
+2022         TH6                2022         0.0399964
+2027         TH6                2022         0.0399964
+2032         TH6                2022         0.0399964
+
+2027         TH6                2027         0.0399964
+2032         TH6                2027         0.0399964
+
+2032         TH6                2032         0.0399964
+
+2017         TH7                2016         0.04649388
+2022         TH7                2016         0.04649388
+2027         TH7                2016         0.04649388
+2032         TH7                2016         0.04649388
+
+2017         TH8                2016         0.04649388
+2022         TH8                2016         0.04649388
+2027         TH8                2016         0.04649388
+2032         TH8                2016         0.04649388
+
+2017         TH9                2016         0.04649388
+2022         TH9                2016         0.04649388
+2027         TH9                2016         0.04649388
+2032         TH9                2016         0.04649388
+
+2017         TH10               2016         0.04649388
+2022         TH10               2016         0.04649388
+2027         TH10               2016         0.04649388
+2032         TH10               2016         0.04649388
+
+2017         TH11               2017         0.0399964
+2022         TH11               2017         0.0399964
+2027         TH11               2017         0.0399964
+2032         TH11               2017         0.0399964
+
+2022         TH11               2022         0.0399964
+2027         TH11               2022         0.0399964
+2032         TH11               2022         0.0399964
+
+2027         TH11               2027         0.0399964
+2032         TH11               2027         0.0399964
+
+2032         TH11               2032         0.0399964
+
+2017         SO1                2017         0.0
+2022         SO1                2017         0.0
+2027         SO1                2017         0.0
+2032         SO1                2017         0.0
+
+2022         SO1                2022         0.0
+2027         SO1                2022         0.0
+2032         SO1                2022         0.0
+
+2027         SO1                2027         0.0
+2032         SO1                2027         0.0
+
+2032         SO1                2032         0.0
+
+2017         SO2                2017         0.0
+2022         SO2                2017         0.0
+2027         SO2                2017         0.0
+2032         SO2                2017         0.0
+
+2022         SO2                2022         0.0
+2027         SO2                2022         0.0
+2032         SO2                2022         0.0
+
+2027         SO2                2027         0.0
+2032         SO2                2027         0.0
+
+2032         SO2                2032         0.0
+
+2017         SO3                2017         0.0
+2022         SO3                2017         0.0
+2027         SO3                2017         0.0
+2032         SO3                2017         0.0
+
+2022         SO3                2022         0.0
+2027         SO3                2022         0.0
+2032         SO3                2022         0.0
+
+2027         SO3                2027         0.0
+2032         SO3                2027         0.0
+
+2032         SO3                2032         0.0
+
+2017         SO4                2017         0.0
+2022         SO4                2017         0.0
+2027         SO4                2017         0.0
+2032         SO4                2017         0.0
+
+2022         SO4                2022         0.0
+2027         SO4                2022         0.0
+2032         SO4                2022         0.0
+
+2027         SO4                2027         0.0
+2032         SO4                2027         0.0
+
+2032         SO4                2032         0.0
+
+2017         SO5                2017         0.0
+2022         SO5                2017         0.0
+2027         SO5                2017         0.0
+2032         SO5                2017         0.0
+
+2022         SO5                2022         0.0
+2027         SO5                2022         0.0
+2032         SO5                2022         0.0
+
+2027         SO5                2027         0.0
+2032         SO5                2027         0.0
+
+2032         SO5                2032         0.0
+
+2017         SO6                2017         0.0
+2022         SO6                2017         0.0
+2027         SO6                2017         0.0
+2032         SO6                2017         0.0
+
+2022         SO6                2022         0.0
+2027         SO6                2022         0.0
+2032         SO6                2022         0.0
+
+2027         SO6                2027         0.0
+2032         SO6                2027         0.0
+
+2032         SO6                2032         0.0
+2017         SO7                2017         0.0
+2022         SO7                2017         0.0
+2027         SO7                2017         0.0
+2032         SO7                2017         0.0
+
+2022         SO7                2022         0.0
+2027         SO7                2022         0.0
+2032         SO7                2022         0.0
+
+2027         SO7                2027         0.0
+2032         SO7                2027         0.0
+
+2032         SO7                2032         0.0
+
+2017         SO8                2017         0.0
+2022         SO8                2017         0.0
+2027         SO8                2017         0.0
+2032         SO8                2017         0.0
+
+2022         SO8                2022         0.0
+2027         SO8                2022         0.0
+2032         SO8                2022         0.0
+
+2027         SO8                2027         0.0
+2032         SO8                2027         0.0
+
+2032         SO8                2032         0.0
+
+2017         SO9                2017         0.0
+2022         SO9                2017         0.0
+2027         SO9                2017         0.0
+2032         SO9                2017         0.0
+
+2022         SO9                2022         0.0
+2027         SO9                2022         0.0
+2032         SO9                2022         0.0
+
+2027         SO9                2027         0.0
+2032         SO9                2027         0.0
+
+2032         SO9                2032         0.0
+2017         SO10               2017         0.0
+2022         SO10               2017         0.0
+2027         SO10               2017         0.0
+2032         SO10               2017         0.0
+2022         SO10               2022         0.0
+2027         SO10               2022         0.0
+2032         SO10               2022         0.0
+2027         SO10               2027         0.0
+2032         SO10               2027         0.0
+2032         SO10               2032         0.0
+2017         SO11               2017         0.0
+2022         SO11               2017         0.0
+2027         SO11               2017         0.0
+2032         SO11               2017         0.0
+
+2022         SO11               2022         0.0
+2027         SO11               2022         0.0
+2032         SO11               2022         0.0
+
+2027         SO11               2027         0.0
+2032         SO11               2027         0.0
+
+2032         SO11               2032         0.0
+
+2017         SO12                2017         0.0
+2022         SO12                2017         0.0
+2027         SO12                2017         0.0
+2032         SO12                2017         0.0
+
+2022         SO12                2022         0.0
+2027         SO12                2022         0.0
+2032         SO12                2022         0.0
+
+2027         SO12                2027         0.0
+2032         SO12                2027         0.0
+
+2032         SO12                2032         0.0
+
+
+2017         SO13                2017         0.0
+2022         SO13                2017         0.0
+2027         SO13                2017         0.0
+2032         SO13                2017         0.0
+
+2022         SO13                2022         0.0
+2027         SO13                2022         0.0
+2032         SO13                2022         0.0
+
+2027         SO13                2027         0.0
+2032         SO13                2027         0.0
+
+2032         SO13                2032         0.0
+
+2017         HY1                2017         0.00453
+2022         HY1                2017         0.00453
+2027         HY1                2017         0.00453
+2032         HY1                2017         0.00453
+
+2022         HY1                2022         0.00453
+2027         HY1                2022         0.00453
+2032         HY1                2022         0.00453
+
+2027         HY1                2027         0.00453
+2032         HY1                2027         0.00453
+
+2032         HY1                2032         0.00453
+
+
+2017         HY2                2017         0.00706
+2022         HY2                2017         0.00706
+2027         HY2                2017         0.00706
+2032         HY2                2017         0.00706
+
+2022         HY2                2022         0.00706
+2027         HY2                2022         0.00706
+2032         HY2                2022         0.00706
+
+2027         HY2                2027         0.00706
+2032         HY2                2027         0.00706
+
+2032         HY2                2032         0.00706
+
+
+2017         HY3                2017         0.0023
+2022         HY3                2017         0.0023
+2027         HY3                2017         0.0023
+2032         HY3                2017         0.0023
+
+2022         HY3                2022         0.0023
+2027         HY3                2022         0.0023
+2032         HY3                2022         0.0023
+
+2027         HY3                2027         0.0023
+2032         HY3                2027         0.0023
+
+2032         HY3                2032         0.0023
+
+
+2017         HY4                2017         0.0005
+2022         HY4                2017         0.0005
+2027         HY4                2017         0.0005
+2032         HY4                2017         0.0005
+
+2022         HY4                2022         0.0005
+2027         HY4                2022         0.0005
+2032         HY4                2022         0.0005
+
+2027         HY4                2027         0.0005
+2032         HY4                2027         0.0005
+
+2032         HY4                2032         0.0005
+
+
+2017         HY5                2017         0.00048
+2022         HY5                2017         0.00048
+2027         HY5                2017         0.00048
+2032         HY5                2017         0.00048
+
+2022         HY5                2022         0.00048
+2027         HY5                2022         0.00048
+2032         HY5                2022         0.00048
+
+2027         HY5                2027         0.00048
+2032         HY5                2027         0.00048
+
+2032         HY5                2032         0.00048
+
+2017         IMPDSL             2016         0.178378        #$6.869/gallon
+2022         IMPDSL             2016         0.178378
+2027         IMPDSL             2016         0.178378
+2032         IMPDSL             2016         0.178378
+
+2017         curtailment        2016         0.8         #0.500
+2022         curtailment        2016         0.8         #0.500
+2027         curtailment        2016         0.8         #0.500
+2032         curtailment        2016         0.8         #0.500
+;
