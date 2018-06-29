@@ -1,4 +1,3 @@
-BEGIN TRANSACTION;
 CREATE TABLE time_season (
   t_season text primary key );
 INSERT INTO `time_season` (t_season) VALUES ('Intermediate');
@@ -1553,12 +1552,12 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'CRFRVM','C_BLND_FUEL_RF',0.075,'');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'CRFRVM','C_BLND_FUEL_RF',0.075,'');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'CRFRVM','C_BLND_FUEL_RF',0.075,'');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'ELCP_Renewables','E_ELCTDLOSS',0.10555942,'#2016 AEO RPS');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'ELCP_Renewables','E_ELCTDLOSS',0.126901447,'#2016 AEO RPS');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'ELCP_Renewables','E_ELCTDLOSS',0.128105213,'#2016 AEO RPS');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'ELCP_Renewables','E_ELCTDLOSS',0.12859857,'#2016 AEO RPS');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'ELCP_Renewables','E_ELCTDLOSS',0.129091928,'#2016 AEO RPS');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2015,'ELCP_Renewables','E_ELCTDLOSS',0.05,'#2016 AEO RPS');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'ELCP_Renewables','E_ELCTDLOSS',0.16,'#AEO 2018, https://www.eia.gov/outlooks/aeo/assumptions/pdf/renewable.pdf');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'ELCP_Renewables','E_ELCTDLOSS',0.18,'#AEO 2018, https://www.eia.gov/outlooks/aeo/assumptions/pdf/renewable.pdf');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'ELCP_Renewables','E_ELCTDLOSS',0.2,'#AEO 2018, https://www.eia.gov/outlooks/aeo/assumptions/pdf/renewable.pdf');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'ELCP_Renewables','E_ELCTDLOSS',0.2,'#AEO 2018, https://www.eia.gov/outlooks/aeo/assumptions/pdf/renewable.pdf');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'ELCP_Renewables','E_ELCTDLOSS',0.2,'#AEO 2018, https://www.eia.gov/outlooks/aeo/assumptions/pdf/renewable.pdf');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2015,'ELCP_Renewables','E_ELCTDLOSS',0.05,'#AEO 2018, https://www.eia.gov/outlooks/aeo/assumptions/pdf/renewable.pdf');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2015,'TMDHDV_B_CNG','T_HDV_BLNDDEM_B',0.03545,'#I changed it to 1 tenth of the original value, otherwise it contradicts base year flows');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2015,'TMDHDV_HT_CNG','T_HDV_BLNDDEM_HT',0.00462,'#I changed it to 1 tenth of the original value, otherwise it contradicts base year flows');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2015,'E10','T_OH_E10_N',0.69,NULL);
@@ -1602,91 +1601,6 @@ CREATE TABLE `ReserveMargin` (
 );
 INSERT INTO `ReserveMargin` (commodity,reservemargin_group,margin,margin_notes) VALUES ('ELCP','US',0.2,NULL);
 INSERT INTO `ReserveMargin` (commodity,reservemargin_group,margin,margin_notes) VALUES ('ELCP_Renewables','US',0.2,NULL);
-CREATE TABLE Output_V_Capacity (
-   scenario text,
-   sector text,
-   tech text,
-   vintage integer,
-   capacity real,
-   PRIMARY KEY(scenario, tech, vintage),
-   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
-CREATE TABLE Output_VFlow_Out (
-   scenario text,
-   sector text,
-   t_periods integer,
-   t_season text,
-   t_day text,
-   input_comm text,
-   tech text,
-   vintage integer,
-   output_comm text,
-   vflow_out real,
-   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
-   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
-CREATE TABLE Output_VFlow_In (
-   scenario text,
-   sector text,
-   t_periods integer,
-   t_season text,
-   t_day text,
-   input_comm text,
-   tech text,
-   vintage integer,
-   output_comm text,
-   vflow_in real,
-   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
-   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
-CREATE TABLE Output_Objective (
-   scenario text,
-   objective_name text,
-   total_system_cost real );
-CREATE TABLE Output_Emissions (
-   scenario text,
-   sector text,
-   t_periods integer,
-   emissions_comm text,
-   tech text,
-   vintage integer,
-   emissions real,
-   PRIMARY KEY(scenario, t_periods, emissions_comm, tech, vintage),
-   FOREIGN KEY(emissions_comm) REFERENCES EmissionActivity(emis_comm),
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(tech) REFERENCES technologies(tech)
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
-CREATE TABLE Output_Costs (
-   scenario text,
-   sector text,
-   output_name text,
-   tech text,
-   vintage integer,
-   output_cost real,
-   PRIMARY KEY(scenario, output_name, tech, vintage),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
-CREATE TABLE Output_CapacityByPeriodAndTech (
-   scenario text,
-   sector text,
-   t_periods integer,   
-   tech text,
-   capacity real,
-   PRIMARY KEY(scenario, t_periods, tech),
-   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),   
-   FOREIGN KEY(tech) REFERENCES technologies(tech));
 CREATE TABLE "MinGenGroupOfTechnologies_Data" (
 	`period`	integer,
 	`flag`	text,
@@ -1747,6 +1661,15 @@ CREATE TABLE MinCapacity (
    PRIMARY KEY(periods, tech),
    FOREIGN KEY(periods) REFERENCES time_periods(t_periods),
    FOREIGN KEY(tech) REFERENCES technologies(tech) );
+INSERT INTO `MinCapacity` (periods,tech,mincap,mincap_units,mincap_notes) VALUES (2020,'E_SOLPVENDUSE_N',27.0,'#GW','"#Min capacities from the AEO2017"
+');
+INSERT INTO `MinCapacity` (periods,tech,mincap,mincap_units,mincap_notes) VALUES (2025,'E_SOLPVENDUSE_N',42.0,'#GW','"#Min capacities from the AEO2017"
+');
+INSERT INTO `MinCapacity` (periods,tech,mincap,mincap_units,mincap_notes) VALUES (2030,'E_SOLPVENDUSE_N',63.0,'#GW','"#Min capacities from the AEO2017"
+');
+INSERT INTO `MinCapacity` (periods,tech,mincap,mincap_units,mincap_notes) VALUES (2035,'E_SOLPVENDUSE_N',90.0,'#GW','"#Min capacities from the AEO2017"
+');
+INSERT INTO `MinCapacity` (periods,tech,mincap,mincap_units,mincap_notes) VALUES (2040,'E_SOLPVENDUSE_N',124.0,'#GW','#Min capacities from the AEO2017');
 CREATE TABLE MinActivity (
    periods integer,
    tech text,
@@ -1787,8 +1710,8 @@ INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_WNDCL4_N',240.0,'#GW','#EPA MARKAL');
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_WNDCL4_N',240.0,'#GW','#EPA MARKAL');
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2015,'E_WNDCL6_N',35.0,'#GW','#EPA MARKAL. In the first period, due to production tax credit model has great incentive to deploy wind class 6, about 81 GW. This will double the total wind capacity by 2019. To wind such a high growth in a short period, the maximum cap for the this class only in the first period is set at AEO level of wind deployment between 2015-2019. For the other periods, 106 GW is applied.');
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2015,'E_WNDCL5_N',387.0,'#GW','#EPA MARKAL');
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2015,'E_WNDCL4_N',240.0,'#GW','#EPA MARKAL');
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2015,'E_WNDCL5_N',0.0,'#GW','#EPA MARKAL');
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2015,'E_WNDCL4_N',0.0,'#GW','#EPA MARKAL');
 CREATE TABLE MaxActivity (
    periods integer,
    tech text,
@@ -2968,11 +2891,34 @@ CREATE TABLE GrowthRateSeed (
    growthrate_seed_units text,
    growthrate_seed_notes text,
    FOREIGN KEY(tech) REFERENCES technologies(tech) );
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_NGAACC_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_NGACC_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_SOLPVCEN_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_NGACT_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_NGAACT_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_WNDCL4_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_WNDCL5_N',100.0,NULL,NULL);
+INSERT INTO `GrowthRateSeed` (tech,growthrate_seed,growthrate_seed_units,growthrate_seed_notes) VALUES ('E_WNDCL6_N',100.0,NULL,NULL);
 CREATE TABLE GrowthRateMax (
    tech text,
    growthrate_max real,
    growthrate_max_notes text,
    FOREIGN KEY(tech) REFERENCES technologies(tech) );
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_NGAACC_N',2.02,'"#182 GW additions during 2000-2005 over 90 GW existing combined cycle and combustion turbine capacity in 2000. 182/90=2.02"
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_NGACC_N',2.02,'"#182 GW additions during 2000-2005 over 90 GW existing combined cycle and combustion turbine capacity in 2000  "
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_SOLPVCEN_N',2.4,'"#solar utility addtions in 2016/total utility PV capacity"
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_NGACT_N',2.02,'"#182 GW additions during 2000-2005 over 90 GW existing combined cycle and combustion turbine capacity in 2000. 182/90=2.02"
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_NGAACT_N',2.02,'"#182 GW additions during 2000-2005 over 90 GW existing combined cycle and combustion turbine capacity in 2000  "
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_WNDCL4_N',2.6,'"#43.3 GW during 2007-2012 on top of 16.7 GW of existing capacity in 2007. 43.3/16.7=2.6"
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_WNDCL5_N',2.6,'"#43.3 GW during 2007-2012 on top of 16.7 GW of existing capacity in 2007. 43.3/16.7=2.6"
+');
+INSERT INTO `GrowthRateMax` (tech,growthrate_max,growthrate_max_notes) VALUES ('E_WNDCL6_N',2.6,'#43.3 GW during 2007-2012 on top of 16.7 GW of existing capacity in 2007. 43.3/16.7=2.6');
 CREATE TABLE GlobalDiscountRate (
    rate real );
 INSERT INTO `GlobalDiscountRate` (rate) VALUES (0.05);
@@ -3359,18 +3305,18 @@ CREATE TABLE EmissionLimit (
    PRIMARY KEY(periods, emis_comm),
    FOREIGN KEY(periods) REFERENCES time_periods(t_periods),
    FOREIGN KEY(emis_comm) REFERENCES commodities(comm_name) );
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2015,'nox_ELC',1410.0,'#kt','based on AEO2015 electric sector emissions ref case http://www.eia.gov/oiaf/aeo/tablebrowser/#release=AEO2015&subject=0-AEO2015&table=8-AEO2015&region=0-0&cases=ref2015-d021915a');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2020,'nox_ELC',1060.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2025,'nox_ELC',1000.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2030,'nox_ELC',910.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2035,'nox_ELC',900.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2040,'nox_ELC',900.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2015,'so2_ELC',2867.0,'#kt','#based on AEO2015 electric sector emissions ref case');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2020,'so2_ELC',1200.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2025,'so2_ELC',1070.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2030,'so2_ELC',770.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2035,'so2_ELC',840.0,'#kt','#Based on AEO2016');
-INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2040,'so2_ELC',840.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2015,'nox_ELC',141000.0,'#kt','based on AEO2015 electric sector emissions ref case http://www.eia.gov/oiaf/aeo/tablebrowser/#release=AEO2015&subject=0-AEO2015&table=8-AEO2015&region=0-0&cases=ref2015-d021915a');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2020,'nox_ELC',106000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2025,'nox_ELC',100000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2030,'nox_ELC',91000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2035,'nox_ELC',90000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2040,'nox_ELC',90000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2015,'so2_ELC',286700.0,'#kt','#based on AEO2015 electric sector emissions ref case');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2020,'so2_ELC',120000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2025,'so2_ELC',107000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2030,'so2_ELC',77000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2035,'so2_ELC',84000.0,'#kt','#Based on AEO2016');
+INSERT INTO `EmissionLimit` (periods,emis_comm,emis_limit,emis_limit_units,emis_limit_notes) VALUES (2040,'so2_ELC',84000.0,'#kt','#Based on AEO2016');
 CREATE TABLE EmissionActivity  (
    emis_comm text,
    input_comm text,
@@ -3395,9 +3341,11 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPELCDSL',2015,'DSLCT_R',0.0196,'#kt/PJout','');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPELCDSL',2015,'DSLCC_R',0.0196,'#kt/PJout','');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPELCRFL',2015,'OIL_R',0.0196,'#kt/PJout','');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCCOAB',2015,'COAB_EA',0.44,'#kt/PJout','');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCCOAS',2015,'COAS_EA',0.44,'#kt/PJout','');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCCOAL',2015,'COAL_EA',0.44,'#kt/PJout','');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCCOAB',2015,'COAB_EA',5.6,'#kt/PJout','"#LCA emissions of coal"
+');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCCOAS',2015,'COAS_EA',5.6,'#kt/PJout','"#LCA emissions of coal"
+');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCCOAL',2015,'COAL_EA',5.6,'#kt/PJout','#LCA emissions of coal');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPELCCOAB',2015,'COAB_EA',0.006265,'#kt/PJout','');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPELCCOAS',2015,'COAS_EA',0.006265,'#kt/PJout','');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPELCCOAL',2015,'COAL_EA',0.006265,'#kt/PJout','');
@@ -5658,16 +5606,16 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','IMPCOMRFO',2015,'C_RFO_EA',1.0,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','IMPCOMLPG',2015,'C_LPG_EA',1.0,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','IMPCOMDISTOIL',2015,'C_DISTOIL_EA',1.0,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM_R',2010,'ELCP',0.326,'');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM_R',2010,'ELCP',0.34,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('URN_R','E_URNLWR_R',2010,'ELCP',1.268,'# Jeff''s numbers');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','E_HYDCONV_R',2010,'ELCP',0.338,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP','E_HYDREV_R',2010,'ELCP',0.338,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('OIL_R','E_OILSTM_R',2010,'ELCP',0.26,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('DSLCT_R','E_DSLCT_R',2010,'ELCP',0.221,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('DSLCC_R','E_DSLCC_R',2010,'ELCP',0.322,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM_R',2010,'ELCP',0.286,'');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM_R',2010,'ELCP',0.33,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACT_R','E_NGACT_R',2010,'ELCP',0.24,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC_R',2010,'ELCP',0.369,'');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC_R',2010,'ELCP',0.43,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('BIO_R','E_BIOSTM_R',2010,'ELCP_Renewables',0.206,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','E_GEO_R',2010,'ELCP_Renewables',0.162,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('MSW','E_MSWSTM_R',2010,'ELCP_Renewables',0.213,'');
@@ -8682,29 +8630,29 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CRFRVM','C_BLND_FUEL_RF',2030,'CRF',1.0,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CRFRVM','C_BLND_FUEL_RF',2035,'CRF',1.0,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CRFRVM','C_BLND_FUEL_RF',2040,'CRF',1.0,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM_R',2005,'ELCP',0.326,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM_R',2000,'ELCP',0.326,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM_R',2005,'ELCP',0.34,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM_R',2000,'ELCP',0.34,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('URN_R','E_URNLWR_R',2005,'ELCP',1.268,'# Jeff''s numbers');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('URN_R','E_URNLWR_R',2000,'ELCP',1.268,'# Jeff''s numbers');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','E_HYDCONV_R',2005,'ELCP',0.338,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','E_HYDCONV_R',2000,'ELCP',0.338,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM_R',2005,'ELCP',0.286,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM_R',2005,'ELCP',0.33,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACT_R','E_NGACT_R',2005,'ELCP',0.24,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACT_R','E_NGACT_R',2000,'ELCP',0.24,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC_R',2005,'ELCP',0.369,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC_R',2000,'ELCP',0.369,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP','E_ELCTDLOSS',2015,'ELC',0.88,'#5% due to t&d loss and 7% due to powerplants own electricity use');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC_R',2005,'ELCP',0.43,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC_R',2000,'ELCP',0.43,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP','E_ELCTDLOSS',2015,'ELC',0.92,'#5% due to t&d loss and 2% due to powerplants own electricity use');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('OIL_R','E_OILSTM_R',2005,'ELCP',0.26,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM1_R',2010,'ELCP',0.326,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM1_R',2005,'ELCP',0.326,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM1_R',2000,'ELCP',0.326,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM_R',2000,'ELCP',0.286,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM1_R',2000,'ELCP',0.286,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM1_R',2005,'ELCP',0.286,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM1_R',2010,'ELCP',0.286,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC1_R',2010,'ELCP',0.369,'');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC1_R',2005,'ELCP',0.369,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC1_R',2000,'ELCP',0.369,'NULL');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM1_R',2010,'ELCP',0.34,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM1_R',2005,'ELCP',0.34,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALSTM_R','E_COALSTM1_R',2000,'ELCP',0.34,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM_R',2000,'ELCP',0.33,'');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM1_R',2000,'ELCP',0.33,'');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM1_R',2005,'ELCP',0.33,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGASTM_R','E_NGASTM1_R',2010,'ELCP',0.33,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC1_R',2010,'ELCP',0.43,'');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC1_R',2005,'ELCP',0.43,'NULL');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('NGACC_R','E_NGACC1_R',2000,'ELCP',0.43,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','E_SOLPVENDUSE_N',2020,'ELCP_Renewables',1.0,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','E_SOLPVENDUSE_N',2025,'ELCP_Renewables',1.0,'');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','E_SOLPVENDUSE_N',2030,'ELCP_Renewables',1.0,'');
@@ -9707,56 +9655,56 @@ INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('C_L
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('C_LT_HIDHBLED_ELC_N',2030,0.3,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('C_LT_HIDHBLED_ELC_N',2035,0.3,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('C_LT_HIDHBLED_ELC_N',2040,0.3,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2040,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACT_N',2040,0.067,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_URNLWR_N',2020,0.15,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_URNLWR_N',2025,0.15,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_URNLWR_N',2030,0.15,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_URNLWR_N',2035,0.15,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_URNLWR_N',2040,0.15,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2040,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACT_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGAACC_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVENDUSE_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLTHCEN_N',2040,0.067,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_LDV_FE10_N',2020,0.05,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_LDV_FE10_N',2025,0.05,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_LDV_FE10_N',2030,0.05,NULL);
@@ -9832,40 +9780,40 @@ INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_H
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_HDV_TCE85X_N',2030,0.05,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_HDV_TCE85X_N',2035,0.05,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('T_HDV_TCE85X_N',2040,0.05,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2015,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2025,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2030,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2035,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2040,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2015,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2015,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2015,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_SOLPVCEN_N',2015,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_BIOIGCC_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALIGCC_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_GEOBCFS_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2020,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2025,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2030,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2035,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_NGACC_CCS_N',2040,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2020,0.1,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2025,0.1,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2030,0.1,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2035,0.1,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_COALSTM_N',2040,0.1,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL4_N',2015,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL5_N',2015,0.067,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_WNDCL6_N',2015,0.067,NULL);
 CREATE TABLE DemandSpecificDistribution (
    season_name text,
    time_of_day_name text,
@@ -10263,29 +10211,30 @@ INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALU
 INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2030,'COEELC',358.97,'#PJ','');
 INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2035,'COEELC',392.98,'#PJ','');
 INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2040,'COEELC',424.79,'#PJ','');
-CREATE TABLE CostVariable (
-   periods integer NOT NULL,
-   tech text NOT NULL,
-   vintage integer NOT NULL,
-   cost_variable real,
-   cost_variable_units text,
-   cost_variable_notes text,
-   PRIMARY KEY(periods, tech, vintage),
-   FOREIGN KEY(periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods) );
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCDSL',2015,21.58,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCDSL',2015,22.92,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCDSL',2015,24.03,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCDSL',2015,25.05,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCDSL',2015,26.35,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCDSL',2015,27.7,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCRFL',2015,21.8,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCRFL',2015,23.11,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCRFL',2015,24.08,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCRFL',2015,24.22,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCRFL',2015,24.38,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCRFL',2015,25.07,'#M$/PJ','');
+CREATE TABLE `CostVariable` (
+	`periods`	integer NOT NULL,
+	`tech`	text NOT NULL,
+	`vintage`	integer NOT NULL,
+	`cost_variable`	real,
+	`cost_variable_units`	text,
+	`cost_variable_notes`	text,
+	FOREIGN KEY(`periods`) REFERENCES `time_periods`(`t_periods`),
+	PRIMARY KEY(`periods`,`tech`,`vintage`),
+	FOREIGN KEY(`tech`) REFERENCES `technologies`(`tech`),
+	FOREIGN KEY(`vintage`) REFERENCES `time_periods`(`t_periods`)
+);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCDSL',2015,24.6040076789435,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCDSL',2015,26.1317820204534,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCDSL',2015,27.3973264376744,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCDSL',2015,28.5602591453909,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCDSL',2015,30.0424282826766,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCDSL',2015,31.5816039252426,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCRFL',2015,24.8548363021765,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCRFL',2015,26.3484067405183,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCRFL',2015,27.4543329429546,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCRFL',2015,27.6139511577392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCRFL',2015,27.7963719746359,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCRFL',2015,28.583061747503,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCBSTMEA',2015,3.39,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCBSTMEA',2015,3.39,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCBSTMEA',2015,3.39,'#M$/PJ','');
@@ -10301,467 +10250,467 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCBIO',2020,3.39,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCBIO',2020,3.39,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCBIO',2020,3.39,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCCOAB',2015,1.887998133,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCCOAB',2015,1.951235801,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCCOAB',2015,2.011978948,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCCOAB',2015,2.082493166,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCCOAB',2015,2.166100171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCCOAB',2015,2.243936654,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCCOAS',2015,1.887998133,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCCOAS',2015,1.951235801,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCCOAS',2015,2.011978948,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCCOAS',2015,2.082493166,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCCOAS',2015,2.166100171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCCOAS',2015,2.243936654,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCCOAL',2015,1.887998133,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCCOAL',2015,1.951235801,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCCOAL',2015,2.011978948,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCCOAL',2015,2.082493166,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCCOAL',2015,2.166100171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCCOAL',2015,2.243936654,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCNGA',2015,2.80956419,'#M$/PJ','#AEO2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCNGA',2015,3.982876787,'#M$/PJ','#AEO2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCNGA',2015,4.514710114,'#M$/PJ','#AEO2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCNGA',2015,4.362244142,'#M$/PJ','#AEO2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCNGA',2015,4.478078085,'#M$/PJ','#AEO2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCNGA',2015,4.453736664,'#M$/PJ','#AEO2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCCOAB',2015,2.28548991140267,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCCOAB',2015,2.36204139178623,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCCOAB',2015,2.43557316463809,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCCOAB',2015,2.52093317153706,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCCOAB',2015,2.6221424699569,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCCOAB',2015,2.7163663435558,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCCOAS',2015,2.28548991140267,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCCOAS',2015,2.36204139178623,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCCOAS',2015,2.43557316463809,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCCOAS',2015,2.52093317153706,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCCOAS',2015,2.6221424699569,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCCOAS',2015,2.7163663435558,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCCOAL',2015,2.28548991140267,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCCOAL',2015,2.36204139178623,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCCOAL',2015,2.43557316463809,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCCOAL',2015,2.52093317153706,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCCOAL',2015,2.6221424699569,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCCOAL',2015,2.7163663435558,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCNGA',2015,2.03037197285865,'#M$/PJ','#AEO2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCNGA',2015,2.79803911454018,'#M$/PJ','#AEO2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCNGA',2015,2.95587721843732,'#M$/PJ','#AEO2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCNGA',2015,3.13523870013862,'#M$/PJ','#AEO2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCNGA',2015,3.20698329281913,'#M$/PJ','#AEO2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCNGA',2015,3.30025126330381,'#M$/PJ','#AEO2016');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPELCURN',2015,2.809,'#M$/ton','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCURN',2015,2.809,'#M$/ton','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCURN',2015,2.809,'#M$/ton','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPELCURN',2015,2.809,'#M$/ton','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPELCURN',2015,2.809,'#M$/ton','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPELCURN',2015,2.809,'#M$/ton','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNDSL',2015,17.05203026,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNDSL',2015,19.93661726,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNDSL',2015,22.25219377,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNDSL',2015,24.14692245,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNDSL',2015,26.68934515,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNDSL',2015,29.30770928,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNE85',2015,18.0343662,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNE85',2015,19.58958035,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNE85',2015,21.28975103,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNE85',2015,22.88787406,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNE85',2015,24.94566094,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNE85',2015,27.41916946,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNE10',2015,18.0343662,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNE10',2015,19.58958035,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNE10',2015,21.28975103,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNE10',2015,22.88787406,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNE10',2015,24.94566094,'#M$/PJ','#AEO 2016');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNE10',2015,27.41916946,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNDSL',2015,26.6100414661153,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNDSL',2015,31.1114983898559,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNDSL',2015,34.7250028250823,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNDSL',2015,37.6817656217615,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNDSL',2015,41.6492681675299,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNDSL',2015,45.7352788623195,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNE85',2015,28.1429967604596,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNE85',2015,30.5699402027675,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNE85',2015,33.223091267102,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNE85',2015,35.716994898055,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNE85',2015,38.928213345877,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNE85',2015,42.7881739097624,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNE10',2015,28.1429967604596,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNE10',2015,30.5699402027675,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNE10',2015,33.223091267102,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNE10',2015,35.716994898055,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNE10',2015,38.928213345877,'#M$/PJ','#AEO 2016');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNE10',2015,42.7881739097624,'#M$/PJ','#AEO 2016');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNH2',2015,27.65,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNH2',2015,27.65,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNH2',2015,27.65,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNH2',2015,27.65,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNH2',2015,27.65,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNH2',2015,27.65,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNCNG',2015,14.35852341,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNCNG',2015,14.29728516,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNCNG',2015,14.01175562,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNCNG',2015,13.08920711,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNCNG',2015,13.23999799,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNCNG',2015,13.58372785,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNLPG',2015,30.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNLPG',2015,30.53,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNLPG',2015,31.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNLPG',2015,32.58,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNLPG',2015,33.88,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNLPG',2015,34.85,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNBIODSL',2015,17.47,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNBIODSL',2015,17.47,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNBIODSL',2015,17.47,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNBIODSL',2015,17.47,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNBIODSL',2015,17.47,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNBIODSL',2015,17.47,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNJTF',2015,22.5,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNJTF',2015,23.94,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNJTF',2015,25.07,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNJTF',2015,26.14,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNJTF',2015,27.61,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNJTF',2015,29.06,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNRFO',2015,6.991446332,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNRFO',2015,10.05501007,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNRFO',2015,11.5699772,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNRFO',2015,12.93943405,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNRFO',2015,14.64710641,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNRFO',2015,16.53727646,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESLPG',2015,15.39553561,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESLPG',2015,18.34530698,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESLPG',2015,19.46132552,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESLPG',2015,20.34888674,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESLPG',2015,21.79594326,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESLPG',2015,23.26402351,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESNGA',2015,8.689838417,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESNGA',2015,9.200040483,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESNGA',2015,9.918993962,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESNGA',2015,10.00055325,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESNGA',2015,10.31236497,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESNGA',2015,10.48858064,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMLPG',2015,29.1,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMLPG',2015,29.45,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMLPG',2015,30.6,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMLPG',2015,31.55,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMLPG',2015,32.83,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMLPG',2015,33.84,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMNGA',2015,6.617938341,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMNGA',2015,7.952672,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMNGA',2015,8.578962464,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMNGA',2015,8.584080891,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMNGA',2015,8.785160701,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMNGA',2015,8.823173687,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMDISTOIL',2015,23.84,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMDISTOIL',2015,25.3,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMDISTOIL',2015,26.6,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMDISTOIL',2015,27.75,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMDISTOIL',2015,28.9,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMDISTOIL',2015,30.3,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMRFO',2015,17.36,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMRFO',2015,18.56,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMRFO',2015,19.55,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMRFO',2015,19.68,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMRFO',2015,19.86,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMRFO',2015,20.54,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESDISTOIL',2015,17.60743257,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESDISTOIL',2015,20.37566531,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESDISTOIL',2015,23.22345207,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESDISTOIL',2015,25.26740762,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESDISTOIL',2015,27.9965595,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESDISTOIL',2015,30.7932443,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESKER',2015,21.67,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESKER',2015,21.67,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESKER',2015,21.67,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESKER',2015,21.67,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESKER',2015,21.67,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESKER',2015,21.67,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNCNG',2015,10.3014641360881,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNCNG',2015,10.2575290030609,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNCNG',2015,10.0526769982521,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNCNG',2015,9.39079832682565,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNCNG',2015,9.4989826281874,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNCNG',2015,9.74559021681252,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNLPG',2015,47.2369531865839,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNLPG',2015,47.6426884964125,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNLPG',2015,49.3748661652961,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNLPG',2015,50.8417553623688,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNLPG',2015,52.8704319115118,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNLPG',2015,54.384136721257,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNBIODSL',2015,27.2622917796373,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNBIODSL',2015,27.2622917796373,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNBIODSL',2015,27.2622917796373,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNBIODSL',2015,27.2622917796373,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNBIODSL',2015,27.2622917796373,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNBIODSL',2015,27.2622917796373,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNJTF',2015,35.1117095043983,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNJTF',2015,37.3588589126798,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNJTF',2015,39.1222469900118,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNJTF',2015,40.7920038419988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNJTF',2015,43.0859688629528,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNJTF',2015,45.3487234754585,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPTRNRFO',2015,10.9102947853043,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNRFO',2015,15.6910485567487,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNRFO',2015,18.0551857075072,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNRFO',2015,20.192251089552,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNRFO',2015,22.8571086838309,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNRFO',2015,25.8067576486982,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESLPG',2015,24.0250477351646,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESLPG',2015,28.6282261944107,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESLPG',2015,30.3697959246801,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESLPG',2015,31.7548533295341,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESLPG',2015,34.0130145847882,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESLPG',2015,36.3039837966612,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESNGA',2015,6.2344891764071,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESNGA',2015,6.60053157143575,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESNGA',2015,7.11634181525395,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESNGA',2015,7.17485619501076,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESNGA',2015,7.39856424151445,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESNGA',2015,7.52498945748881,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMLPG',2015,45.4111442923552,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMLPG',2015,45.9573264402014,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMLPG',2015,47.7519249259817,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMLPG',2015,49.2344193272785,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMLPG',2015,51.2318854679732,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMLPG',2015,52.8080110946151,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMNGA',2015,4.748012905234,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMNGA',2015,5.70561213361757,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMNGA',2015,6.15494167769895,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMNGA',2015,6.15861386924984,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMNGA',2015,6.3028777605439,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMNGA',2015,6.33015002082765,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMDISTOIL',2015,37.2028068704381,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMDISTOIL',2015,39.4811666871679,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMDISTOIL',2015,41.5098432363109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMDISTOIL',2015,43.3044417220913,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMDISTOIL',2015,45.0990402078716,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMDISTOIL',2015,47.2837687992564,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPCOMRFO',2015,27.0906345331713,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCOMRFO',2015,28.9632590400726,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCOMRFO',2015,30.5081742582661,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCOMRFO',2015,30.7110419131804,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCOMRFO',2015,30.9919355892156,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCOMRFO',2015,32.0530894764596,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESDISTOIL',2015,27.4767581152289,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESDISTOIL',2015,31.7966418383036,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESDISTOIL',2015,36.240671237675,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESDISTOIL',2015,39.430305615964,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESDISTOIL',2015,43.6892028571824,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESDISTOIL',2015,48.0534866026475,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESKER',2015,33.8164775537916,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESKER',2015,33.8164775537916,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESKER',2015,33.8164775537916,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESKER',2015,33.8164775537916,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESKER',2015,33.8164775537916,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESKER',2015,33.8164775537916,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'IMPRESBIO',2015,2.94,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPRESBIO',2015,2.94,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPRESBIO',2015,2.94,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPRESBIO',2015,2.94,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPRESBIO',2015,2.94,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPRESBIO',2015,2.94,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM_R',2010,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_R',2010,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_R',2010,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_R',2010,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_R',2010,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_R',2010,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_N',2020,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_N',2020,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_N',2020,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2020,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2020,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_N',2025,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_N',2025,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2025,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2025,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_N',2030,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2030,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2030,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2035,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2035,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2040,12.2,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALIGCC_N',2020,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_N',2020,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_N',2020,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2020,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2020,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_N',2025,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_N',2025,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2025,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2025,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_N',2030,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2030,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2030,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2035,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2035,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2040,12.872,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALIGCC_CCS_N',2020,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_CCS_N',2020,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_CCS_N',2020,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2020,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2020,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_CCS_N',2025,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_CCS_N',2025,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2025,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2025,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_CCS_N',2030,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2030,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2030,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2035,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2035,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2040,13.171,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_URNLWR_R',2010,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_R',2010,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_R',2010,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_R',2010,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_R',2010,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_R',2010,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_N',2020,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_N',2020,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_N',2020,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2020,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2020,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_N',2025,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_N',2025,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2025,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2025,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_N',2030,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2030,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2030,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2035,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2035,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2040,11.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDCONV_R',2010,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDCONV_R',2010,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDCONV_R',2010,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDCONV_R',2010,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDCONV_R',2010,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDCONV_R',2010,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDREV_R',2010,16.109,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDREV_R',2010,16.109,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDREV_R',2010,16.109,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDREV_R',2010,16.109,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDREV_R',2010,16.109,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDREV_R',2010,16.109,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_OILSTM_R ',2010,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_OILSTM_R ',2010,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_OILSTM_R ',2010,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_OILSTM_R ',2010,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_OILSTM_R ',2010,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_OILSTM_R ',2010,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_DSLCT_R ',2010,20.321,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_DSLCT_R ',2010,20.321,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_DSLCT_R ',2010,20.321,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_DSLCT_R ',2010,20.321,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_DSLCT_R ',2010,20.321,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_DSLCC_R ',2010,13.071,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_DSLCC_R ',2010,13.071,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_DSLCC_R ',2010,13.071,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_DSLCC_R ',2010,13.071,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_DSLCC_R ',2010,13.071,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM_R ',2010,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM_R ',2010,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM_R ',2010,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGASTM_R ',2010,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGASTM_R ',2010,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGASTM_R ',2010,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACT_R ',2010,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_R ',2010,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_R ',2010,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_R ',2010,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_R ',2010,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC_R ',2010,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_R ',2010,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_R ',2010,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_R ',2010,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_R ',2010,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_N ',2020,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_N ',2020,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_N ',2020,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2020,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2020,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_N ',2025,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_N ',2025,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2025,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2025,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_N ',2030,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2030,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2030,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2035,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2035,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2040,14.878,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_N ',2020,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_N ',2020,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_N ',2020,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2020,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2020,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_N ',2025,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_N ',2025,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2025,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2025,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_N ',2030,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2030,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2030,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2035,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2035,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2040,11.99,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGAACT_N ',2020,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACT_N ',2020,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACT_N ',2020,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2020,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2020,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACT_N ',2025,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACT_N ',2025,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2025,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2025,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACT_N ',2030,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2030,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2030,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2035,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2035,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2040,13.64,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGAACC_N ',2020,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACC_N ',2020,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACC_N ',2020,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2020,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2020,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACC_N ',2025,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACC_N ',2025,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2025,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2025,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACC_N ',2030,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2030,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2030,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2035,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2035,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2040,11.49,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_CCS_N ',2020,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_CCS_N ',2020,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_CCS_N ',2020,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2020,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2020,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_CCS_N ',2025,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_CCS_N ',2025,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2025,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2025,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_CCS_N ',2030,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2030,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2030,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2035,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2035,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2040,12.764,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_BIOSTM_R ',2010,15.691,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_BIOSTM_R ',2010,15.691,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_BIOSTM_R ',2010,15.691,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOSTM_R ',2010,15.691,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_BIOIGCC_N ',2020,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_BIOIGCC_N ',2020,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOIGCC_N ',2020,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2020,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2020,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_BIOIGCC_N ',2025,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOIGCC_N ',2025,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2025,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2025,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOIGCC_N ',2030,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2030,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2030,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2035,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2035,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2040,12.392,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_GEO_R ',2010,16.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_GEO_R ',2010,16.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_GEO_R ',2010,16.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEO_R ',2010,16.221,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_GEOBCFS_N ',2020,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_GEOBCFS_N ',2020,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEOBCFS_N ',2020,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2020,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2020,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_GEOBCFS_N ',2025,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEOBCFS_N ',2025,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2025,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2025,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEOBCFS_N ',2030,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2030,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2030,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2035,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2035,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2040,13.581,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_MSWSTM_R ',2010,16.722,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_MSWSTM_R ',2010,16.722,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_MSWSTM_R ',2010,16.722,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_MSWSTM_R ',2010,16.722,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_MSWSTM_R ',2010,16.722,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WND_R ',2010,12.568,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WND_R ',2010,12.568,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WND_R ',2010,12.568,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WND_R ',2010,12.568,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL4_N ',2020,13.27,'#M$/PJ','#footnote 12 of https://www.nrel.gov/docs/fy17osti/66861.pdf estimates the variable Opex of land-based wind to be 9$/MWh');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL4_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL4_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2035,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2035,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2040,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL5_N ',2020,13.27,'#M$/PJ','#footnote 12 of https://www.nrel.gov/docs/fy17osti/66861.pdf estimates the variable Opex of land-based wind to be 9$/MWh');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL5_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL5_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2035,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2035,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2040,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL6_N ',2020,13.27,'#M$/PJ','#footnote 12 of https://www.nrel.gov/docs/fy17osti/66861.pdf estimates the variable Opex of land-based wind to be 9$/MWh');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL6_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2020,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL6_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2025,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2030,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2035,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2035,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2040,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_SOLPV_R ',2010,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPV_R ',2010,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPV_R ',2010,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPV_R ',2010,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPV_R ',2010,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_SOLTH_R ',2010,13.011,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLTH_R ',2010,13.011,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLTH_R ',2010,13.011,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTH_R ',2010,13.011,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTH_R ',2010,13.011,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPVCEN_N ',2020,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVCEN_N ',2020,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N ',2020,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2020,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2020,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVCEN_N ',2025,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N ',2025,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2025,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2025,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N ',2030,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2030,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2030,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2035,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2035,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2040,11.0,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLTHCEN_N ',2020,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLTHCEN_N ',2020,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTHCEN_N ',2020,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2020,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2020,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLTHCEN_N ',2025,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTHCEN_N ',2025,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2025,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2025,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTHCEN_N ',2030,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2030,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2030,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2035,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2035,11.111,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2040,11.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM_R',2010,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_R',2010,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_R',2010,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_R',2010,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_R',2010,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_R',2010,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_N',2020,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_N',2020,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_N',2020,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2020,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2020,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_N',2025,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_N',2025,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2025,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2025,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_N',2030,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2030,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2030,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_N',2035,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2035,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALSTM_N',2040,1.2,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALIGCC_N',2020,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_N',2020,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_N',2020,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2020,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2020,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_N',2025,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_N',2025,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2025,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2025,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_N',2030,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2030,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2030,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_N',2035,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2035,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_N',2040,1.872,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALIGCC_CCS_N',2020,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_CCS_N',2020,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_CCS_N',2020,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2020,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2020,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALIGCC_CCS_N',2025,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_CCS_N',2025,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2025,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2025,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALIGCC_CCS_N',2030,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2030,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2030,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALIGCC_CCS_N',2035,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2035,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_COALIGCC_CCS_N',2040,2.171,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_URNLWR_R',2010,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_R',2010,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_R',2010,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_R',2010,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_R',2010,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_R',2010,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_N',2020,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_N',2020,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_N',2020,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2020,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2020,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_N',2025,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_N',2025,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2025,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2025,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_N',2030,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2030,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2030,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_N',2035,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2035,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_N',2040,0.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDCONV_R',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDCONV_R',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDCONV_R',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDCONV_R',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDCONV_R',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDCONV_R',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDREV_R',2010,5.109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDREV_R',2010,5.109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDREV_R',2010,5.109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDREV_R',2010,5.109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDREV_R',2010,5.109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDREV_R',2010,5.109,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_OILSTM_R ',2010,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_OILSTM_R ',2010,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_OILSTM_R ',2010,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_OILSTM_R ',2010,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_OILSTM_R ',2010,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_OILSTM_R ',2010,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_DSLCT_R ',2010,9.321,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_DSLCT_R ',2010,9.321,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_DSLCT_R ',2010,9.321,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_DSLCT_R ',2010,9.321,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_DSLCT_R ',2010,9.321,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_DSLCC_R ',2010,2.071,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_DSLCC_R ',2010,2.071,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_DSLCC_R ',2010,2.071,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_DSLCC_R ',2010,2.071,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_DSLCC_R ',2010,2.071,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM_R ',2010,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM_R ',2010,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM_R ',2010,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGASTM_R ',2010,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGASTM_R ',2010,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGASTM_R ',2010,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACT_R ',2010,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_R ',2010,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_R ',2010,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_R ',2010,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_R ',2010,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC_R ',2010,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_R ',2010,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_R ',2010,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_R ',2010,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_R ',2010,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_N ',2020,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_N ',2020,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_N ',2020,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2020,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2020,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_N ',2025,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_N ',2025,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2025,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2025,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_N ',2030,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2030,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2030,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACT_N ',2035,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2035,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_N ',2040,3.878,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_N ',2020,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_N ',2020,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_N ',2020,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2020,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2020,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_N ',2025,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_N ',2025,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2025,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2025,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_N ',2030,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2030,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2030,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_N ',2035,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2035,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_N ',2040,0.99,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGAACT_N ',2020,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACT_N ',2020,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACT_N ',2020,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2020,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2020,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACT_N ',2025,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACT_N ',2025,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2025,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2025,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACT_N ',2030,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2030,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2030,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACT_N ',2035,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2035,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACT_N ',2040,2.64,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGAACC_N ',2020,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACC_N ',2020,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACC_N ',2020,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2020,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2020,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGAACC_N ',2025,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACC_N ',2025,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2025,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2025,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGAACC_N ',2030,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2030,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2030,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGAACC_N ',2035,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2035,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGAACC_N ',2040,0.49,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_CCS_N ',2020,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_CCS_N ',2020,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_CCS_N ',2020,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2020,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2020,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_CCS_N ',2025,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_CCS_N ',2025,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2025,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2025,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_CCS_N ',2030,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2030,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2030,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_CCS_N ',2035,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2035,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_CCS_N ',2040,1.764,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_BIOSTM_R ',2010,4.691,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_BIOSTM_R ',2010,4.691,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_BIOSTM_R ',2010,4.691,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOSTM_R ',2010,4.691,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_BIOIGCC_N ',2020,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_BIOIGCC_N ',2020,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOIGCC_N ',2020,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2020,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2020,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_BIOIGCC_N ',2025,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOIGCC_N ',2025,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2025,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2025,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_BIOIGCC_N ',2030,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2030,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2030,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_BIOIGCC_N ',2035,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2035,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_BIOIGCC_N ',2040,1.392,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_GEO_R ',2010,5.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_GEO_R ',2010,5.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_GEO_R ',2010,5.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEO_R ',2010,5.221,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_GEOBCFS_N ',2020,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_GEOBCFS_N ',2020,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEOBCFS_N ',2020,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2020,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2020,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_GEOBCFS_N ',2025,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEOBCFS_N ',2025,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2025,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2025,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_GEOBCFS_N ',2030,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2030,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2030,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_GEOBCFS_N ',2035,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2035,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_GEOBCFS_N ',2040,2.581,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_MSWSTM_R ',2010,5.722,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_MSWSTM_R ',2010,5.722,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_MSWSTM_R ',2010,5.722,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_MSWSTM_R ',2010,5.722,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_MSWSTM_R ',2010,5.722,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WND_R ',2010,1.568,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WND_R ',2010,1.568,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WND_R ',2010,1.568,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WND_R ',2010,1.568,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL4_N ',2020,2.27,'#M$/PJ','#footnote 12 of https://www.nrel.gov/docs/fy17osti/66861.pdf estimates the variable Opex of land-based wind to be 9$/MWh');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL4_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL4_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N ',2035,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2035,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2040,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL5_N ',2020,2.27,'#M$/PJ','#footnote 12 of https://www.nrel.gov/docs/fy17osti/66861.pdf estimates the variable Opex of land-based wind to be 9$/MWh');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL5_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL5_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N ',2035,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2035,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2040,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL6_N ',2020,2.27,'#M$/PJ','#footnote 12 of https://www.nrel.gov/docs/fy17osti/66861.pdf estimates the variable Opex of land-based wind to be 9$/MWh');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL6_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2020,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL6_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2025,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2030,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N ',2035,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2035,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2040,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_SOLPV_R ',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPV_R ',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPV_R ',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPV_R ',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPV_R ',2010,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_SOLTH_R ',2010,2.011,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLTH_R ',2010,2.011,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLTH_R ',2010,2.011,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTH_R ',2010,2.011,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTH_R ',2010,2.011,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPVCEN_N ',2020,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVCEN_N ',2020,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N ',2020,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2020,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2020,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVCEN_N ',2025,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N ',2025,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2025,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2025,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N ',2030,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2030,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2030,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N ',2035,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2035,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N ',2040,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLTHCEN_N ',2020,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLTHCEN_N ',2020,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTHCEN_N ',2020,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2020,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2020,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLTHCEN_N ',2025,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTHCEN_N ',2025,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2025,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2025,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLTHCEN_N ',2030,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2030,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2030,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLTHCEN_N ',2035,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2035,0.111,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLTHCEN_N ',2040,0.111,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_CCR_COALSTM_N ',2020,1.171,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_CCR_COALSTM_N ',2020,1.171,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_CCR_COALSTM_N ',2020,1.171,'#M$/PJ','');
@@ -11305,81 +11254,81 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SNCR_COAL_N',2035,0.036,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SNCR_COAL_N',2035,0.036,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SNCR_COAL_N',2040,0.036,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM_R',2005,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM_R',2000,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC_R ',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC_R ',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACT_R ',2005,18.814,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACT_R ',2000,18.814,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM_R ',2005,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDCONV_R',2005,11.6723888888889,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDCONV_R',2000,11.6723888888889,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_URNLWR_R',2005,11.556,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_URNLWR_R',2000,11.556,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_R',2005,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_R',2000,12.932,'#M$/PJ','NULL');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_R',2005,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_R',2000,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_R',2005,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_R',2000,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_R',2005,12.932,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_R',2005,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_R',2000,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_R',2005,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_R',2000,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_R',2005,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_R',2000,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_R',2005,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_R',2000,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_R',2005,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_R',2000,11.556,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDCONV_R',2005,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDCONV_R',2000,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDCONV_R',2005,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDCONV_R',2000,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDCONV_R',2005,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDCONV_R',2000,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDCONV_R',2005,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDCONV_R',2000,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDCONV_R',2005,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDCONV_R',2000,11.6723888888889,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM_R ',2005,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM_R ',2005,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGASTM_R ',2005,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGASTM_R ',2005,12.988,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_R ',2005,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_R ',2000,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_R ',2005,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_R ',2000,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_R ',2005,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_R ',2005,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_R ',2000,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_R ',2005,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_R ',2000,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_R ',2005,12.472,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_OILSTM_R ',2005,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_OILSTM_R ',2005,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_OILSTM_R ',2005,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_OILSTM_R ',2005,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_OILSTM_R ',2005,12.919,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM1_R',2010,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM1_R',2010,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM1_R',2010,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM1_R',2005,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM1_R',2005,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM1_R',2000,12.932,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM1_R ',2000,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM1_R ',2005,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM1_R ',2010,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM1_R ',2005,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM1_R ',2010,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM1_R ',2010,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC1_R ',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC1_R ',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC1_R ',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC1_R ',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC1_R ',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC1_R ',2010,12.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM_R',2005,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM_R',2000,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC_R ',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC_R ',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACT_R ',2005,7.814,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACT_R ',2000,7.814,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM_R ',2005,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDCONV_R',2005,0.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_HYDCONV_R',2000,0.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_URNLWR_R',2005,0.556,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_URNLWR_R',2000,0.556,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_R',2005,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM_R',2000,1.932,'#M$/PJ','NULL');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_R',2005,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM_R',2000,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_R',2005,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_COALSTM_R',2000,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_COALSTM_R',2005,1.932,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_R',2005,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_URNLWR_R',2000,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_R',2005,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_URNLWR_R',2000,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_R',2005,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_URNLWR_R',2000,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_R',2005,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_URNLWR_R',2000,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_R',2005,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_URNLWR_R',2000,0.556,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDCONV_R',2005,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_HYDCONV_R',2000,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDCONV_R',2005,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_HYDCONV_R',2000,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDCONV_R',2005,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_HYDCONV_R',2000,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDCONV_R',2005,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_HYDCONV_R',2000,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDCONV_R',2005,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_HYDCONV_R',2000,0.0,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM_R ',2005,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM_R ',2005,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGASTM_R ',2005,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGASTM_R ',2005,1.988,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_R ',2005,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACT_R ',2000,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_R ',2005,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACT_R ',2000,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACT_R ',2005,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_R ',2005,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC_R ',2000,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_R ',2005,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC_R ',2000,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_R ',2005,1.472,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_OILSTM_R ',2005,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_OILSTM_R ',2005,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_OILSTM_R ',2005,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_OILSTM_R ',2005,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_OILSTM_R ',2005,1.919,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM1_R',2010,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM1_R',2010,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_COALSTM1_R',2010,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM1_R',2005,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_COALSTM1_R',2005,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_COALSTM1_R',2000,1.932,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM1_R ',2000,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM1_R ',2005,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM1_R ',2010,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM1_R ',2005,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM1_R ',2010,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM1_R ',2010,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC1_R ',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC1_R ',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACC1_R ',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC1_R ',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACC1_R ',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACC1_R ',2010,1.472,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPVENDUSE_N',2020,0.0,NULL,NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVENDUSE_N',2020,0.0,NULL,NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVENDUSE_N',2020,0.0,NULL,NULL);
@@ -11395,54 +11344,60 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVENDUSE_N',2035,0.0,NULL,NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVENDUSE_N',2035,0.0,NULL,NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVENDUSE_N',2040,0.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_R ',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM_R',2000,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM_R',2000,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGASTM_R',2000,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_R',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_R',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM_R ',2000,12.988,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N',2015,11.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N',2015,11.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N',2015,11.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVCEN_N',2015,11.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPVCEN_N',2015,11.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_SOLPVCEN_N',2015,11.0,NULL,NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACCP_R',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACCP_R',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACCP_R',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACCP_R',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACCP_R',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACCP_R',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACCP_R',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACCP_R',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACCP_R',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACCP_R',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACCP_R',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACCP_R',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACCP_R',2010,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACCP_R',2000,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACCP_R',2005,12.472,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_R ',2010,18.814,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL4_N',2015,11.47,'#M$/PJ','"60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ"........in 2005 costs:-2.07*0.91=-1.8
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACC_R ',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGASTM_R',2000,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGASTM_R',2000,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGASTM_R',2000,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACC_R',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACC_R',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGASTM_R ',2000,1.988,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_SOLPVCEN_N',2015,0.0,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_SOLPVCEN_N',2015,0.0,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_SOLPVCEN_N',2015,0.0,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_SOLPVCEN_N',2015,0.0,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_SOLPVCEN_N',2015,0.0,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_SOLPVCEN_N',2015,0.0,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACCP_R',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACCP_R',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACCP_R',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACCP_R',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACCP_R',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACCP_R',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_NGACCP_R',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACCP_R',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_NGACCP_R',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACCP_R',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_NGACCP_R',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACCP_R',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACCP_R',2010,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_NGACCP_R',2000,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_NGACCP_R',2005,1.472,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_NGACT_R ',2010,7.814,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL4_N',2015,0.47,'#M$/PJ','"60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ"........in 2005 costs:-2.07*0.91=-1.8
 Therefore 11-1.8=9.2 M$/PJ');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL4_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL5_N',2015,11.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL5_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL6_N',2015,11.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL6_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N',2015,13.27,'#M$/PJ','');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WNDCL6_N',2015,11.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WNDCL5_N',2015,11.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WNDCL4_N',2015,11.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2015,13.27,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2015,13.27,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2015,13.27,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL4_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL4_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL4_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL5_N',2015,0.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL5_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL5_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL5_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL6_N',2015,0.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL6_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_WNDCL6_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_WNDCL6_N',2015,2.27,'#M$/PJ','');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WNDCL6_N',2015,0.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WNDCL5_N',2015,0.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_WNDCL4_N',2015,0.47,'#M$/PJ','60% of the current PTC value (2.3*0.6=1.38 cent/kWh) for projects with construction beginning in 2017= -2.07 M$/PJ');
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL4_N ',2015,2.27,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL5_N ',2015,2.27,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_WNDCL6_N ',2015,2.27,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2015,'E_ELCTDLOSS',2015,11.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_ELCTDLOSS',2015,11.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_ELCTDLOSS',2015,11.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'E_ELCTDLOSS',2015,11.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'E_ELCTDLOSS',2015,11.0,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'E_ELCTDLOSS',2015,11.0,'#M$/PJ',NULL);
 CREATE TABLE CostInvest (
    tech text,
    vintage integer,
@@ -11477,21 +11432,21 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACT_N',2030,933.0,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACT_N',2035,933.0,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACT_N',2040,933.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2020,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2025,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2030,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2035,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2040,828.0,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2020,893.0,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2025,893.0,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2030,893.0,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2035,893.0,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_N',2040,893.0,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACT_N',2020,604.0,'#M$/GW','#AEO 2017');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACT_N',2025,591.9855335,'#M$/GW','#AEO 2017');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACT_N',2030,591.9855335,'#M$/GW','#AEO 2017');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACT_N',2035,579.9710669,'#M$/GW','#AEO 2017');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACT_N',2040,579.9710669,'#M$/GW','#AEO 2017');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2020,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2025,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2030,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2035,828.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2040,828.0,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2020,1008.3,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2025,1008.3,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2030,1008.3,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2035,1008.3,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGAACC_N',2040,1008.3,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_CCS_N',2020,1927.0,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_CCS_N',2025,1927.0,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_NGACC_CCS_N',2030,1927.0,'#M$/GW','');
@@ -11522,11 +11477,15 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL6_N',2030,1862.911888,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL6_N',2035,1858.219415,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL6_N',2040,1858.219415,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2020,1958.977257,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2025,1862.348228,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2030,1765.719198,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2035,1669.090169,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2040,1669.090169,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2020,1515.15,'"#M$/GW"
+','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2025,1409.93125,'"#M$/GW"
+','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2030,1304.7125,'"#M$/GW"
+','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2035,1199.49375,'"#M$/GW"
+','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2040,1094.275,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2020,3618.309911,'#M$/GW','#AEO 2016');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2025,3106.181189,'#M$/GW','#AEO 2016');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2030,3034.476476,'#M$/GW','#AEO 2016');
@@ -12928,12 +12887,16 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('C_LT_HIDHBLED_ELC_N',2030,19.4,'#M$/bnlum','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('C_LT_HIDHBLED_ELC_N',2035,19.4,'#M$/bnlum','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('C_LT_HIDHBLED_ELC_N',2040,19.4,'#M$/bnlum','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2020,3097.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2025,2604.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2030,2532.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,2460.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2040,2425.0,'#M$/GW','');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2015,1854.544632,'#M$/GW','#AEO 2016, with 70% tax credit');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2020,2930.2,'#M$/GW','""
+');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2025,2387.74,'#M$/GW','""
+');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2030,1845.48,'#M$/GW','""
+');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,1691.74,'#M$/GW','""
+');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2040,1537.9,'#M$/GW','');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2015,1178.0,'#M$/GW','#AEO 2016, with 70% tax credit');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL4_N',2015,1755.777032,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL5_N',2015,1738.219261,'#M$/GW','');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL6_N',2015,1894.658994,'#M$/GW','');
@@ -13379,20 +13342,34 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_SOLPVCEN_N',2015,19.4,NULL,NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_SOLPVCEN_N',2015,19.4,NULL,NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2015,'E_SOLPVCEN_N',2015,19.4,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2015,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2015,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_WNDCL4_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2015,'E_WNDCL6_N',2015,41.86,'#M$/GW','"NULL"
+');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2015,'E_WNDCL5_N',2015,41.86,'#M$/GW','"NULL"
+');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2015,'E_WNDCL4_N',2015,41.86,'#M$/GW','NULL');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_WNDCL4_N',2015,41.86,'#M$/GW',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_WNDCL5_N',2015,41.86,'#M$/GW',NULL);
@@ -16186,17 +16163,17 @@ INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_t
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_SOLTH_R',0.46,'');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_SOLTH_R',0.46,'');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','E_SOLTH_R',0.23,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','E_SOLPVCEN_N',0.4655,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','E_SOLPVCEN_N',0.4655,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','pm','E_SOLPVCEN_N',0.4655,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','E_SOLPVCEN_N',0.39,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','E_SOLPVCEN_N',0.53,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','pm','E_SOLPVCEN_N',0.53,'');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','night','E_SOLPVCEN_N',0.0,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','am','E_SOLPVCEN_N',0.5091,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','peak','E_SOLPVCEN_N',0.5091,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','pm','E_SOLPVCEN_N',0.5091,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','am','E_SOLPVCEN_N',0.42,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','peak','E_SOLPVCEN_N',0.56,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','pm','E_SOLPVCEN_N',0.53,'');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','night','E_SOLPVCEN_N',0.0,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','am','E_SOLPVCEN_N',0.4231,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_SOLPVCEN_N',0.4231,'');
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_SOLPVCEN_N',0.4231,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','am','E_SOLPVCEN_N',0.338,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_SOLPVCEN_N',0.43,'');
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_SOLPVCEN_N',0.337,'');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','E_SOLPVCEN_N',0.0,'');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','E_SOLTHCEN_N',0.46,'#EPA 2016 Markall');
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','E_SOLTHCEN_N',0.46,'');
@@ -16222,17 +16199,17 @@ INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_t
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_COALSTM1_R',0.8,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_COALSTM1_R',0.8,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','E_COALSTM1_R',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','E_SOLPVENDUSE_N',0.3,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','E_SOLPVENDUSE_N',0.3,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','pm','E_SOLPVENDUSE_N',0.3,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','E_SOLPVENDUSE_N',0.2808,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','E_SOLPVENDUSE_N',0.3816,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','pm','E_SOLPVENDUSE_N',0.3816,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','night','E_SOLPVENDUSE_N',0.0,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','am','E_SOLPVENDUSE_N',0.34,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','peak','E_SOLPVENDUSE_N',0.34,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','pm','E_SOLPVENDUSE_N',0.34,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','am','E_SOLPVENDUSE_N',0.3024,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','peak','E_SOLPVENDUSE_N',0.4032,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','pm','E_SOLPVENDUSE_N',0.3816,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','night','E_SOLPVENDUSE_N',0.0,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','am','E_SOLPVENDUSE_N',0.28,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_SOLPVENDUSE_N',0.28,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_SOLPVENDUSE_N',0.28,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','am','E_SOLPVENDUSE_N',0.24336,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_SOLPVENDUSE_N',0.3096,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_SOLPVENDUSE_N',0.24264,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','E_SOLPVENDUSE_N',0.0,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','E_NGASTM1_R',0.85,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','E_NGASTM1_R',0.85,NULL);
@@ -16295,4 +16272,88 @@ INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLPVENDUSE
 INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLPV_R',0.35,NULL);
 INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLTHCEN_N',0.35,NULL);
 INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLTH_R',0.35,NULL);
-COMMIT;
+CREATE TABLE Output_V_Capacity (
+   scenario text,
+   sector text,
+   tech text,
+   vintage integer,
+   capacity real,
+   PRIMARY KEY(scenario, tech, vintage),
+   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE Output_VFlow_Out (
+   scenario text,
+   sector text,
+   t_periods integer,
+   t_season text,
+   t_day text,
+   input_comm text,
+   tech text,
+   vintage integer,
+   output_comm text,
+   vflow_out real,
+   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
+   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
+CREATE TABLE Output_VFlow_In (
+   scenario text,
+   sector text,
+   t_periods integer,
+   t_season text,
+   t_day text,
+   input_comm text,
+   tech text,
+   vintage integer,
+   output_comm text,
+   vflow_in real,
+   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
+   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
+CREATE TABLE Output_Objective (
+   scenario text,
+   objective_name text,
+   total_system_cost real );
+CREATE TABLE Output_Emissions (
+   scenario text,
+   sector text,
+   t_periods integer,
+   emissions_comm text,
+   tech text,
+   vintage integer,
+   emissions real,
+   PRIMARY KEY(scenario, t_periods, emissions_comm, tech, vintage),
+   FOREIGN KEY(emissions_comm) REFERENCES EmissionActivity(emis_comm),
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(tech) REFERENCES technologies(tech)
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE Output_Costs (
+   scenario text,
+   sector text,
+   output_name text,
+   tech text,
+   vintage integer,
+   output_cost real,
+   PRIMARY KEY(scenario, output_name, tech, vintage),
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE Output_CapacityByPeriodAndTech (
+   scenario text,
+   sector text,
+   t_periods integer,   
+   tech text,
+   capacity real,
+   PRIMARY KEY(scenario, t_periods, tech),
+   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),   
+   FOREIGN KEY(tech) REFERENCES technologies(tech));
