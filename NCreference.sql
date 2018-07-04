@@ -1,6 +1,12 @@
 BEGIN TRANSACTION;
 
 -------------------------------------------------
+CREATE TABLE Zones (
+  zones	text primary key,
+  zones_note text);
+INSERT INTO Zones (zones,zones_note) VALUES ('NC', '# The entire NC grid');
+
+-------------------------------------------------
 CREATE TABLE time_period_labels (
   t_period_labels text primary key,
   t_period_labels_desc text);
@@ -104,7 +110,8 @@ CREATE TABLE technologies (
 
    INSERT INTO "technologies" VALUES('IMPELCNGAEA',     'r', 'supply',      '# Import NG to combined cycle', 'natural gas');
    INSERT INTO "technologies" VALUES('IMPELCDSLEA',     'r', 'supply',      '# Import diesel', 'diesel');
-   INSERT INTO "technologies" VALUES('IMPURNA',         'r', 'supply',      '# Import uranium','uranium');
+   INSERT INTO "technologies" VALUES('IMPURNA',         'r', 'supply',      '# Import uranium @ 4.5% enrichment level','uranium');
+   INSERT INTO "technologies" VALUES('IMPURN5',         'r', 'supply',      '# Import uranium @ 5% enrichment level','uranium');
    INSERT INTO "technologies" VALUES('IMPELCBIGCCEA',   'r', 'supply',      '# Import biomass to IGCC','biomass');
    INSERT INTO "technologies" VALUES('IMPELCBIOSTM',    'r', 'supply',      '# Import biomass to steam','biomass');
    INSERT INTO "technologies" VALUES('IMPELCGEO',       'r', 'supply',      '# Import geothermal','geothermal');
@@ -132,6 +139,7 @@ CREATE TABLE technologies (
    INSERT INTO "technologies" VALUES('EDSLCTR',         'p', 'electric',    '# Residual diesel Oil Combustion Turbine','Petroleum');
    INSERT INTO "technologies" VALUES('EURNALWR',        'pb','electric',    '# Residual Nuclear LWRs','Nuclear');
    INSERT INTO "technologies" VALUES('EURNALWR15',      'pb','electric',    '# Nuclear LWRs in 2015','Nuclear');
+   INSERT INTO "technologies" VALUES('EURNSMR',         'pb','electric',    '# Small modular reactors','Nuclear');
    INSERT INTO "technologies" VALUES('EBIOIGCC',        'p', 'electric',    '# Biomass Integrated Gasification Combined-Cycle','Biomass');
    INSERT INTO "technologies" VALUES('EBIOSTMR',        'p', 'electric',    '# Residual wood/Biomass Steam','Biomass');
    INSERT INTO "technologies" VALUES('EGEOBCFS',        'p', 'electric',    '# Geothermal - Binary Cycle and Flashed Steam','Geothermal');
@@ -214,7 +222,8 @@ INSERT INTO "commodities" VALUES('ELCNGAEA',  'p', '# NG');
 -- INSERT INTO "commodities" VALUES('ELCNGSEA', 'p', '# NG');
 INSERT INTO "commodities" VALUES('ELCDSLEA',  'p', '# Diesel');
 -- INSERT INTO "commodities" VALUES('ELCRFLEA', 'p', '# Residual fuel oil');
-INSERT INTO "commodities" VALUES('URNA',    'p', '# Uranium');
+INSERT INTO "commodities" VALUES('URNA',    'p', '# Uranium @ 4.5 enrichment levelf');
+INSERT INTO "commodities" VALUES('URN5',    'p', '# Uranium @ 5% enrichment level');
 INSERT INTO "commodities" VALUES('ELCBIGCCEA',  'p', '# Biomass to IGCC');
 INSERT INTO "commodities" VALUES('ELCBIOSTM', 'p', '# Biomass to steam');
 INSERT INTO "commodities" VALUES('ELCGEO',    'p', '# Geothermal');
@@ -387,6 +396,7 @@ CREATE TABLE Efficiency (
    INSERT INTO "Efficiency" VALUES('ethos','IMPELCDSLEA',   2015,'ELCDSLEA',    1.00,'');
 -- INSERT INTO "Efficiency" VALUES('ethos','IMPELCRFLEA',   2015,'ELCRFLEA',    1.00,'');
    INSERT INTO "Efficiency" VALUES('ethos','IMPURNA',       2015,'URNA',        1.00,'');
+   INSERT INTO "Efficiency" VALUES('ethos','IMPURN5',       2015,'URN5',        1.00,'# Import and enrich 5% uranium');
    INSERT INTO "Efficiency" VALUES('ethos','IMPELCBIGCCEA', 2015,'ELCBIGCCEA',  1.00,'');
    INSERT INTO "Efficiency" VALUES('ethos','IMPELCBIOSTM',  2015,'ELCBIOSTM',   1.00,'');
    INSERT INTO "Efficiency" VALUES('ethos','IMPELCGEO',     2015,'ELCGEO',      1.00,'');
@@ -550,6 +560,16 @@ INSERT INTO "Efficiency" VALUES('URNA', 'EURNALWR15', 2035,'ELC',1.268,'# PJ/ton
 INSERT INTO "Efficiency" VALUES('URNA', 'EURNALWR15', 2040,'ELC',1.268,'# PJ/ton = 45 GWd/ton, 32.6% efficiency (EIA)');
 INSERT INTO "Efficiency" VALUES('URNA', 'EURNALWR15', 2045,'ELC',1.268,'# PJ/ton = 45 GWd/ton, 32.6% efficiency (EIA)');
 INSERT INTO "Efficiency" VALUES('URNA', 'EURNALWR15', 2050,'ELC',1.268,'# PJ/ton = 45 GWd/ton, 32.6% efficiency (EIA)');
+
+-- SMR technology.
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2015,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2020,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2025,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2030,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2035,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2040,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2045,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
+INSERT INTO "Efficiency" VALUES('URN5', 'EURNSMR', 2050,'ELC',1.693,'# PJ/ton, capacity weighted efficiency of Westinghouse SMR');
 
 -- Biomass, both existing and future
 INSERT INTO "Efficiency" VALUES('ELCBIGCCEA', 'EBIOIGCC', 2015,'ELCRNWB',0.253,'# MARKAL 2014 v1.1');
@@ -4188,6 +4208,102 @@ INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod22', 'EURNALWR15', '0.9','# 
 INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod23', 'EURNALWR15', '0.9','# MARKAL 2014 v1.1');
 INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod24', 'EURNALWR15', '0.9','# MARKAL 2014 v1.1');
 
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod01', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod02', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod03', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod04', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod05', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod06', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod07', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod08', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod09', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod10', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod11', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod12', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod13', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod14', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod15', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod16', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod17', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod18', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod19', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod20', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod21', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod22', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod23', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod24', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod01', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod02', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod03', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod04', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod05', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod06', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod07', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod08', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod09', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod10', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod11', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod12', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod13', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod14', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod15', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod16', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod17', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod18', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod19', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod20', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod21', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod22', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod23', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod24', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod01', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod02', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod03', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod04', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod05', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod06', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod07', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod08', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod09', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod10', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod11', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod12', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod13', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod14', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod15', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod16', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod17', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod18', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod19', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod20', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod21', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod22', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod23', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod24', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod01', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod02', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod03', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod04', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod05', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod06', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod07', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod08', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod09', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod10', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod11', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod12', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod13', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod14', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod15', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod16', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod17', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod18', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod19', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod20', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod21', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod22', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod23', 'EURNSMR', '0.9','# The same as EURNALWR15');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod24', 'EURNSMR', '0.9','# The same as EURNALWR15');
 
 INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod01', 'ELFGGTR', '0.9','# MARKAL 2014 v1.1');
 INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod02', 'ELFGGTR', '0.9','# MARKAL 2014 v1.1');
@@ -5282,6 +5398,7 @@ INSERT INTO "CapacityToActivity" VALUES('ECOASTMR',   31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EDSLCTR',    31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EURNALWR',   31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EURNALWR15', 31.54,'# GW to PJ');
+INSERT INTO "CapacityToActivity" VALUES('EURNSMR',    31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EBIOIGCC',   31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EBIOSTMR',   31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EGEOBCFS',   31.54,'# GW to PJ');
@@ -5446,6 +5563,16 @@ INSERT INTO "CostInvest" VALUES('EURNALWR15',2040,4543,'M$/GW','# MARKAL 2014 v1
 INSERT INTO "CostInvest" VALUES('EURNALWR15',2045,4543,'M$/GW','# MARKAL 2014 v1.1');
 INSERT INTO "CostInvest" VALUES('EURNALWR15',2050,4543,'M$/GW','# MARKAL 2014 v1.1');
 
+-- New nuclear, SMR
+INSERT INTO "CostInvest" VALUES('EURNSMR',2015,5300,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2020,5036,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2025,4904,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2030,4904,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2035,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2040,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2045,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2050,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+
 -- New biomass
 INSERT INTO "CostInvest" VALUES('EBIOIGCC',2015,3805,'M$/GW','# MARKAL 2014 v1.1');
 INSERT INTO "CostInvest" VALUES('EBIOIGCC',2020,3657,'M$/GW','# MARKAL 2014 v1.1');
@@ -5467,61 +5594,61 @@ INSERT INTO "CostInvest" VALUES('EGEOBCFS',2045,2266,'M$/GW','# MARKAL 2014 v1.1
 INSERT INTO "CostInvest" VALUES('EGEOBCFS',2050,2266,'M$/GW','# MARKAL 2014 v1.1');
 
 -- New solar, Investment Tax Credit: 30% in 2015, 26% in 2020, 10% from 2025 to 2050.
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2015,1713*0.70,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2015,1440*0.70,'M$/GW','# NREL 2017 Q1 benchmark');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2015,2788,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2015,4500*(0.70-0.35),'M$/GW','# MARKAL 2016 v1.1, subtract federal ITC (30%) and NC ITC (35%)');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2015,3220*0.70,'M$/GW','# NREL 2017 Q1 benchmark');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2020,2035*0.74,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2020,1360*0.74,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2020,2758,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2020,3860*0.74,'M$/GW','# MARKAL 2016 v1.1, subtract federal ITC (26%)');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2020,3120*0.74,'M$/GW','# NREL ATB 2017, subtract federal ITC (26%)');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2025,1928*0.9,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2025,1279*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2025,3417,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2025,3320,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2025,2535,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2030,1820*0.9,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2030,1197*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2030,3337,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2030,3080,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2030,1950,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2035,1713*0.9,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2035,1131*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2035,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2035,2850,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2035,1788,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2040,1713*0.9,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2040,1065*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2040,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2040,2650,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2040,1625,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2045,1713*0.9,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2045,1004*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2045,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2045,2650,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2045,1560,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2050,1713*0.9,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2050,944*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
 INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2050,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2050,2650,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2050,1495,'M$/GW','# NREL ATB 2017');
 
 -- New wind, Investment Tax Credit, 30% in 2015.
-INSERT INTO "CostInvest" VALUES('EWNDON', 2015,1847*0.7,'M$/GW','# MARKAL 2016 v1.1, subtract');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2015,1643*0.7,'M$/GW','# NREL ATB 2017, subtract');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2015,5491*0.7,'M$/GW','# MARKAL 2016 v1.1, subtract');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2020,1842,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2020,1609,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2020,5216,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2025,1838,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2025,1609,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2025,4942,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2030,1833,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2030,1570,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2030,4667,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2035,1829,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2035,1617,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2035,4393,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2040,1829,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2040,1641,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2040,4393,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2045,1829,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2045,1645,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2045,4393,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2050,1829,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2050,1631,'M$/GW','# NREL ATB 2017');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2050,4393,'M$/GW','# MARKAL 2016 v1.1');
 
 INSERT INTO "CostInvest" VALUES('EE', 2015, 0, 'M$/GW','#No investment cost for EE tech');
@@ -6164,10 +6291,10 @@ CREATE TABLE CostFixed (
    INSERT INTO "CostFixed" VALUES(2020,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2025,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2030,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2035,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2040,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2045,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2035,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2040,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2045,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2050,'EHYDCONR',1965,9.7,'M$/GW','# MARKAL 2014 v1.1');
    
    INSERT INTO "CostFixed" VALUES(2015,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2020,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
@@ -6176,7 +6303,7 @@ CREATE TABLE CostFixed (
    INSERT INTO "CostFixed" VALUES(2035,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2040,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2045,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2050,'EHYDCONR',1980,9.7,'M$/GW','# MARKAL 2014 v1.1');
    
    INSERT INTO "CostFixed" VALUES(2015,'EHYDCONR',1985,9.7,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2020,'EHYDCONR',1985,9.7,'M$/GW','# MARKAL 2014 v1.1');
@@ -6227,10 +6354,10 @@ CREATE TABLE CostFixed (
    INSERT INTO "CostFixed" VALUES(2020,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2025,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
    INSERT INTO "CostFixed" VALUES(2030,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2035,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2040,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2045,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2035,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2040,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2045,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
+   INSERT INTO "CostFixed" VALUES(2050,'EHYDREVR',1965,14.4,'M$/GW','# MARKAL 2014 v1.1');
 
 -- Existing solid waste
 -- INSERT INTO "CostFixed" VALUES(2020,'EMSWSTMR',1995,13.046,'M$/GW','# From Samaneh NUSTD');
@@ -6705,6 +6832,51 @@ INSERT INTO "CostFixed" VALUES(2050,'EURNALWR15',2045,98.9,'M$/GW','# MARKAL 201
 
 INSERT INTO "CostFixed" VALUES(2050,'EURNALWR15',2050,98.9,'M$/GW','# MARKAL 2014 v1.1');
 
+-- Future nuclear, SMR
+INSERT INTO "CostFixed" VALUES(2015,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2020,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2025,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2030,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2035,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2040,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2015,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2020,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2025,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2030,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2035,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2040,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2020,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2025,'EURNSMR',2025,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2030,'EURNSMR',2025,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2035,'EURNSMR',2025,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2040,'EURNSMR',2025,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2025,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2025,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2030,'EURNSMR',2030,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2035,'EURNSMR',2030,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2040,'EURNSMR',2030,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2030,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2030,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2035,'EURNSMR',2035,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2040,'EURNSMR',2035,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2035,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2035,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2040,'EURNSMR',2040,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2040,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2040,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2045,'EURNSMR',2045,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2045,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
+INSERT INTO "CostFixed" VALUES(2050,'EURNSMR',2050,118.7,'M$/GW','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
 -- Future biomass
 INSERT INTO "CostFixed" VALUES(2015,'EBIOIGCC',2015,112.0,'M$/GW','# MARKAL 2014 v1.1');
 INSERT INTO "CostFixed" VALUES(2020,'EBIOIGCC',2015,112.0,'M$/GW','# MARKAL 2014 v1.1');
@@ -6796,14 +6968,14 @@ INSERT INTO "CostFixed" VALUES(2050,'EGEOBCFS',2045,119.7,'M$/GW','# MARKAL 2014
 INSERT INTO "CostFixed" VALUES(2050,'EGEOBCFS',2050,119.7,'M$/GW','# MARKAL 2014 v1.1');
 
 -- Future solar
-INSERT INTO "CostFixed" VALUES(2015,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2020,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2025,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
--- INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2015,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2015,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2020,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2025,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2015,13,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2015,'ESOLSTCEN',2015,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2020,'ESOLSTCEN',2015,63.0,'M$/GW','# MARKAL 2016 v1.1');
@@ -6814,22 +6986,22 @@ INSERT INTO "CostFixed" VALUES(2040,'ESOLSTCEN',2015,63.0,'M$/GW','# MARKAL 2016
 -- INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2015,63.0,'M$/GW','# MARKAL 2016 v1.1');
 -- INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2015,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2015,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2020,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2025,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
--- INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
--- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2015,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2015,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2020,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2025,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2015,24,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2020,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2025,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2020,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2020,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2025,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2020,12,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2020,'ESOLSTCEN',2020,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2025,'ESOLSTCEN',2020,63.0,'M$/GW','# MARKAL 2016 v1.1');
@@ -6839,20 +7011,20 @@ INSERT INTO "CostFixed" VALUES(2040,'ESOLSTCEN',2020,63.0,'M$/GW','# MARKAL 2016
 INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2020,63.0,'M$/GW','# MARKAL 2016 v1.1');
 -- INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2020,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2020,'ESOLPVDIS',2020,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2025,'ESOLPVDIS',2020,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2020,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2020,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2020,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2020,0.000,'M$/GW','# Rooftop solar requires no upkeep');
--- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2020,0.000,'M$/GW','Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2020,'ESOLPVDIS',2020,17,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2025,'ESOLPVDIS',2020,17,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2020,17,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2020,17,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2020,17,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2020,17,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2020,17,'M$/GW','NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2025,'ESOLPVCEN',2025,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2025,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2025,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2025,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2025,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2025,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2025,'ESOLPVCEN',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2025,10,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2025,'ESOLSTCEN',2025,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2030,'ESOLSTCEN',2025,63.0,'M$/GW','# MARKAL 2016 v1.1');
@@ -6861,18 +7033,18 @@ INSERT INTO "CostFixed" VALUES(2040,'ESOLSTCEN',2025,63.0,'M$/GW','# MARKAL 2016
 INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2025,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2025,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2025,'ESOLPVDIS',2025,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2025,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2025,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2025,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2025,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2025,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2025,'ESOLPVDIS',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2025,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2025,10,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2030,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2030,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2030,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2030,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2030,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVCEN',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2030,10,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2030,'ESOLSTCEN',2030,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2035,'ESOLSTCEN',2030,63.0,'M$/GW','# MARKAL 2016 v1.1');
@@ -6880,98 +7052,98 @@ INSERT INTO "CostFixed" VALUES(2040,'ESOLSTCEN',2030,63.0,'M$/GW','# MARKAL 2016
 INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2030,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2030,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2030,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2030,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2030,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2030,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2030,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2030,'ESOLPVDIS',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2030,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2030,10,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2035,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2035,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2035,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2035,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVCEN',2035,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2035,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2035,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2035,10,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2035,'ESOLSTCEN',2035,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2040,'ESOLSTCEN',2035,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2035,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2035,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2035,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2035,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2035,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2035,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2035,'ESOLPVDIS',2035,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2035,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2035,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2035,10,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2040,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2040,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2040,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVCEN',2040,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2040,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2040,10,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2040,'ESOLSTCEN',2040,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2040,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2040,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2040,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2040,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2040,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2040,'ESOLPVDIS',2040,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2040,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2040,10,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2045,19.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2045,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVCEN',2045,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2045,10,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2045,'ESOLSTCEN',2045,63.0,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2045,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2045,0.000,'M$/GW','# Rooftop solar requires no upkeep');
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2045,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2045,'ESOLPVDIS',2045,10,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2045,10,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2050,19.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVCEN',2050,10,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2050,'ESOLSTCEN',2050,63.0,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2050,0.000,'M$/GW','# Rooftop solar requires no upkeep');
+INSERT INTO "CostFixed" VALUES(2050,'ESOLPVDIS',2050,10,'M$/GW','# NREL ATB 2017');
 
 -- Future wind
-INSERT INTO "CostFixed" VALUES(2015,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2020,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2025,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
--- INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2015,23.5,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2015,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2020,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2025,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2015,51,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2020,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2025,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
--- INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2020,23.5,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2020,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2025,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
+-- INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2020,49,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2025,'EWNDON', 2025,22.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2025,22.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2025,22.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2025,22.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2025,22.5,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2025,22.5,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2025,'EWNDON', 2025,47,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2025,47,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2025,47,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2025,47,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2025,47,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2025,47,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2030,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2030,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2030,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2030,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2030,21.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2030,'EWNDON', 2030,46,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2030,46,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2030,46,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2030,46,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2030,46,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2035,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2035,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2035,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2035,21.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2035,'EWNDON', 2035,44,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2035,44,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2035,44,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2035,44,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2040,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2040,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2040,21.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2040,'EWNDON', 2040,42,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2040,42,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2040,42,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2045,21.4,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2045,21.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2045,'EWNDON', 2045,40,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2045,40,'M$/GW','# NREL ATB 2017');
 
-INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2050,21.4,'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostFixed" VALUES(2050,'EWNDON', 2050,38,'M$/GW','# NREL ATB 2017');
 
 INSERT INTO "CostFixed" VALUES(2015,'EWNDOFS',2015,66.5,'M$/GW','# MARKAL 2016 v1.1');
 INSERT INTO "CostFixed" VALUES(2020,'EWNDOFS',2015,66.5,'M$/GW','# MARKAL 2016 v1.1');
@@ -7852,10 +8024,10 @@ CREATE TABLE CostVariable (
    INSERT INTO "CostVariable" VALUES(2020,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2025,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2030,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2035,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2040,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2045,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2050,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2035,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2040,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2045,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2050,'EHYDCONR',1965,5.244,'M$/PJ','# MARKAL 2014 v1.1');
 -- no hydro built in 1970, 1975   
    INSERT INTO "CostVariable" VALUES(2015,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2020,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
@@ -7864,7 +8036,7 @@ CREATE TABLE CostVariable (
    INSERT INTO "CostVariable" VALUES(2035,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2040,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2045,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2050,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2050,'EHYDCONR',1980,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    
    INSERT INTO "CostVariable" VALUES(2015,'EHYDCONR',1985,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2020,'EHYDCONR',1985,5.244,'M$/PJ','# MARKAL 2014 v1.1');
@@ -7910,15 +8082,15 @@ CREATE TABLE CostVariable (
    INSERT INTO "CostVariable" VALUES(2040,'EHYDCONR',2010,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2045,'EHYDCONR',2010,5.244,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2050,'EHYDCONR',2010,5.244,'M$/PJ','# MARKAL 2014 v1.1');
-   
+
    INSERT INTO "CostVariable" VALUES(2015,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2020,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2025,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2030,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2035,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2040,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2045,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
--- INSERT INTO "CostVariable" VALUES(2050,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2035,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2040,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2045,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
+   INSERT INTO "CostVariable" VALUES(2050,'EHYDREVR',1965,6.124,'M$/PJ','# MARKAL 2014 v1.1');
 
 -- Existing LFG
    INSERT INTO "CostVariable" VALUES(2015,'ELFGICER',2000,0.000,'M$/PJ','#');
@@ -8376,6 +8548,51 @@ CREATE TABLE CostVariable (
    
    INSERT INTO "CostVariable" VALUES(2050,'EURNALWR15',2050,0.630,'M$/PJ','# MARKAL 2014 v1.1');
 
+-- Future nuclear, SMR
+   INSERT INTO "CostVariable" VALUES(2015,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2020,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2025,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2030,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2035,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2040,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2015,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2020,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2025,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2030,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2035,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2040,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2020,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2025,'EURNSMR',2025,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2030,'EURNSMR',2025,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2035,'EURNSMR',2025,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2040,'EURNSMR',2025,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2025,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2025,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2030,'EURNSMR',2030,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2035,'EURNSMR',2030,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2040,'EURNSMR',2030,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2030,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2030,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2035,'EURNSMR',2035,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2040,'EURNSMR',2035,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2035,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2035,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2040,'EURNSMR',2040,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2040,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2040,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2045,'EURNSMR',2045,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2045,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+   
+   INSERT INTO "CostVariable" VALUES(2050,'EURNSMR',2050,0.756,'M$/PJ','# 20% more than EURNALWR15 based on Locatelli et al. 2014');
+
 -- Future biomass
    INSERT INTO "CostVariable" VALUES(2015,'EBIOIGCC',2015,1.549,'M$/PJ','# MARKAL 2014 v1.1');
    INSERT INTO "CostVariable" VALUES(2020,'EBIOIGCC',2015,1.549,'M$/PJ','# MARKAL 2014 v1.1');
@@ -8769,14 +8986,24 @@ CREATE TABLE CostVariable (
    INSERT INTO "CostVariable" VALUES(2050,'IMPELCDSLEA',2015,23.80,'M$/PJ','AEO2017 Tab 3, national electric fuel prices, south atlantic region, 2015 $');
 
 -- Importing reactor-ready uranium @ 4.5% enrichment, includes disposal fees
-INSERT INTO "CostVariable" VALUES(2015,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2020,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2025,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2030,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2035,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2040,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2045,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
-INSERT INTO "CostVariable" VALUES(2050,'IMPURNA',2015,2.809,'M$/ton','# From Nuclear Energy Institute & World Nuclear Association, $7.98/MWh');
+INSERT INTO "CostVariable" VALUES(2015,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2020,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2025,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2030,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2035,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2040,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2045,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2050,'IMPURNA',2015,1.297,'M$/ton','# From EIA uranium prices and MARKAL 2016');
+
+-- Importing reactor-ready uranium @ 5% enrichment for SMR units
+INSERT INTO "CostVariable" VALUES(2015,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2020,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2025,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2030,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2035,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2040,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2045,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
+INSERT INTO "CostVariable" VALUES(2050,'IMPURN5',2015,1.431,'M$/tonIHM','# From EIA uranium prices and MARKAL 2016');
 
 -- Importing biogass
 INSERT INTO "CostVariable" VALUES(2015,'IMPELCBIGCCEA',2015,3.39,'M$/PJ','# From Samaneh NUSTD');
@@ -9444,6 +9671,7 @@ CREATE TABLE  LifetimeTech (
   INSERT INTO "LifetimeTech" VALUES('IMPELCDSLEA',  1000,'');
 -- INSERT INTO "LifetimeTech" VALUES('IMPELCRFLEA',  1000,'');
    INSERT INTO "LifetimeTech" VALUES('IMPURNA',      1000,'');
+   INSERT INTO "LifetimeTech" VALUES('IMPURN5',      1000,'');
    INSERT INTO "LifetimeTech" VALUES('IMPELCBIGCCEA',1000,'');
    INSERT INTO "LifetimeTech" VALUES('IMPELCBIOSTM', 1000,'');
    INSERT INTO "LifetimeTech" VALUES('IMPELCGEO',    1000,'');
@@ -9473,6 +9701,7 @@ INSERT INTO "LifetimeTech" VALUES('EDSLCTR',      45,  '');
 -- INSERT INTO "LifetimeTech" VALUES('ERFLSTMR',     50,  '');
 INSERT INTO "LifetimeTech" VALUES('EURNALWR',     60,  '');
 INSERT INTO "LifetimeTech" VALUES('EURNALWR15',   60,  '');
+INSERT INTO "LifetimeTech" VALUES('EURNSMR',      60,  '');
 INSERT INTO "LifetimeTech" VALUES('EBIOIGCC',     45,  '');
 INSERT INTO "LifetimeTech" VALUES('EBIOSTMR',     45,  '');
 INSERT INTO "LifetimeTech" VALUES('EGEOBCFS',     45,  '');
@@ -9486,8 +9715,8 @@ INSERT INTO "LifetimeTech" VALUES('ESOLPVR',      30,  '');
 INSERT INTO "LifetimeTech" VALUES('EWNDON',       30,  '');
 INSERT INTO "LifetimeTech" VALUES('EWNDOFS',      30,  '');
 -- INSERT INTO "LifetimeTech" VALUES('EWNDOFD',      30,  '');
-INSERT INTO "LifetimeTech" VALUES('EHYDCONR',     70,  '');
-INSERT INTO "LifetimeTech" VALUES('EHYDREVR',     70,  '');
+INSERT INTO "LifetimeTech" VALUES('EHYDCONR',     100,  '');
+INSERT INTO "LifetimeTech" VALUES('EHYDREVR',     100,  '');
 -- INSERT INTO "LifetimeTech" VALUES('EMSWSTMR',     50,  '');
 INSERT INTO "LifetimeTech" VALUES('ELFGICER',     30,  '');
 INSERT INTO "LifetimeTech" VALUES('ELFGGTR',      30,  '');
@@ -9941,6 +10170,15 @@ INSERT INTO "DiscountRate" VALUES('EURNALWR15', 2035, 0.15, '# MARKAL 2016');
 INSERT INTO "DiscountRate" VALUES('EURNALWR15', 2040, 0.15, '# MARKAL 2016');
 INSERT INTO "DiscountRate" VALUES('EURNALWR15', 2045, 0.15, '# MARKAL 2016');
 INSERT INTO "DiscountRate" VALUES('EURNALWR15', 2050, 0.15, '# MARKAL 2016');
+
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2015, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2020, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2025, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2030, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2035, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2040, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2045, 0.15, '# 5% lower than EURNALWR15');
+INSERT INTO "DiscountRate" VALUES('EURNSMR', 2050, 0.15, '# 5% lower than EURNALWR15');
 
 INSERT INTO "DiscountRate" VALUES('EBIOIGCC', 2015, 0.06, '# PURPA 15-year rate');
 INSERT INTO "DiscountRate" VALUES('EBIOIGCC', 2020, 0.06, '# PURPA 15-year rate');
@@ -10779,7 +11017,7 @@ CREATE TABLE MinCapacity (
    FOREIGN KEY(periods) REFERENCES time_periods(t_periods),
    FOREIGN KEY(tech) REFERENCES technologies(tech) );
    
-INSERT INTO "MinCapacity" VALUES(2030, 'EURNALWR15',  2.2*0.68, 'GW', '# 2GW of new nuclear added per duke IRP (carolinas); 68% of energy sent to NC per Energy Policy Council');
+-- INSERT INTO "MinCapacity" VALUES(2030, 'EURNALWR15',  2.2*0.68, 'GW', '# 2GW of new nuclear added per duke IRP (carolinas); 68% of energy sent to NC per Energy Policy Council');
 
 
 -------------------------------------------------
@@ -10880,14 +11118,14 @@ INSERT INTO "MaxActivity" VALUES(2040, 'EE', 31.050, 'PJ', '');
 INSERT INTO "MaxActivity" VALUES(2045, 'EE', 33.050, 'PJ', '');
 INSERT INTO "MaxActivity" VALUES(2050, 'EE', 35.100, 'PJ', '');
 
-INSERT INTO "MaxActivity" VALUES(2015, 'IMPELCNGAEA',    292, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2020, 'IMPELCNGAEA',    629, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2025, 'IMPELCNGAEA',    677, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2030, 'IMPELCNGAEA',    699, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2035, 'IMPELCNGAEA',    731, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2040, 'IMPELCNGAEA',    761, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2045, 'IMPELCNGAEA',    776, 'PJ', '# based on NG3 scenario');
-INSERT INTO "MaxActivity" VALUES(2050, 'IMPELCNGAEA',    795, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2015, 'IMPELCNGAEA',    292, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2020, 'IMPELCNGAEA',    629, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2025, 'IMPELCNGAEA',    677, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2030, 'IMPELCNGAEA',    699, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2035, 'IMPELCNGAEA',    731, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2040, 'IMPELCNGAEA',    761, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2045, 'IMPELCNGAEA',    776, 'PJ', '# based on NG3 scenario');
+-- INSERT INTO "MaxActivity" VALUES(2050, 'IMPELCNGAEA',    795, 'PJ', '# based on NG3 scenario');
 
 -------------------------------------------------
 CREATE TABLE GrowthRateMax (
@@ -10937,6 +11175,7 @@ CREATE TABLE LifetimeLoanTech (
    INSERT INTO "LifetimeLoanTech" VALUES('EDSLCTR',      30,  '');
    INSERT INTO "LifetimeLoanTech" VALUES('EURNALWR',     30,  '');
    INSERT INTO "LifetimeLoanTech" VALUES('EURNALWR15',   30,  '');
+   INSERT INTO "LifetimeLoanTech" VALUES('EURNSMR',      30,  '');
    INSERT INTO "LifetimeLoanTech" VALUES('EBIOIGCC',     15,  '# PURPA 15-year PPA');
    INSERT INTO "LifetimeLoanTech" VALUES('EBIOSTMR',     30,  '');
    INSERT INTO "LifetimeLoanTech" VALUES('EGEOBCFS',     30,  '');
@@ -12039,6 +12278,7 @@ INSERT INTO "tech_reserve" VALUES('ECOASTMR_b');
 INSERT INTO "tech_reserve" VALUES('EDSLCTR');
 INSERT INTO "tech_reserve" VALUES('EURNALWR');
 INSERT INTO "tech_reserve" VALUES('EURNALWR15');
+INSERT INTO "tech_reserve" VALUES('EURNSMR');
 INSERT INTO "tech_reserve" VALUES('EBIOIGCC');
 INSERT INTO "tech_reserve" VALUES('EBIOSTMR');
 INSERT INTO "tech_reserve" VALUES('EGEOBCFS');
@@ -12056,9 +12296,12 @@ INSERT INTO "tech_reserve" VALUES('ELFGGTR');
 -------------------------------------------------
 CREATE TABLE ReserveMargin (
   demand_comm text primary key,
+  reserve_zone text,
   reserve_margin real,
-  FOREIGN KEY(demand_comm) REFERENCES Demand(demand_comm));
-INSERT INTO "ReserveMargin" VALUES('ELCDMD', 0.60);
+  notes text,
+  FOREIGN KEY(demand_comm) REFERENCES Demand(demand_comm),
+  FOREIGN KEY(reserve_zone) REFERENCES Zones(reserve_zone));
+INSERT INTO "ReserveMargin" VALUES('ELCDMD', 'NC', 0.60, '#');
 
 -------------------------------------------------
 CREATE TABLE CapacityCredit (
