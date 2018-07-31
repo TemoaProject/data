@@ -1,3 +1,4 @@
+BEGIN TRANSACTION;
 CREATE TABLE time_season (
   t_season text primary key );
 INSERT INTO `time_season` (t_season) VALUES ('Intermediate');
@@ -1592,15 +1593,56 @@ INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUE
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','peak',0.0032,'# A-P from 12pm-3pm');
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','pm',0.1087,'# A-DPM from 3pm to 9pm');
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','night',0.1381,'# A-N from 9pm to 6am');
-CREATE TABLE `ReserveMargin` (
-	`commodity`	text,
+CREATE TABLE "ReserveMargin" (
+	`tech`	text,
 	`reservemargin_group`	TEXT,
-	`margin`	real,
-	`margin_notes`	text,
-	PRIMARY KEY(commodity)
+	`notes`	text,
+	PRIMARY KEY(tech)
 );
-INSERT INTO `ReserveMargin` (commodity,reservemargin_group,margin,margin_notes) VALUES ('ELCP','US',0.2,NULL);
-INSERT INTO `ReserveMargin` (commodity,reservemargin_group,margin,margin_notes) VALUES ('ELCP_Renewables','US',0.2,NULL);
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALSTM_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_URNLWR_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_HYDCONV_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_HYDREV_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_OILSTM_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_DSLCT_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_DSLCC_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGASTM_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACT_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACC_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_BIOSTM_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_GEO_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_MSWSTM_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WND_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPV_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLTH_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALSTM_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALIGCC_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALIGCC_CCS_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_URNLWR_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACT_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACC_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGAACT_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGAACC_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACC_CCS_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_BIOIGCC_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_GEOBCFS_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL4_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL5_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL6_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPVCEN_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLTHCEN_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALSTM1_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGASTM1_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACC1_R','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPVENDUSE_N','US','#power generation tech');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACCP_R','US','#power generation tech');
+CREATE TABLE `PlanningReserveMargin` (
+	`zone`	text,
+	`planning_reserve_margin`	real,
+	`planning_reserve_margin_notes`	text,
+	PRIMARY KEY(zone)
+);
+INSERT INTO `PlanningReserveMargin` (zone,planning_reserve_margin,planning_reserve_margin_notes) VALUES ('US',0.2,'#20% additional capacity above peak demand. Capacity credits are used to calculate available capacity instead of the capacity factors.');
 CREATE TABLE "MinGenGroupOfTechnologies_Data" (
 	`period`	integer,
 	`flag`	text,
