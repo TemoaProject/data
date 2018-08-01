@@ -1,4 +1,3 @@
-BEGIN TRANSACTION;
 CREATE TABLE time_season (
   t_season text primary key );
 INSERT INTO `time_season` (t_season) VALUES ('Intermediate');
