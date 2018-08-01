@@ -1,3 +1,32 @@
+/*
+--------------------------------------------------------------------------------
+Written in 2018 by Hadi Eshraghi, NC State University
+
+
+Description: 
+This sql file represents the US energy system as a single region. 
+It was used to produce the analysis in a 2018 ES&T paper titled "US Energy-
+Related Greenhouse Gas Emissions in the Absence of Federal Climate Policy."
+
+Note that all costs are based on year 2005 dollars. Cost estimates were 
+converted to 2005 dollars using this GDP deflator: 
+http://www.bea.gov/national/nipaweb/SelectTable.asp?Selected=Y
+NIPA Table 1.1.9. Implicit Price Deflators for Gross Domestic Product
+US Department of Commerce: Bureau of Economic Analysis
+Downloaded on 4/20/2012
+
+
+License: CC0 1.0 Universal
+To the extent possible under law, the author(s) have dedicated all copyright 
+and related and neighboring rights to this software to the public domain 
+worldwide. This software is distributed without any warranty.
+
+A copy of the CC0 Public Domain Dedication is in the LICENSE.md file. 
+Also, see <http://creativecommons.org/publicdomain/zero/1.0
+--------------------------------------------------------------------------------
+*/
+
+
 CREATE TABLE time_season (
   t_season text primary key );
 INSERT INTO `time_season` (t_season) VALUES ('Intermediate');
