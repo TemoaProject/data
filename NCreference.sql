@@ -160,7 +160,9 @@ CREATE TABLE technologies (
    INSERT INTO "technologies" VALUES('EDISTR',          'p', 'residential', '# Distribution in the grid','');
    INSERT INTO "technologies" VALUES('RENEWABLES',      'p', 'electric', '# Dummy ELCRNWB to ELC','');
 
-   
+-- Hourly energy storage technologies
+   INSERT INTO "technologies" VALUES('ESLION',        	'ph','electric',    '# New storage: lithium ion batteries', '');
+
 -- Emission control technologies
    INSERT INTO "technologies" VALUES('E_BLND_BITSUBLIG_COALSTM_R',   'p','electric','#blending tech to collect bit subbit and lig coal for existing coal steam plant','');
    INSERT INTO "technologies" VALUES('E_BLND_BIT_COALSTM_R',         'p','electric','#blending tech to collect bit coal for existing coal steam plant','');
@@ -1166,6 +1168,16 @@ INSERT INTO "Efficiency" VALUES('COABL_N',           'E_BLND_BITHML_COALSTM_N', 
 INSERT INTO "Efficiency" VALUES('COABL_N',           'E_BLND_BITHML_COALSTM_N',     2040,'COALSTM_N_B',1,'');
 INSERT INTO "Efficiency" VALUES('COABL_N',           'E_BLND_BITHML_COALSTM_N',     2045,'COALSTM_N_B',1,'');
 INSERT INTO "Efficiency" VALUES('COABL_N',           'E_BLND_BITHML_COALSTM_N',     2050,'COALSTM_N_B',1,'');
+
+-- Hourly Energy Storage
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2015, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2020, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2025, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2030, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2035, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2040, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2045, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
+INSERT INTO "Efficiency" VALUES('ELC', 'ESLION', 2050, 'ELC', 0.93, '93% Round Trip (Lazards LCOS)');
 
 ---------------
 -- NUSTD importing tech
@@ -5378,6 +5390,104 @@ INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod22', 'E_SNCR_COAB_R', '0.7',
 INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod23', 'E_SNCR_COAB_R', '0.7','# consistent with ECOASTMR');
 INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod24', 'E_SNCR_COAB_R', '0.7','# consistent with ECOASTMR');
 
+-- Hourly Energy Storage
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod01', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod02', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod03', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod04', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod05', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod06', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod07', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod08', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod09', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod10', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod11', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod12', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod13', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod14', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod15', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod16', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod17', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod18', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod19', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod20', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod21', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod22', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod23', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s001', 'tod24', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod01', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod02', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod03', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod04', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod05', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod06', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod07', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod08', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod09', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod10', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod11', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod12', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod13', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod14', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod15', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod16', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod17', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod18', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod19', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod20', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod21', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod22', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod23', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s002', 'tod24', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod01', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod02', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod03', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod04', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod05', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod06', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod07', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod08', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod09', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod10', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod11', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod12', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod13', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod14', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod15', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod16', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod17', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod18', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod19', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod20', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod21', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod22', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod23', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s003', 'tod24', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod01', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod02', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod03', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod04', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod05', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod06', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod07', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod08', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod09', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod10', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod11', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod12', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod13', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod14', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod15', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod16', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod17', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod18', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod19', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod20', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod21', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod22', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod23', 'ESLION', '1','# ');
+INSERT INTO "CapacityFactorTech" VALUES('s004', 'tod24', 'ESLION', '1','# ');
+
 -------------------------------------------------
 CREATE TABLE CapacityToActivity (
    tech text primary key,
@@ -5415,6 +5525,7 @@ INSERT INTO "CapacityToActivity" VALUES('ELFGICER',   31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('ELFGGTR',    31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('EE',         31.54,'# GW to PJ');
 INSERT INTO "CapacityToActivity" VALUES('RENEWABLES', 31.54,'# GW to PJ');
+INSERT INTO "CapacityToActivity" VALUES('ESLION',     31.54,'# GW to PJ');
 
 -- Emission control
 -- Group existing coal-fired steam turbine
@@ -5464,114 +5575,114 @@ CREATE TABLE CostInvest (
    FOREIGN KEY(vintage) REFERENCES time_periods(t_periods) );
 
 -- New natural gas
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2015,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2015,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2015,1002,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2015,679, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2015,2023,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2015,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2015,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2015,1054,'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2015,902, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2015,2201,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2020,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2020,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2020,969, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2020,654, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2020,1902,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2020,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2020,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2020,1048,'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2020,896, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2020,2168,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2025,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2025,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2025,953, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2025,641, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2025,1780,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2025,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2025,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2025,1025, 'M$/GW', '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2025,874, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2025,2079,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2030,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2030,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2030,953, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2030,641, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2030,1780,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2030,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2030,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2030,1001, 'M$/GW', '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2030,852, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2030,1991,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2035,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2035,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2035,936, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2035,628, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2035,1780,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2035,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2035,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2035,983, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2035,836, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2035,1918,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2040,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2040,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2040,936, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2040,628, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2040,1780,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2040,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2040,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2040,966, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2040,821, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2040,1847,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2045,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2045,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2045,936, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2045,628, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2045,1780,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2045,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2045,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2045,950, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2045,806, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2045,1777,'M$/GW',  '# NREL ATB 2018');
 
-INSERT INTO "CostInvest" VALUES('ENGACC05', 2050,923, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACT05', 2050,979, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACC',  2050,936, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGAACT',  2050,628, 'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ENGACCCCS',2050,1780,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACC05', 2050,923, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGACT05', 2050,979, 'M$/GW',  '# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ENGAACC',  2050,927, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGAACT',  2050,786, 'M$/GW',  '# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ENGACCCCS',2050,1697,'M$/GW',  '# NREL ATB 2018');
 
 -- New coal
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2015,2898,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2015,3736,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2015,3952,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2015,4241,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2015,6494,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2015,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2020,2825,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2020,3590,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2020,3903,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2020,4180,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2020,6121,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2020,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2025,2789,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2025,3518,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2025,3850,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2025,4068,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2025,5747,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2025,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2030,2789,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2030,3518,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2030,3802,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2030,3954,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2030,5747,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2030,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2035,2753,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2035,3445,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2035,3755,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2035,3863,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2035,5747,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2035,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2040,2753,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2040,3445,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2040,3704,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2040,3774,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2040,5747,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2040,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2045,2753,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2045,3445,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2045,3659,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2045,3688,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2045,5747,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2045,6494,'M$/GW','# MARKAL 2014 v1.1');
 
-INSERT INTO "CostInvest" VALUES('ECOALSTM',  2050,2753,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2050,3445,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('ECOALSTM',  2050,3578,'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('ECOALIGCC', 2050,3575,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('ECOALIGCCS',2050,5747,'M$/GW','# MARKAL 2014 v1.1');
 -- INSERT INTO "CostInvest" VALUES('ECOALOXYCS',2050,6494,'M$/GW','# MARKAL 2014 v1.1');
 
 -- New nuclear
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2015,5048,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2020,4796,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2025,4670,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2030,4670,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2035,4543,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2040,4543,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2045,4543,'M$/GW','# MARKAL 2014 v1.1');
-INSERT INTO "CostInvest" VALUES('EURNALWR15',2050,4543,'M$/GW','# MARKAL 2014 v1.1');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2015, 6158, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2020, 6143, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2025, 6044, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2030, 5887, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2035, 5731, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2040, 5570, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2045, 5416, 'M$/GW','# NREL ATB 2018');
+INSERT INTO "CostInvest" VALUES('EURNALWR15',2050, 5211, 'M$/GW','# NREL ATB 2018');
 
 -- New nuclear, SMR
-INSERT INTO "CostInvest" VALUES('EURNSMR',2015,5300,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2020,5036,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2025,4904,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2030,4904,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2035,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2040,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2045,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
-INSERT INTO "CostInvest" VALUES('EURNSMR',2050,4770,'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2015, 5469, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2020, 5196, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2025, 5060, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2030, 5060, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2035, 4922, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2040, 4922, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2045, 4922, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
+INSERT INTO "CostInvest" VALUES('EURNSMR',2050, 4922, 'M$/GW','# Abdulla et al. (PNAS 2014), Locatelli et al. 2014, 5% more than EURNALWR15, adjusted using the finance factor in ATB 2018 3 years lead time');
 
 -- New biomass
 INSERT INTO "CostInvest" VALUES('EBIOIGCC',2015,3805,'M$/GW','# MARKAL 2014 v1.1');
@@ -5593,62 +5704,62 @@ INSERT INTO "CostInvest" VALUES('EGEOBCFS',2040,2266,'M$/GW','# MARKAL 2014 v1.1
 INSERT INTO "CostInvest" VALUES('EGEOBCFS',2045,2266,'M$/GW','# MARKAL 2014 v1.1');
 INSERT INTO "CostInvest" VALUES('EGEOBCFS',2050,2266,'M$/GW','# MARKAL 2014 v1.1');
 
--- New solar, Investment Tax Credit: 30% in 2015, 26% in 2020, 10% from 2025 to 2050.
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2015,1440*0.70,'M$/GW','# NREL 2017 Q1 benchmark');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2015,2788,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2015,3220*0.70,'M$/GW','# NREL 2017 Q1 benchmark');
+-- New solar, Investment Tax Credit: 30% in 2015, 26% in 2020, 10% from 2025 to 2050 for utility PV; 30% in 2015, 26% in 2020.
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2015,1440*0.70, 'M$/GW','# NREL 2017 Q1 benchmark');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2015,2788,      'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2015,3220*0.70, 'M$/GW','# NREL 2017 Q1 benchmark');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2020,1360*0.74,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2020,2758,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2020,3120*0.74,'M$/GW','# NREL ATB 2017, subtract federal ITC (26%)');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2020,928,       'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2020,2758,      'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2020,2218,      'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2025,1279*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2025,3417,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2025,2535,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2025,1021,     'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2025,3417,     'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2025,2362,     'M$/GW','# NREL ATB 2018, convert to $/kWac');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2030,1197*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2030,3337,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2030,1950,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2030,961,      'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2030,3337,     'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2030,1941,     'M$/GW','# NREL ATB 2018, convert to $/kWac');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2035,1131*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2035,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2035,1788,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2035,919,      'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2035,3178,     'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2035,1777,     'M$/GW','# NREL ATB 2018, convert to $/kWac');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2040,1065*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2040,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2040,1625,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2040,878,      'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2040,3178,     'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2040,1612,     'M$/GW','# NREL ATB 2018, convert to $/kWac');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2045,1004*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2045,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2045,1560,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2045,830,      'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2045,3178,     'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2045,1547,     'M$/GW','# NREL ATB 2018, convert to $/kWac');
 
-INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2050,944*0.9,'M$/GW','# NREL ATB 2017, subtract ITC');
-INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2050,3178,'M$/GW','# MARKAL 2016 v1.1');
-INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2050,1495,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('ESOLPVCEN',2050,783,      'M$/GW','# NREL ATB 2018, subtract ITC, convert to $/kWac');
+INSERT INTO "CostInvest" VALUES('ESOLSTCEN',2050,3178,     'M$/GW','# MARKAL 2016 v1.1');
+INSERT INTO "CostInvest" VALUES('ESOLPVDIS',2050,1482,     'M$/GW','# NREL ATB 2018, convert to $/kWac');
 
 -- New wind, Investment Tax Credit, 30% in 2015.
-INSERT INTO "CostInvest" VALUES('EWNDON', 2015,1643*0.7,'M$/GW','# NREL ATB 2017, subtract');
-INSERT INTO "CostInvest" VALUES('EWNDOFS',2015,5491*0.7,'M$/GW','# MARKAL 2016 v1.1, subtract');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2015,1214,    'M$/GW','# NREL ATB 2018, subtract ITC');
+INSERT INTO "CostInvest" VALUES('EWNDOFS',2015,5491*0.7,'M$/GW','# MARKAL 2016 v1.1, subtract ITC');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2020,1609,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2020,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2020,5216,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2025,1609,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2025,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2025,4942,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2030,1570,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2030,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2030,4667,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2035,1617,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2035,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2035,4393,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2040,1641,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2040,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2040,4393,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2045,1645,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2045,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2045,4393,'M$/GW','# MARKAL 2016 v1.1');
 
-INSERT INTO "CostInvest" VALUES('EWNDON', 2050,1631,'M$/GW','# NREL ATB 2017');
+INSERT INTO "CostInvest" VALUES('EWNDON', 2050,1738,'M$/GW','# NREL ATB 2018');
 INSERT INTO "CostInvest" VALUES('EWNDOFS',2050,4393,'M$/GW','# MARKAL 2016 v1.1');
 
 INSERT INTO "CostInvest" VALUES('EE', 2015, 0, 'M$/GW','#No investment cost for EE tech');
@@ -5771,6 +5882,14 @@ INSERT INTO "CostInvest" VALUES('E_CCR_COALSTM_N',2040,20,'#M$/PJout','');
 INSERT INTO "CostInvest" VALUES('E_CCR_COALSTM_N',2045,20,'#M$/PJout','');
 INSERT INTO "CostInvest" VALUES('E_CCR_COALSTM_N',2050,20,'#M$/PJout','');
 
+INSERT INTO "CostInvest" VALUES('ESLION', 2015, 2100, 'M$/GW','#From Joe');
+INSERT INTO "CostInvest" VALUES('ESLION', 2020, 2200, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2025, 1520, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2030, 1250, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2035, 1000, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2040,  925, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2045,  850, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2050,  750, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
 -------------------------------------------------
 CREATE TABLE CostFixed (
    periods integer NOT NULL,
@@ -7552,6 +7671,41 @@ INSERT INTO "CostFixed" VALUES(2050,'E_SCR_COAB_N',        2040,0.009,'#M$/PJ','
 INSERT INTO "CostFixed" VALUES(2045,'E_SCR_COAB_N',        2045,0.009,'#M$/PJ','# Cohan paper, in 2015 $'); 
 INSERT INTO "CostFixed" VALUES(2050,'E_SCR_COAB_N',        2045,0.009,'#M$/PJ','# Cohan paper, in 2015 $');
 INSERT INTO "CostFixed" VALUES(2050,'E_SCR_COAB_N',        2050,0.009,'#M$/PJ','# Cohan paper, in 2015 $');
+
+-- Hourly Energy Storage
+INSERT INTO "CostFixed" VALUES(2015,'ESLION',2015,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2020,'ESLION',2015,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2025,'ESLION',2015,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2015,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2020,'ESLION',2020,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2025,'ESLION',2020,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2020,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2020,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2025,'ESLION',2025,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2025,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2025,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2025,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2030,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2030,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2030,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2030,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2035,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2035,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2035,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2035,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2040,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2040,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2040,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2045,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2045,  10, 'M$/GW','# From Joe');
+
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2050,  10, 'M$/GW','# From Joe');
 
 -------------------------------------------------
 CREATE TABLE CostVariable (
@@ -9653,6 +9807,39 @@ INSERT INTO "CostVariable" VALUES(2045,'E_CCR_COALSTM_N ',      2045,1.171,'#M$/
 INSERT INTO "CostVariable" VALUES(2050,'E_CCR_COALSTM_N ',      2045,1.171,'#M$/PJ','');
 INSERT INTO "CostVariable" VALUES(2050,'E_CCR_COALSTM_N ',      2050,1.171,'#M$/PJ','');
 
+INSERT INTO "CostVariable" VALUES(2015,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2020,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2025,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2030,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2020,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2025,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2030,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2035,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2025,'ESLION',2025, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2030,'ESLION',2025, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2035,'ESLION',2025, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2040,'ESLION',2025, 0 , 'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2030,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2035,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2040,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2045,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2035,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2040,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2045,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2050,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2040,'ESLION',2040, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2045,'ESLION',2040, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2050,'ESLION',2040, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2045,'ESLION',2045, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+INSERT INTO "CostVariable" VALUES(2050,'ESLION',2045, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
+
+INSERT INTO "CostVariable" VALUES(2050,'ESLION',2050, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 -------------------------------------------------
 CREATE TABLE  LifetimeTech (
    tech text,
@@ -9726,6 +9913,7 @@ INSERT INTO "LifetimeTech" VALUES('ESOL',        1000,'');
 INSERT INTO "LifetimeTech" VALUES('ETRANS',      1000,'');
 INSERT INTO "LifetimeTech" VALUES('EDISTR',      1000,'');
 INSERT INTO "LifetimeTech" VALUES('RENEWABLES',  1000,'');
+INSERT INTO "LifetimeTech" VALUES('ESLION',       20,'');
 
 -- Emission control technologies
 -- Group existing coal-fired steam turbine
@@ -10242,7 +10430,15 @@ INSERT INTO "DiscountRate" VALUES('EWNDOFS',  2035, 0.10, '# MARKAL 2016');
 INSERT INTO "DiscountRate" VALUES('EWNDOFS',  2040, 0.10, '# MARKAL 2016');
 INSERT INTO "DiscountRate" VALUES('EWNDOFS',  2045, 0.10, '# MARKAL 2016');
 INSERT INTO "DiscountRate" VALUES('EWNDOFS',  2050, 0.10, '# MARKAL 2016');  
-   
+
+INSERT INTO "DiscountRate" VALUES('ESLION',  2015, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2020, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2025, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2030, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2035, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2040, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2045, 0.08, '# Lazards LCOS');
+INSERT INTO "DiscountRate" VALUES('ESLION',  2050, 0.08, '# Lazards LCOS');     
 -------------------------------------------------
 CREATE TABLE EmissionActivity  (
    emis_comm text,
@@ -11194,7 +11390,7 @@ CREATE TABLE LifetimeLoanTech (
    INSERT INTO "LifetimeLoanTech" VALUES('ETRANS',       30,'');
    INSERT INTO "LifetimeLoanTech" VALUES('EDISTR',       30,'');
    INSERT INTO "LifetimeLoanTech" VALUES('RENEWABLES',   30,'');
-   
+   INSERT INTO "LifetimeLoanTech" VALUES('ESLION',       20,'');
 -------------------------------------------------
 CREATE TABLE Output_VFlow_Out (
    scenario text,
@@ -12292,7 +12488,7 @@ INSERT INTO "tech_reserve" VALUES('EHYDCONR');
 INSERT INTO "tech_reserve" VALUES('EHYDREVR');
 INSERT INTO "tech_reserve" VALUES('ELFGICER');
 INSERT INTO "tech_reserve" VALUES('ELFGGTR');
-
+INSERT INTO "tech_reserve" VALUES('ESLION');
 -------------------------------------------------
 CREATE TABLE ReserveMargin (
   demand_comm text primary key,
