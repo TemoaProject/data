@@ -11436,6 +11436,20 @@ CREATE TABLE Output_VFlow_In (
    FOREIGN KEY(vintage) REFERENCES time_periods(t_periods), 
    FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
  
+CREATE TABLE Output_HourlyStorage (
+   scenario text,
+   sector text,
+   t_periods integer,
+   t_season text,
+   t_day text,
+   tech text,
+   stored_energy real,
+   PRIMARY KEY(scenario, t_periods, t_season, t_day, tech),
+   FOREIGN KEY(sector) REFERENCES sector_labels(sector),   
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),   
+   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
+   FOREIGN KEY(tech) REFERENCES technologies(tech));
 
 CREATE TABLE Output_V_Capacity (
    scenario text,
