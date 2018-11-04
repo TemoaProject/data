@@ -1,33 +1,4 @@
-/*
---------------------------------------------------------------------------------
-Written in 2018 by Hadi Eshraghi, NC State University
-
-
-Description: 
-This sql file represents the US energy system as a single region. 
-It was used to produce the analysis in a 2018 ES&T paper titled "US Energy-
-Related Greenhouse Gas Emissions in the Absence of Federal Climate Policy."
-
-Note that all costs are based on year 2005 dollars. Cost estimates were 
-converted to 2005 dollars using this GDP deflator: 
-http://www.bea.gov/national/nipaweb/SelectTable.asp?Selected=Y
-NIPA Table 1.1.9. Implicit Price Deflators for Gross Domestic Product
-US Department of Commerce: Bureau of Economic Analysis
-Downloaded on 4/20/2012
-
-
-License: CC0 1.0 Universal
-To the extent possible under law, the author(s) have dedicated all copyright 
-and related and neighboring rights to this software to the public domain 
-worldwide. This software is distributed without any warranty.
-
-A copy of the CC0 Public Domain Dedication is in the LICENSE.md file. 
-Also, see <http://creativecommons.org/publicdomain/zero/1.0
---------------------------------------------------------------------------------
-*/
-
-
-
+BEGIN TRANSACTION;
 CREATE TABLE time_season (
   t_season text primary key );
 INSERT INTO `time_season` (t_season) VALUES ('Intermediate');
@@ -1672,6 +1643,91 @@ CREATE TABLE `PlanningReserveMargin` (
 	PRIMARY KEY(zone)
 );
 INSERT INTO `PlanningReserveMargin` (zone,planning_reserve_margin,planning_reserve_margin_notes) VALUES ('US',0.2,'#20% additional capacity above peak demand. Capacity credits are used to calculate available capacity instead of the capacity factors.');
+CREATE TABLE Output_V_Capacity (
+   scenario text,
+   sector text,
+   tech text,
+   vintage integer,
+   capacity real,
+   PRIMARY KEY(scenario, tech, vintage),
+   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE Output_VFlow_Out (
+   scenario text,
+   sector text,
+   t_periods integer,
+   t_season text,
+   t_day text,
+   input_comm text,
+   tech text,
+   vintage integer,
+   output_comm text,
+   vflow_out real,
+   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
+   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
+CREATE TABLE Output_VFlow_In (
+   scenario text,
+   sector text,
+   t_periods integer,
+   t_season text,
+   t_day text,
+   input_comm text,
+   tech text,
+   vintage integer,
+   output_comm text,
+   vflow_in real,
+   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
+   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
+CREATE TABLE Output_Objective (
+   scenario text,
+   objective_name text,
+   total_system_cost real );
+CREATE TABLE Output_Emissions (
+   scenario text,
+   sector text,
+   t_periods integer,
+   emissions_comm text,
+   tech text,
+   vintage integer,
+   emissions real,
+   PRIMARY KEY(scenario, t_periods, emissions_comm, tech, vintage),
+   FOREIGN KEY(emissions_comm) REFERENCES EmissionActivity(emis_comm),
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
+   FOREIGN KEY(tech) REFERENCES technologies(tech)
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE Output_Costs (
+   scenario text,
+   sector text,
+   output_name text,
+   tech text,
+   vintage integer,
+   output_cost real,
+   PRIMARY KEY(scenario, output_name, tech, vintage),
+   FOREIGN KEY(tech) REFERENCES technologies(tech),
+   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE Output_CapacityByPeriodAndTech (
+   scenario text,
+   sector text,
+   t_periods integer,   
+   tech text,
+   capacity real,
+   PRIMARY KEY(scenario, t_periods, tech),
+   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
+   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),   
+   FOREIGN KEY(tech) REFERENCES technologies(tech));
 CREATE TABLE "MinGenGroupOfTechnologies_Data" (
 	`period`	integer,
 	`flag`	text,
@@ -1686,43 +1742,44 @@ INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (204
 CREATE TABLE "MinGenGroupOfTechnologies" (
 	`tech`	text,
 	`flag`	text,
+	`act_fraction`	TEXT,
 	`tech_desc`	text,
 	PRIMARY KEY(tech,flag)
 );
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_MCELC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_CELC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FELC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_SSELC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FELC_R','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_CE10_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FE10_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_SSE10_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_LSE10_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_MVE10_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_PE10_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_CE10_PHEV10_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FE10_PHEV10_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_SSE10_PHEV10_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_LSE10_PHEV10_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_MVE10_PHEV10_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_PE10_PHEV10_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_CE10_PHEV40_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FE10_PHEV40_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_SSE10_PHEV40_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_LSE10_PHEV40_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_MVE10_PHEV40_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_PE10_PHEV40_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_SSDSL_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_MVDSL_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_LSDSL_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FDSL_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_CDSL_HYB_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_SSH2FC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_MVH2FC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_LSH2FC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_FH2FC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_LDV_CH2FC_N','g1',NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,tech_desc) VALUES ('T_HDV_TCH2FC_N','g1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_MCELC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_CELC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FELC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_SSELC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FELC_R','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_CE10_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FE10_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_SSE10_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_LSE10_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_MVE10_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_PE10_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_CE10_PHEV10_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FE10_PHEV10_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_SSE10_PHEV10_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_LSE10_PHEV10_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_MVE10_PHEV10_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_PE10_PHEV10_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_CE10_PHEV40_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FE10_PHEV40_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_SSE10_PHEV40_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_LSE10_PHEV40_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_MVE10_PHEV40_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_PE10_PHEV40_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_SSDSL_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_MVDSL_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_LSDSL_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FDSL_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_CDSL_HYB_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_SSH2FC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_MVH2FC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_LSH2FC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_FH2FC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_LDV_CH2FC_N','g1','1',NULL);
+INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('T_HDV_TCH2FC_N','g1','1',NULL);
 CREATE TABLE MinCapacity (
    periods integer,
    tech text,
@@ -16329,88 +16386,4 @@ INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLPVENDUSE
 INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLPV_R',0.35,'"The capacity value is defined as the fraction of the rated capacity considered firm for the purposes of calculating the module reserve margin." [Reference: www.energycommunity.com]');
 INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLTHCEN_N',0.35,'"The capacity value is defined as the fraction of the rated capacity considered firm for the purposes of calculating the module reserve margin." [Reference: www.energycommunity.com]');
 INSERT INTO `CapacityCredit` (tech,cf_tech,cf_tech_notes) VALUES ('E_SOLTH_R',0.35,'"The capacity value is defined as the fraction of the rated capacity considered firm for the purposes of calculating the module reserve margin." [Reference: www.energycommunity.com]');
-CREATE TABLE Output_V_Capacity (
-   scenario text,
-   sector text,
-   tech text,
-   vintage integer,
-   capacity real,
-   PRIMARY KEY(scenario, tech, vintage),
-   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
-CREATE TABLE Output_VFlow_Out (
-   scenario text,
-   sector text,
-   t_periods integer,
-   t_season text,
-   t_day text,
-   input_comm text,
-   tech text,
-   vintage integer,
-   output_comm text,
-   vflow_out real,
-   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
-   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
-CREATE TABLE Output_VFlow_In (
-   scenario text,
-   sector text,
-   t_periods integer,
-   t_season text,
-   t_day text,
-   input_comm text,
-   tech text,
-   vintage integer,
-   output_comm text,
-   vflow_in real,
-   PRIMARY KEY(scenario, t_periods, t_season, t_day, input_comm, tech, vintage, output_comm),
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_season) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(t_day) REFERENCES time_of_day(t_day),
-   FOREIGN KEY(input_comm) REFERENCES commodities(comm_name),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name));
-CREATE TABLE Output_Objective (
-   scenario text,
-   objective_name text,
-   total_system_cost real );
-CREATE TABLE Output_Emissions (
-   scenario text,
-   sector text,
-   t_periods integer,
-   emissions_comm text,
-   tech text,
-   vintage integer,
-   emissions real,
-   PRIMARY KEY(scenario, t_periods, emissions_comm, tech, vintage),
-   FOREIGN KEY(emissions_comm) REFERENCES EmissionActivity(emis_comm),
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
-   FOREIGN KEY(tech) REFERENCES technologies(tech)
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
-CREATE TABLE Output_Costs (
-   scenario text,
-   sector text,
-   output_name text,
-   tech text,
-   vintage integer,
-   output_cost real,
-   PRIMARY KEY(scenario, output_name, tech, vintage),
-   FOREIGN KEY(tech) REFERENCES technologies(tech),
-   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
-CREATE TABLE Output_CapacityByPeriodAndTech (
-   scenario text,
-   sector text,
-   t_periods integer,   
-   tech text,
-   capacity real,
-   PRIMARY KEY(scenario, t_periods, tech),
-   FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
-   FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),   
-   FOREIGN KEY(tech) REFERENCES technologies(tech));
+COMMIT;
