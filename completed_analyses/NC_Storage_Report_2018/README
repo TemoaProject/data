@@ -1,0 +1,44 @@
+This directory contains Temmoa-compatible input data files used to conduct 
+the 2018 North Carolina energy storage study. The final report is 
+available here: https://energy.ncsu.edu/storage.
+
+The files are split into the capacity expansion and operational 
+versions of the data. To begin, the capacity expansion runs are conducted
+to estimate the 2030 electricity generation mix in North Carolina. 
+The optimal installed capacity is then fixed in the operational model, and 
+the operational model is run to determine how storage with a fixed installed 
+capacity and duration affects the objective function value. The change 
+in objective function value, corresponding to the change in total system 
+cost, is used to assess the net benefit associated with using storage for 
+bulk energy time shifting and peak capacity deferral. (See report for more 
+details.)
+
+The primary difference between the capacity expansion and operational 
+versions of the model are the number of time slices. In the capacity 
+expansion model, electricity supply and demand is balanced over a 
+representatitive 24-hour period for each of the four seasons, for a total 
+of 96 time slices per year. The operational model includes 8760 time 
+slices per year, thereby representing every hour of the year, which 
+allows us to better capture the value of storage. 
+
+In terms of workflow, the capacity expansion runs were conducted with an 
+input sqlite database file. Here we include the raw text-based sql file. 
+It can be converted to a binary sqlite database file with 
+the freely available sqlite program: https://www.sqlite.org. The results
+from the capacity expansion runs were automatically stored in the output 
+tables associated with the same sqlite database. To run the operational 
+version, capacity results are extracted from the capacity expansion sqlite 
+file, and added to an input DAT file. These input DAT files are text-based 
+files located in the scenario-specific folders for the operational runs. 
+(Note that Temoa can run with either a sqlite or DAT file specified as 
+input.) 
+
+Each scenario folder for both the capacity expansion and 
+operational runs also contain the config file used to run the model. Each 
+model run was executed from the command line with the following syntax:
+
+$ python temoa_model/ --config=temoa_model/<config_file_name>
+
+Note that the specific instance of the Temoa source code we ran 
+corresponds to git commit hash 06edf7b883cee44ebd1129803f2145687c46bea0. 
+We verified the modle code works with Pyomo versions 5.3 and 5.5.
