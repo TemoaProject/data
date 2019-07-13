@@ -161,7 +161,7 @@ CREATE TABLE technologies (
    INSERT INTO "technologies" VALUES('RENEWABLES',      'p', 'electric', '# Dummy ELCRNWB to ELC','');
 
 -- Hourly energy storage technologies
-   INSERT INTO "technologies" VALUES('ESLION',        	'ph','electric',    '# New storage: lithium ion batteries', '');
+   INSERT INTO "technologies" VALUES('ESLION',        	'ps','electric',    '# New storage: lithium ion batteries', '');
 
 -- Emission control technologies
    INSERT INTO "technologies" VALUES('E_BLND_BITSUBLIG_COALSTM_R',   'p','electric','#blending tech to collect bit subbit and lig coal for existing coal steam plant','');
@@ -5882,14 +5882,14 @@ INSERT INTO "CostInvest" VALUES('E_CCR_COALSTM_N',2040,20,'#M$/PJout','');
 INSERT INTO "CostInvest" VALUES('E_CCR_COALSTM_N',2045,20,'#M$/PJout','');
 INSERT INTO "CostInvest" VALUES('E_CCR_COALSTM_N',2050,20,'#M$/PJout','');
 
-INSERT INTO "CostInvest" VALUES('ESLION', 2015, 2100, 'M$/GW','#From Joe');
-INSERT INTO "CostInvest" VALUES('ESLION', 2020, 2200, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
-INSERT INTO "CostInvest" VALUES('ESLION', 2025, 1520, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
-INSERT INTO "CostInvest" VALUES('ESLION', 2030, 1250, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
-INSERT INTO "CostInvest" VALUES('ESLION', 2035, 1000, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
-INSERT INTO "CostInvest" VALUES('ESLION', 2040,  925, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
-INSERT INTO "CostInvest" VALUES('ESLION', 2045,  850, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
-INSERT INTO "CostInvest" VALUES('ESLION', 2050,  750, 'M$/GW','#From From Cole (2016) low-range Li-Ion cost projections');
+INSERT INTO "CostInvest" VALUES('ESLION', 2015, 2370, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2020, 1741, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2025, 1446, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2030, 1308, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2035, 1212, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2040, 1139, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2045, 1107, 'M$/GW','#From Joe, ATB 2018 data, mid');
+INSERT INTO "CostInvest" VALUES('ESLION', 2050, 1078, 'M$/GW','#From Joe, ATB 2018 data, mid');
 -------------------------------------------------
 CREATE TABLE CostFixed (
    periods integer NOT NULL,
@@ -7673,39 +7673,34 @@ INSERT INTO "CostFixed" VALUES(2050,'E_SCR_COAB_N',        2045,0.009,'#M$/PJ','
 INSERT INTO "CostFixed" VALUES(2050,'E_SCR_COAB_N',        2050,0.009,'#M$/PJ','# Cohan paper, in 2015 $');
 
 -- Hourly Energy Storage
-INSERT INTO "CostFixed" VALUES(2015,'ESLION',2015,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2020,'ESLION',2015,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2025,'ESLION',2015,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2030,'ESLION',2015,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2015,'ESLION',2015,  9.18, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2020,'ESLION',2015,  9.18, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2025,'ESLION',2015,  9.18, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2020,'ESLION',2020,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2025,'ESLION',2020,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2030,'ESLION',2020,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2035,'ESLION',2020,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2020,'ESLION',2020,  8.65, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2025,'ESLION',2020,  8.65, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2020,  8.65, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2025,'ESLION',2025,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2030,'ESLION',2025,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2035,'ESLION',2025,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2040,'ESLION',2025,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2025,'ESLION',2025,  8.11, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2025,  8.11, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2025,  8.11, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2030,'ESLION',2030,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2035,'ESLION',2030,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2040,'ESLION',2030,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2045,'ESLION',2030,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2030,'ESLION',2030,  7.58, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2030,  7.58, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2030,  7.58, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2035,'ESLION',2035,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2040,'ESLION',2035,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2045,'ESLION',2035,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2050,'ESLION',2035,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2035,'ESLION',2035,  7.05, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2035,  7.05, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2035,  7.05, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2040,'ESLION',2040,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2045,'ESLION',2040,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2050,'ESLION',2040,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2040,'ESLION',2040,  6.52, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2040,  6.52, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2040,  6.52, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2045,'ESLION',2045,  10, 'M$/GW','# From Joe');
-INSERT INTO "CostFixed" VALUES(2050,'ESLION',2045,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2045,'ESLION',2045,  6.52, 'M$/GW','# From Joe, ATB 2018 mid');
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2045,  6.52, 'M$/GW','# From Joe, ATB 2018 mid');
 
-INSERT INTO "CostFixed" VALUES(2050,'ESLION',2050,  10, 'M$/GW','# From Joe');
+INSERT INTO "CostFixed" VALUES(2050,'ESLION',2050,  6.52, 'M$/GW','# From Joe, ATB 2018 mid');
 
 -------------------------------------------------
 CREATE TABLE CostVariable (
@@ -9810,31 +9805,25 @@ INSERT INTO "CostVariable" VALUES(2050,'E_CCR_COALSTM_N ',      2050,1.171,'#M$/
 INSERT INTO "CostVariable" VALUES(2015,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2020,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2025,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
-INSERT INTO "CostVariable" VALUES(2030,'ESLION',2015, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 
 INSERT INTO "CostVariable" VALUES(2020,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2025,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2030,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
-INSERT INTO "CostVariable" VALUES(2035,'ESLION',2020, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 
 INSERT INTO "CostVariable" VALUES(2025,'ESLION',2025, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2030,'ESLION',2025, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2035,'ESLION',2025, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
-INSERT INTO "CostVariable" VALUES(2040,'ESLION',2025, 0 , 'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 
 INSERT INTO "CostVariable" VALUES(2030,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2035,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2040,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
-INSERT INTO "CostVariable" VALUES(2045,'ESLION',2030, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 
 INSERT INTO "CostVariable" VALUES(2035,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2040,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2045,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
-INSERT INTO "CostVariable" VALUES(2050,'ESLION',2035, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 
 INSERT INTO "CostVariable" VALUES(2040,'ESLION',2040, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2045,'ESLION',2040, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
-INSERT INTO "CostVariable" VALUES(2050,'ESLION',2040, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 
 INSERT INTO "CostVariable" VALUES(2045,'ESLION',2045, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
 INSERT INTO "CostVariable" VALUES(2050,'ESLION',2045, 0,  'M$/PJ','# NO variable cost for Lithium Ion batteries (Lazards)');
@@ -9913,7 +9902,7 @@ INSERT INTO "LifetimeTech" VALUES('ESOL',        1000,'');
 INSERT INTO "LifetimeTech" VALUES('ETRANS',      1000,'');
 INSERT INTO "LifetimeTech" VALUES('EDISTR',      1000,'');
 INSERT INTO "LifetimeTech" VALUES('RENEWABLES',  1000,'');
-INSERT INTO "LifetimeTech" VALUES('ESLION',       20,'');
+INSERT INTO "LifetimeTech" VALUES('ESLION',       15,'From Joe from ATB 2018');
 
 -- Emission control technologies
 -- Group existing coal-fired steam turbine
@@ -11193,6 +11182,14 @@ INSERT INTO "TechInputSplit" VALUES(2050, 'COALIGCC_N_B', 'E_BLND_BITSUBLIG_COAL
 INSERT INTO "TechInputSplit" VALUES(2050, 'COALSTM_N_B',  'E_BLND_BITSUBLIG_COALSTM_N',  1,'');
 
 -------------------------------------------------
+CREATE TABLE "StorageDuration" (
+   tech text,
+   duration real,
+   duration_notes text,
+   PRIMARY KEY(tech) );
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('ESLION',4.0,NULL);
+
+-------------------------------------------------
 CREATE TABLE TechOutputSplit (
    tech text,
    output_comm text,
@@ -12467,64 +12464,233 @@ INSERT INTO "LifetimeTech" VALUES('ECOALIGCCS_b',   60,  '');
 INSERT INTO "LifetimeTech" VALUES('ECOASTMR_b',     60,  '');
 
 -------------------------------------------------
-CREATE TABLE tech_reserve (
-  tech text primary key,
-  FOREIGN KEY(tech) REFERENCES technologies(tech));
-INSERT INTO "tech_reserve" VALUES('ENGACC05');
-INSERT INTO "tech_reserve" VALUES('ENGACT05');
-INSERT INTO "tech_reserve" VALUES('ENGAACC');
-INSERT INTO "tech_reserve" VALUES('ENGAACT');
-INSERT INTO "tech_reserve" VALUES('ENGACCCCS');
-INSERT INTO "tech_reserve" VALUES('ENGACCR');
-INSERT INTO "tech_reserve" VALUES('ENGACTR');
-INSERT INTO "tech_reserve" VALUES('ECOALSTM');
-INSERT INTO "tech_reserve" VALUES('ECOALIGCC');
-INSERT INTO "tech_reserve" VALUES('ECOALIGCCS');
-INSERT INTO "tech_reserve" VALUES('ECOASTMR');
-INSERT INTO "tech_reserve" VALUES('ECOALSTM_b');
-INSERT INTO "tech_reserve" VALUES('ECOALIGCC_b');
-INSERT INTO "tech_reserve" VALUES('ECOALIGCCS_b');
-INSERT INTO "tech_reserve" VALUES('ECOASTMR_b');
-INSERT INTO "tech_reserve" VALUES('EDSLCTR');
-INSERT INTO "tech_reserve" VALUES('EURNALWR');
-INSERT INTO "tech_reserve" VALUES('EURNALWR15');
-INSERT INTO "tech_reserve" VALUES('EURNSMR');
-INSERT INTO "tech_reserve" VALUES('EBIOIGCC');
-INSERT INTO "tech_reserve" VALUES('EBIOSTMR');
-INSERT INTO "tech_reserve" VALUES('EGEOBCFS');
-INSERT INTO "tech_reserve" VALUES('ESOLPVCEN');
-INSERT INTO "tech_reserve" VALUES('ESOLPVDIS');
-INSERT INTO "tech_reserve" VALUES('ESOLSTCEN');
-INSERT INTO "tech_reserve" VALUES('ESOLPVR');
-INSERT INTO "tech_reserve" VALUES('EWNDON');
-INSERT INTO "tech_reserve" VALUES('EWNDOFS');
-INSERT INTO "tech_reserve" VALUES('EHYDCONR');
-INSERT INTO "tech_reserve" VALUES('EHYDREVR');
-INSERT INTO "tech_reserve" VALUES('ELFGICER');
-INSERT INTO "tech_reserve" VALUES('ELFGGTR');
-INSERT INTO "tech_reserve" VALUES('ESLION');
--------------------------------------------------
-CREATE TABLE ReserveMargin (
-  demand_comm text primary key,
-  reserve_zone text,
-  reserve_margin real,
-  notes text,
-  FOREIGN KEY(demand_comm) REFERENCES Demand(demand_comm),
-  FOREIGN KEY(reserve_zone) REFERENCES Zones(reserve_zone));
-INSERT INTO "ReserveMargin" VALUES('ELCDMD', 'NC', 0.60, '#');
+-- CREATE TABLE tech_reserve (
+--   tech text primary key,
+--   FOREIGN KEY(tech) REFERENCES technologies(tech));
+-- INSERT INTO "tech_reserve" VALUES('ENGACC05');
+-- INSERT INTO "tech_reserve" VALUES('ENGACT05');
+-- INSERT INTO "tech_reserve" VALUES('ENGAACC');
+-- INSERT INTO "tech_reserve" VALUES('ENGAACT');
+-- INSERT INTO "tech_reserve" VALUES('ENGACCCCS');
+-- INSERT INTO "tech_reserve" VALUES('ENGACCR');
+-- INSERT INTO "tech_reserve" VALUES('ENGACTR');
+-- INSERT INTO "tech_reserve" VALUES('ECOALSTM');
+-- INSERT INTO "tech_reserve" VALUES('ECOALIGCC');
+-- INSERT INTO "tech_reserve" VALUES('ECOALIGCCS');
+-- INSERT INTO "tech_reserve" VALUES('ECOASTMR');
+-- INSERT INTO "tech_reserve" VALUES('ECOALSTM_b');
+-- INSERT INTO "tech_reserve" VALUES('ECOALIGCC_b');
+-- INSERT INTO "tech_reserve" VALUES('ECOALIGCCS_b');
+-- INSERT INTO "tech_reserve" VALUES('ECOASTMR_b');
+-- INSERT INTO "tech_reserve" VALUES('EDSLCTR');
+-- INSERT INTO "tech_reserve" VALUES('EURNALWR');
+-- INSERT INTO "tech_reserve" VALUES('EURNALWR15');
+-- INSERT INTO "tech_reserve" VALUES('EURNSMR');
+-- INSERT INTO "tech_reserve" VALUES('EBIOIGCC');
+-- INSERT INTO "tech_reserve" VALUES('EBIOSTMR');
+-- INSERT INTO "tech_reserve" VALUES('EGEOBCFS');
+-- INSERT INTO "tech_reserve" VALUES('ESOLPVCEN');
+-- INSERT INTO "tech_reserve" VALUES('ESOLPVDIS');
+-- INSERT INTO "tech_reserve" VALUES('ESOLSTCEN');
+-- INSERT INTO "tech_reserve" VALUES('ESOLPVR');
+-- INSERT INTO "tech_reserve" VALUES('EWNDON');
+-- INSERT INTO "tech_reserve" VALUES('EWNDOFS');
+-- INSERT INTO "tech_reserve" VALUES('EHYDCONR');
+-- INSERT INTO "tech_reserve" VALUES('EHYDREVR');
+-- INSERT INTO "tech_reserve" VALUES('ELFGICER');
+-- INSERT INTO "tech_reserve" VALUES('ELFGGTR');
+-- INSERT INTO "tech_reserve" VALUES('ESLION');
+
+CREATE TABLE "ReserveMargin" (
+	`tech`	text,
+	`reservemargin_group`	TEXT,
+	`notes`	text,
+	PRIMARY KEY(tech)
+);
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGACC05', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGACT05', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGAACC', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGAACT', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGACCCCS', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGACCR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ENGACTR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOALSTM', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOALIGCC', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOALIGCCS', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOASTMR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOALSTM_b', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOALIGCC_b', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOALIGCCS_b', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ECOASTMR_b', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EDSLCTR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EURNALWR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EURNALWR15', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EURNSMR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EBIOIGCC', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EBIOSTMR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EGEOBCFS', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ESOLPVCEN', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ESOLPVDIS', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ESOLSTCEN', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ESOLPVR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EWNDON', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EWNDOFS', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EHYDCONR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('EHYDREVR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ELFGICER', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ELFGGTR', 'NC','#NULL');
+INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('ESLION', 'NC','#NULL');
 
 -------------------------------------------------
-CREATE TABLE CapacityCredit (
-  tech text primary key,
-  capacity_credit real,
-  FOREIGN KEY(tech) REFERENCES tech_reserve(tech));
-INSERT INTO "CapacityCredit" VALUES('EWNDON',    0.20);
-INSERT INTO "CapacityCredit" VALUES('EWNDOFS',   0.20);
-INSERT INTO "CapacityCredit" VALUES('ESOLPVCEN', 0.35);
-INSERT INTO "CapacityCredit" VALUES('ESOLSTCEN', 0.35);
-INSERT INTO "CapacityCredit" VALUES('ESOLPVR',   0.35);
-INSERT INTO "CapacityCredit" VALUES('ESOLPVDIS', 0.35);
+-- CREATE TABLE ReserveMargin (
+--   demand_comm text primary key,
+--   reserve_zone text,
+--   reserve_margin real,
+--   notes text,
+--   FOREIGN KEY(demand_comm) REFERENCES Demand(demand_comm),
+--   FOREIGN KEY(reserve_zone) REFERENCES Zones(reserve_zone));
+-- INSERT INTO "ReserveMargin" VALUES('ELCDMD', 'NC', 0.60, '#');
 
+CREATE TABLE "PlanningReserveMargin" (
+  zones TEXT,
+  ReserveMargin  real,
+  PRIMARY KEY(zones));
+INSERT INTO `PlanningReserveMargin` (zones,ReserveMargin) VALUES ('NC',0.60);
+-------------------------------------------------
+CREATE TABLE "CapacityCredit" (
+   periods integer,
+   tech text,
+   cf_tech real check (cf_tech >=0 AND cf_tech <=1),
+   cf_tech_notes text,
+   PRIMARY KEY(periods, tech) );
+INSERT INTO "CapacityCredit" VALUES(2015, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'EWNDON',    0.20, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'EWNDOFS',   0.35, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ESOLPVCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ESOLSTCEN', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ESOLPVR',   0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ESOLPVDIS', 0.05, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ESLION',    0.70, "");
+INSERT INTO "CapacityCredit" VALUES(2015, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'EBIOSTMR',  0.9,  "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ECOASTMR',  0.92, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'EHYDCONR',  0.25, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'EHYDREVR',  0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ELFGGTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ELFGICER',  0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ENGACCR',   0.96, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'ENGACTR',   0.91, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2015, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2020, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2025, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2030, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2035, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2040, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2045, 'EURNALWR',  0.98, "EFORd");
+INSERT INTO "CapacityCredit" VALUES(2050, 'EURNALWR',  0.98, "EFORd");
 -------------------------------------------------
 CREATE TABLE tech_ramping (
   tech text primary key,
