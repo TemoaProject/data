@@ -1112,6 +1112,22 @@ INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z7');
 INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO');
 INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z9');
 INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDGSL');
+CREATE TABLE `tech_curtailment` (
+	`technology`	text,
+	PRIMARY KEY(technology),
+	FOREIGN KEY(`technology`) REFERENCES `technologies`(`tech`)
+);
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL4_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_WND_R');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLTHCEN_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLTH_R');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVCEN_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPV_R');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_HYDCONV_R');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL5_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL1_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL2_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL3_N');
 CREATE TABLE sector_labels (
   sector text primary key);
 INSERT INTO `sector_labels` (sector) VALUES ('supply');
@@ -2309,16 +2325,33 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CCKNGA','C_BLND_FUEL_CK',0.19,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CVTCAV','C_BLND_FUEL_VT',0.3,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CVTVAV','C_BLND_FUEL_VT',0.3,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDCOALOTH','O_INDOTH',0.02,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDNGOTH','O_INDOTH',0.25,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDRFOOTH','O_INDOTH',0.0,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDDFOOTH','O_INDOTH',0.02,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDLPGOTH','O_INDOTH',0.01,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDELCOTH','O_INDOTH',0.35,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDOTHOTH','O_INDOTH',0.35,NULL);
+CREATE TABLE `StorageInit` (
+	`storage_tech`	TEXT,
+	`storage_tech_note`	TEXT,
+	PRIMARY KEY(`storage_tech`)
+);
+INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('MEOH_STO','0');
+INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('H2_STO150','0');
+INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('E_HYDREV_R','0');
+INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('E_Batt','0');
+INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('E_Batt8hr','0');
 CREATE TABLE "StorageDuration" (
    tech text,
    duration real,
    duration_notes text,
    PRIMARY KEY(tech) );
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('MEOH_STO',300.0,'#according to NC storage study');
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('H2_STO150',2000.0,'#according to NC storage study');
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_HYDREV_R',8.0,'');
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt',4.0,NULL);
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt8hr',8.0,NULL);
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('MEOH_STO',0.034246575,'#according to NC storage study');
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('H2_STO150',0.228310502,'#according to NC storage study');
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_HYDREV_R',0.000913242,'');
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt',0.000456621,NULL);
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt8hr',0.000913242,NULL);
 CREATE TABLE "SegFrac" (
    season_name text,
    time_of_day_name text,
@@ -2459,6 +2492,26 @@ CREATE TABLE Output_Emissions (
    FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),
    FOREIGN KEY(tech) REFERENCES technologies(tech)
    FOREIGN KEY(vintage) REFERENCES time_periods(t_periods));
+CREATE TABLE `Output_Curtailment` (
+	`scenario`	text,
+	`sector`	text,
+	`t_periods`	integer,
+	`t_season`	text,
+	`t_day`	text,
+	`input_comm`	text,
+	`tech`	text,
+	`vintage`	integer,
+	`output_comm`	text,
+	`curtailment`	real,
+	PRIMARY KEY(scenario,t_periods,t_season,t_day,input_comm,tech,vintage,output_comm),
+	FOREIGN KEY(`t_periods`) REFERENCES `time_periods`(`t_periods`),
+	FOREIGN KEY(`t_season`) REFERENCES `time_periods`(`t_periods`),
+	FOREIGN KEY(`t_day`) REFERENCES `time_of_day`(`t_day`),
+	FOREIGN KEY(`input_comm`) REFERENCES `commodities`(`comm_name`),
+	FOREIGN KEY(`tech`) REFERENCES `technologies`(`tech`),
+	FOREIGN KEY(`vintage`) REFERENCES `time_periods`(`t_periods`),
+	FOREIGN KEY(`output_comm`) REFERENCES `commodities`(`comm_name`)
+);
 CREATE TABLE Output_Costs (
    scenario text,
    sector text,
@@ -2733,7 +2786,8 @@ INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2040,'IMPSOY',3981.94,'PJ/Mt','');
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2045,'IMPSOY',3981.94,'PJ/Mt','');
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2050,'IMPSOY',3981.94,'PJ/Mt','');
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'R_EA_BIO',402.8891624,NULL,NULL);
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'R_EA_BIO',402.8891624,'PJ',NULL);
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'E_COALSTM_R',4109.0,'PJ',NULL);
 CREATE TABLE LifetimeTech (
    tech text,
    life real,
