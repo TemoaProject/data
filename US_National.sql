@@ -2064,14 +2064,8 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CSCELCAHP','C_BLND_FUEL_SC',0.045,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CSCELCCC','C_BLND_FUEL_SC',0.045,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CSCELCRC','C_BLND_FUEL_SC',0.171,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CSHDISTOIL','C_BLND_FUEL_SH',0.018,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CSHELC','C_BLND_FUEL_SH',0.234,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CSHNGA','C_BLND_FUEL_SH',0.682727273,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CVTCAV','C_BLND_FUEL_VT',0.576,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CVTVAV','C_BLND_FUEL_VT',0.306,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CWHDISTOIL','C_BLND_FUEL_WH',0.0,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CWHELC','C_BLND_FUEL_WH',0.306,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CWHNGA','C_BLND_FUEL_WH',0.598787879,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'CCKELC','C_BLND_FUEL_CK',0.324,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'CLTINC','C_BLND_FUEL_LT',0.081,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'CLTCFL','C_BLND_FUEL_LT',0.054,'NULL');
@@ -2250,16 +2244,6 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'RLTLFL','R_BLND_FUEL_LT',0.1392,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'RLTREF','R_BLND_FUEL_LT',0.0485,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'RLTEXT','R_BLND_FUEL_LT',0.0485,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RWHDISTOIL','R_BLND_FUEL_WH',0.0,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RWHELC','R_BLND_FUEL_WH',0.17,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RWHLPG','R_BLND_FUEL_WH',0.04,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RWHNGA','R_BLND_FUEL_WH',0.5,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RWHSOL','R_BLND_FUEL_WH',0.0,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSHDISTOIL','R_BLND_FUEL_SH',0.0,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSHELC','R_BLND_FUEL_SH',0.07,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSHLPG','R_BLND_FUEL_SH',0.05,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSHNGA','R_BLND_FUEL_SH',0.711818182,'NULL');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSHKER','R_BLND_FUEL_SH',0.0,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSCHP','R_BLND_FUEL_SC',0.12,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSCCAC','R_BLND_FUEL_SC',0.58,'NULL');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'RSCRAC','R_BLND_FUEL_SC',0.02,'NULL');
@@ -2312,23 +2296,17 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'CO2_SNG','SNGSYN',0.9747,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'H2_100','SNGSYN',0.0253,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'CO2_SNG','SNGSYN',0.9747,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'RSHDISTOIL','R_BLND_FUEL_SH',0.002,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'RSHELC','R_BLND_FUEL_SH',0.002,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'RSHLPG','R_BLND_FUEL_SH',0.056,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'RSHNGA','R_BLND_FUEL_SH',0.4,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'RSHBIO','R_BLND_FUEL_SH',0.002,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'RSHKER','R_BLND_FUEL_SH',0.002,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CCKELC','C_BLND_FUEL_CK',0.19,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CCKNGA','C_BLND_FUEL_CK',0.19,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CVTCAV','C_BLND_FUEL_VT',0.3,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CVTVAV','C_BLND_FUEL_VT',0.3,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDCOALOTH','O_INDOTH',0.02,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDNGOTH','O_INDOTH',0.25,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDCOALOTH','O_INDOTH',0.0,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDNGOTH','O_INDOTH',0.0,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDRFOOTH','O_INDOTH',0.0,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDDFOOTH','O_INDOTH',0.02,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDLPGOTH','O_INDOTH',0.01,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDELCOTH','O_INDOTH',0.35,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDOTHOTH','O_INDOTH',0.35,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDDFOOTH','O_INDOTH',0.0,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDLPGOTH','O_INDOTH',0.0,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDELCOTH','O_INDOTH',0.0,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDOTHOTH','O_INDOTH',0.0,NULL);
 CREATE TABLE `StorageInit` (
 	`storage_tech`	TEXT,
 	`storage_tech_note`	TEXT,
