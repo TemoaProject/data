@@ -566,9 +566,7 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_BLND_ETH','p'
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPTRNGAS','r','transport','#import of pure gasoline');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_BLND_ETHGAS_E10','p','transport','#blending of ethanol and gasoline to produce E10');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_BLND_ETHGAS_E85','p','transport','#blending of ethanol and gasoline to produce E85');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPTRNETH_CO','p','transport','#import of corn ethanol');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPELCNGA_S3','p','supply','#natural gas import for electric sector');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPTRNETH_CO_ACTIVITY_CONTROL','r','supply','#dummy tech to control national corn ethanol');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_BLND_ETH_ACTIVITY_CONTROL','p','transport','#dummy tech to control national ethanol consumption');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_WNDCL1_N','p','PowerPlants',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_WNDCL2_N','p','PowerPlants',NULL);
@@ -620,8 +618,6 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('FISCH_TROP','p'
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('TRANSEST','p','supply','');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('CELL_ETH_SYN','p','supply','');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('BLEND_BIOJTF_JTF','p','transport','');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPTRNETH_CE','p','transport','#import of celulosic ethanol');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPTRNETH_CE_ACTIVITY_CONTROL','r','supply','#dummy tech to control national cell ethanol');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_TCELC_N','p','transport','#electric commercial trucks, data drawn from the NREL EFS for light duty trucks');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_BLNDFUEL_ELCE10','p','transport','#dummy technology - E10 vs BEV tradeoff');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_BLNDFUEL_ELCDSL','p','transport','#dummy technology - DSL vs BEV tradeoff');
@@ -657,6 +653,8 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COALH_R',
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COABM_R','p','electric',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COABL_R','p','electric',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COABH_R','p','electric',NULL);
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('DRY_MILL','p','supply',NULL);
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPCORN','p','supply',NULL);
 CREATE TABLE `tech_renewable` (
   `tech`  TEXT
 );
@@ -1393,7 +1391,6 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ETH','p','#pure et
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('GAS','p','#pure gasoline without ethanol mix');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ETH_CORN','p','#corn ethanol');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ETH_CEL','p','#celulosic ethanol');
-INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ETH_CO','p','#corn ethanol - before import technologies');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ELCDIST_R','p','electricity from distributed generation');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ETHANOL','p','#Total ethanol before blending to generate E10 and E85');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ELCP_DC','p','# electrolysis needs DC electricity');
@@ -1418,7 +1415,6 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('SOY','p','');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ECA','p','');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ECG','p','');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('UWW','p','');
-INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ETH_CE','p','#celulosic ethanol - before import technologies');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('THDVCT_ELCE10','p',NULL);
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('THDVCT_ELCDSL','p',NULL);
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('TMDHDV_CT_ELC','p',NULL);
@@ -1431,6 +1427,7 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('COTHER','d','#Othe
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ROTHER','d','#Other demand in resindetial sector');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('O_SNG','p',NULL);
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('T_SNG','p',NULL);
+INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('CORN','p','');
 CREATE TABLE `Zones` (
 	`zones`	TEXT,
 	`zones_note`	TEXT,
@@ -2697,14 +2694,6 @@ INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2040,'R_EA_BIO',402.8891624,NULL,NULL);
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2045,'R_EA_BIO',402.8891624,NULL,NULL);
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2050,'R_EA_BIO',402.8891624,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2020,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2025,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2030,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2035,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2040,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2045,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
-INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2050,'IMPTRNETH_CO_ACTIVITY_CONTROL',1203.0,NULL,NULL);
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'T_BLND_ETH_ACTIVITY_CONTROL',3689.0,NULL,NULL);
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2020,'T_BLND_ETH_ACTIVITY_CONTROL',3689.0,NULL,NULL);
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2025,'T_BLND_ETH_ACTIVITY_CONTROL',3689.0,NULL,NULL);
@@ -2788,6 +2777,14 @@ INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2050,'IMPSOY',3981.94,'PJ/Mt','');
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'R_EA_BIO',402.8891624,'PJ',NULL);
 INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'E_COALSTM_R',4109.0,'PJ',NULL);
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2017,'IMPCORN',12977.78,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2020,'IMPCORN',13558.64,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2025,'IMPCORN',14680.73,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2030,'IMPCORN',15678.42,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2035,'IMPCORN',16597.54,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2040,'IMPCORN',17250.24,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2045,'IMPCORN',17250.24,'PJ','');
+INSERT INTO `MaxActivity` (periods,tech,maxact,maxact_units,maxact_notes) VALUES (2050,'IMPCORN',17250.24,'PJ','');
 CREATE TABLE LifetimeTech (
    tech text,
    life real,
@@ -3270,6 +3267,7 @@ INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_OTH',20.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('CELL_ETH_SYN',20.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_Batt8hr',15.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_H2CC_N',30.0,NULL);
+INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('DRY_MILL',20.0,'');
 CREATE TABLE LifetimeProcess (
    tech text,
    vintage integer,
@@ -5782,9 +5780,6 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPTRNGAS',2017,'GAS',0.00611,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPTRNGAS',2017,'GAS',0.00723,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPTRNGAS',2017,'GAS',72.62,'#kt/PJout',NULL);
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ETH_CO','IMPTRNETH_CO',2017,'ETH_CORN',0.0,'#kt/PJout','#carbon neutrality');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ETH_CO','IMPTRNETH_CO',2017,'ETH_CORN',0.048,'#kt/PJout',NULL);
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ETH_CO','IMPTRNETH_CO',2017,'ETH_CORN',0.0196,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',7.3,'#kt/PJout','In 2015 Natural Gas Systems" emitted 42 MT combustion related CO2 and 162.4 MT CO2-e methane, collectively 205 MTCO2-e. US total NG consumption in the same period was around 28000 PJ, giving an emission factor equal to 205000/28000=7.3 ktons/PJ"');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',0.0107,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',0.0176,'#kt/PJout','NULL');
@@ -5964,9 +5959,6 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','SOY','HEFA',2050,'BIODSL',0.01947,'#kt/PJout','');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','WOODY_BIO','FISCH_TROP',2050,'BIO_JTF',0.00367,'kt/PJout','');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','SOY','HEFA',2050,'BIO_JTF',0.01947,'kt/PJout','');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ETH_CE','IMPTRNETH_CE',2017,'ETH_CEL',0.0196,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ETH_CE','IMPTRNETH_CE',2017,'ETH_CEL',0.048,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ETH_CE','IMPTRNETH_CE',2017,'ETH_CEL',0.0,'#kt/PJout','#carbon neutrality');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','AGR','E_BECCS_N',2020,'ELCP_Renewables',-142.0,NULL,NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ECG','E_BECCS_N',2020,'ELCP_Renewables',-142.0,NULL,NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ECA','E_BECCS_N',2020,'ELCP_Renewables',-142.0,NULL,NULL);
@@ -6003,6 +5995,14 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','H2_100','H2_OTH',2050,'O_OTH_H2',0.00367,'#kt/PJout','#same as the emission activity of the fischer troph process');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','O_RFO','O_RFOCHP',2017,'INDCHP',83.14,NULL,NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','O_COAL','O_COALCHP',2017,'INDCHP',92.1,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2017,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2020,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2025,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2030,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2035,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2040,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2045,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2050,'ETH_CORN',27.67,'#kt/PJout','#NULL');
 CREATE TABLE Efficiency (
   input_comm text,
   tech text,
@@ -8893,10 +8893,10 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ETHANOL','T_BLND_ETHGAS_E10',2017,'E10',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('GAS','T_BLND_ETHGAS_E85',2017,'E85',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ETHANOL','T_BLND_ETHGAS_E85',2017,'E85',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ETH_CO','IMPTRNETH_CO',2017,'ETH_CORN',1.0,'NULL');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2017,'ETH_CORN',0.48,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ETH_CORN','T_BLND_ETH',2017,'ETH',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','IMPELCNGA_S3',2017,'E_NGA_EA',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','IMPTRNETH_CO_ACTIVITY_CONTROL',2017,'ETH_CO',1.0,'NULL');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','IMPCORN',2017,'CORN',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ETH','T_BLND_ETH_ACTIVITY_CONTROL',2017,'ETHANOL',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','E_WNDCL5_N',2020,'ELCP_Renewables',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','E_WNDCL5_N',2025,'ELCP_Renewables',1.0,NULL);
@@ -9260,8 +9260,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('SOY','HEFA',2045,'BIO_JTF',0.84,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('WOODY_BIO','FISCH_TROP',2050,'BIO_JTF',0.5,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('SOY','HEFA',2050,'BIO_JTF',0.84,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ETH_CE','IMPTRNETH_CE',2017,'ETH_CEL',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_R','IMPTRNETH_CE_ACTIVITY_CONTROL',2017,'ETH_CE',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDNG',2017,'O_NG_EA',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDGSL',2017,'O_GSL_EA',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2020,'O_OTH_H2',1.0,'NULL');
@@ -9505,6 +9503,13 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COABM_R','E_FGD_COABM_N',2050,'COAB_R_CC',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COABL_R','E_FGD_COABL_N',2050,'COAB_R_CC',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COABH_R','E_FGD_COABH_N',2050,'COAB_R_CC',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2020,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2025,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2030,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2035,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2040,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2045,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2050,'ETH_CORN',0.48,NULL);
 CREATE TABLE DiscountRate (
    tech text,
    vintage integer,
@@ -13399,16 +13404,8 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNGAS',2017,26.48,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNGAS',2017,27.48,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNGAS',2017,28.24,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNETH_CO',2017,30.17,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNETH_CO',2017,31.3,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNETH_CO',2017,32.54,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNETH_CO',2017,35.29,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNETH_CO',2017,36.53,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'IMPTRNETH_CO',2017,28.05,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'IMPTRNGAS',2017,28.67,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'IMPTRNETH_CO',2017,27.21,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPTRNGAS',2017,28.98,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPTRNETH_CO',2017,27.21,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'IMPELCNGA_S3',2017,3.29,NULL,NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPELCNGA_S3',2017,3.23,NULL,NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPELCNGA_S3',2017,3.82,NULL,NULL);
@@ -13737,14 +13734,6 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPUWW',2017,2.97,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPFSR',2017,3.75,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPSOY',2017,14.63,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'IMPTRNETH_CE',2017,28.05,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNETH_CE',2017,36.53,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNETH_CE',2017,35.29,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPTRNETH_CE',2017,32.54,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPTRNETH_CE',2017,31.3,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPTRNETH_CE',2017,30.17,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'IMPTRNETH_CE',2017,27.21,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPTRNETH_CE',2017,27.21,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'E_WNDCL1_N',2020,0.0,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL1_N',2020,0.0,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'E_WNDCL1_N',2025,0.0,'#M$/PJ',NULL);
@@ -13993,6 +13982,41 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'E_H2CC_N',2045,0.54,'NULL',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'E_H2CC_N',2045,0.54,'NULL',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'E_H2CC_N',2050,0.54,'NULL',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'IMPCORN',2017,1.68,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'IMPCORN',2017,1.64,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'DRY_MILL',2017,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'DRY_MILL',2017,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'DRY_MILL',2017,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'DRY_MILL',2017,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'DRY_MILL',2017,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'DRY_MILL',2020,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'DRY_MILL',2020,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'DRY_MILL',2020,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'DRY_MILL',2020,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'DRY_MILL',2025,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'DRY_MILL',2025,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'DRY_MILL',2025,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'DRY_MILL',2025,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'DRY_MILL',2030,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'DRY_MILL',2030,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'DRY_MILL',2030,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'DRY_MILL',2030,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'DRY_MILL',2035,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'DRY_MILL',2035,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'DRY_MILL',2035,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'DRY_MILL',2035,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'DRY_MILL',2040,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'DRY_MILL',2040,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'DRY_MILL',2040,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'DRY_MILL',2045,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'DRY_MILL',2045,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'DRY_MILL',2050,14.16,'#M$/PJ',NULL);
 CREATE TABLE CostInvest (
    tech text,
    vintage integer,
@@ -16200,6 +16224,14 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_H2CC_N',2040,966.43,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_H2CC_N',2045,950.07,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_H2CC_N',2050,927.08,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2017,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2020,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2025,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2030,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2035,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2040,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2045,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2050,36.38,'#M$/PJ','NULL');
 CREATE TABLE "CostFixed" (
 	`periods`	INTEGER NOT NULL,
 	`tech`	text NOT NULL,
@@ -18416,6 +18448,33 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_SOLPVENDUSE_N',2045,9.1,'#M$/GWyr',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_SOLPVENDUSE_N',2045,9.1,'#M$/GWyr',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_SOLPVENDUSE_N',2050,9.1,'#M$/GWyr',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'DRY_MILL',2017,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'DRY_MILL',2017,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'DRY_MILL',2017,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'DRY_MILL',2017,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'DRY_MILL',2017,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'DRY_MILL',2020,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'DRY_MILL',2020,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'DRY_MILL',2020,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'DRY_MILL',2020,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'DRY_MILL',2025,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'DRY_MILL',2025,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'DRY_MILL',2025,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'DRY_MILL',2025,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'DRY_MILL',2030,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'DRY_MILL',2030,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'DRY_MILL',2030,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'DRY_MILL',2030,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'DRY_MILL',2035,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'DRY_MILL',2035,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'DRY_MILL',2035,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'DRY_MILL',2035,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'DRY_MILL',2040,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'DRY_MILL',2040,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'DRY_MILL',2040,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'DRY_MILL',2045,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'DRY_MILL',2045,2.41,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'DRY_MILL',2050,2.41,'#M$/PJ',NULL);
 CREATE TABLE CapacityToActivity (
    tech text primary key,
    c2a real,
