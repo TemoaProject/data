@@ -1117,11 +1117,8 @@ CREATE TABLE `tech_curtailment` (
 );
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL4_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WND_R');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLTHCEN_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLTH_R');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVCEN_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPV_R');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_HYDCONV_R');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL5_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL1_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL2_N');
