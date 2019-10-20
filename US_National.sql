@@ -625,12 +625,12 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_Batt8hr','ps'
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('CO2_Capture','p','supply','#capturing carbon for air to use for generating SNG');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('CO2_BLND','p','supply','#capturing carbon for air to use for generating SNG');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_H2CC_N','p','PowerPlants','#hydrogen combustion in a combined cycle plants for electricity generation');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('C_OTH','p','Commercial',NULL);
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('C_OTH','p','commercial',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('R_OTH','p','residential',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('R_SH_FKER_R','p','residential',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('R_SH_RDISTOIL_R','p','residential',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('R_WH_DISTOIL_R','p','residential',NULL);
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('C_WH_SOL_ELC_R','p','Commercial',NULL);
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('C_WH_SOL_ELC_R','p','commercial',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_LNBSNCR_COAB_R','p','electric',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_LNBSCR_COAB_R','p','electric',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_SCR_COAB_R','p','electric',NULL);
