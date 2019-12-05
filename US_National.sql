@@ -14148,8 +14148,8 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAS_N',2025,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2020,1253.473,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2025,1134.523,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2020,2997.553,'#M$/GW','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2025,2362.009,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2020,3188.7708,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2025,2488.779177,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2020,6497.8,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2025,6089.01,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_URNLWR_N',2020,6143.38,'#M$/GW','NULL');
@@ -14194,7 +14194,7 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAL_N',2030,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAS_N',2030,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2030,1067.456,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2030,1941.355,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2030,1788.787553,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2030,5679.12,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_URNLWR_N',2030,5886.78,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL4_N',2030,1380.87,'#M$/GW','"#drawing reduction fractions from ATB 2018. Table below shows costs ratios of wind CPEX in the Mid scenario for TRG 4 (most represenetaive value for recent or near-future plants)
@@ -14235,7 +14235,6 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAL_N',2035,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAS_N',2035,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2035,1021.332,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,1776.684,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2035,5395.6,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_URNLWR_N',2035,5730.71,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL4_N',2035,1342.94,'#M$/GW','"#drawing reduction fractions from ATB 2018. Table below shows costs ratios of wind CPEX in the Mid scenario for TRG 4 (most represenetaive value for recent or near-future plants)
@@ -14276,7 +14275,7 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAL_N',2040,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAS_N',2040,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2040,975.195,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2040,1612.0,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2040,1449.0,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2040,5110.99,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_URNLWR_N',2040,5569.59,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL4_N',2040,1320.12,'#M$/GW','"#drawing reduction fractions from ATB 2018. Table below shows costs ratios of wind CPEX in the Mid scenario for TRG 4 (most represenetaive value for recent or near-future plants)
@@ -14317,7 +14316,7 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAL_N',2045,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAS_N',2045,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2045,922.493,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2045,1547.0,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2045,1376.0,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2045,4827.47,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_URNLWR_N',2045,5415.81,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL4_N',2045,1312.41,'#M$/GW','"#drawing reduction fractions from ATB 2018. Table below shows costs ratios of wind CPEX in the Mid scenario for TRG 4 (most represenetaive value for recent or near-future plants)
@@ -14358,7 +14357,7 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAL_N',2050,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SNCR_COAS_N',2050,0.08,'#M$/PJout','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVCEN_N',2050,869.778,'#M$/GW','ATB 2018 Mid scenario for DC ratings, CFs are DC rated too');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2050,1482.0,'#M$/GW','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2050,1359.0,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLTHCEN_N',2050,4543.96,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_URNLWR_N',2050,5210.73,'#M$/GW','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_WNDCL4_N',2050,1319.8,'#M$/GW','#drawing reduction fractions from ATB 2018. Table below shows costs ratios of wind CPEX in the Mid scenario for TRG 4 (most represenetaive value for recent or near-future plants)
@@ -16207,6 +16206,7 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2040,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2045,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2050,36.38,'#M$/PJ','NULL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,1618.0,'#M$/GW',NULL);
 CREATE TABLE "CostFixed" (
 	`periods`	INTEGER NOT NULL,
 	`tech`	text NOT NULL,
