@@ -3272,7 +3272,7 @@ CREATE TABLE GrowthRateMax (
    FOREIGN KEY(tech) REFERENCES technologies(tech) );
 CREATE TABLE GlobalDiscountRate (
    rate real );
-INSERT INTO `GlobalDiscountRate` (rate) VALUES (0.04);
+INSERT INTO `GlobalDiscountRate` (rate) VALUES (0.05);
 CREATE TABLE ExistingCapacity (
    tech text,
    vintage integer,
@@ -3980,19 +3980,11 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALIGCC_N_B','E_BLND_BITSUBLIG_COALIGCC_N',2020,'COALIGCC_CCS_N',-84.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALIGCC_N_S','E_BLND_BITSUBLIG_COALIGCC_N',2020,'COALIGCC_CCS_N',-84.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALIGCC_N_L','E_BLND_BITSUBLIG_COALIGCC_N',2020,'COALIGCC_CCS_N',-84.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGASTM_R',1982,'ELCP',176.2,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGASTM_R',1982,'ELCP',0.41,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGASTM_R',1982,'ELCP',0.903,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACT_R',2015,'ELCP',204.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACT_R',2015,'ELCP',0.019,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGACT_R',2015,'ELCP',0.001,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_R',2015,'ELCP',136.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_R',2015,'ELCP',0.0128,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2020,'ELCP',126.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2025,'ELCP',126.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2030,'ELCP',126.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2035,'ELCP',126.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2040,'ELCP',126.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACT_N',2020,'ELCP',0.012,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACT_N',2025,'ELCP',0.012,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACT_N',2030,'ELCP',0.012,'#kt/PJout','NULL');
@@ -4003,21 +3995,11 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGAACT_N',2030,'ELCP',0.0006,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGAACT_N',2035,'ELCP',0.0006,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGAACT_N',2040,'ELCP',0.0006,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2020,'ELCP',93.4,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2025,'ELCP',93.4,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2030,'ELCP',93.4,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2035,'ELCP',93.4,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2040,'ELCP',93.4,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2020,'ELCP',0.0088,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2025,'ELCP',0.0088,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2030,'ELCP',0.0088,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2035,'ELCP',0.0088,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2040,'ELCP',0.0088,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2020,'ELCP',11.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2025,'ELCP',11.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2030,'ELCP',11.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2035,'ELCP',11.0,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2040,'ELCP',11.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2020,'ELCP',0.0104,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2025,'ELCP',0.0104,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2030,'ELCP',0.0104,'#kt/PJout','NULL');
@@ -5247,10 +5229,8 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_RFO_EA','C_EA_RFO',2020,'C_RFO',0.1536,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_RFO_EA','C_EA_RFO',2017,'C_RFO',1.0146,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_RFO_EA','C_EA_RFO',2020,'C_RFO',1.0146,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGASTM_R',2005,'ELCP',176.2,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGASTM_R',2005,'ELCP',0.41,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGASTM_R',2005,'ELCP',0.903,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGASTM_R',2010,'ELCP',176.2,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGASTM_R',2010,'ELCP',0.41,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGASTM_R',2010,'ELCP',0.903,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','COABH_R','E_FGD_COABH_N',2045,'COAB_R_CC',-1.127,'#kt/PJout','NULL');
@@ -5289,12 +5269,9 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','COAL_R_SCR_PT','E_SNCR_COAL_N',2045,'COAL_R',-0.0303,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALSTM_N_CC','E_CCR_COALSTM_N',2045,'COALSTM_N',-107.4,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALIGCC_N_CC','E_CCR_COALIGCC_N',2045,'COALIGCC_N',-93.94,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2045,'ELCP',126.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACT_N',2045,'ELCP',0.012,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGAACT_N',2045,'ELCP',0.0006,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2045,'ELCP',93.4,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2045,'ELCP',0.0088,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2045,'ELCP',11.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2045,'ELCP',0.0104,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_CDSL_N',2045,'TMDLDV_C',0.1266,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_FDSL_N',2045,'TMDLDV_F',0.1266,'#kt/bvmt','NULL');
@@ -5537,12 +5514,9 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','COAL_R_SCR_PT','E_SNCR_COAL_N',2050,'COAL_R',-0.0303,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALSTM_N_CC','E_CCR_COALSTM_N',2050,'COALSTM_N',-107.4,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','COALIGCC_N_CC','E_CCR_COALIGCC_N',2050,'COALIGCC_N',-93.94,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACT_N',2050,'ELCP',126.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACT_N',2050,'ELCP',0.012,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGAACT_N',2050,'ELCP',0.0006,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGAACC_N',2050,'ELCP',93.4,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGAACC_N',2050,'ELCP',0.0088,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2050,'ELCP',11.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2050,'ELCP',0.0104,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_CDSL_N',2050,'TMDLDV_C',0.1266,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_FDSL_N',2050,'TMDLDV_F',0.1266,'#kt/bvmt','NULL');
@@ -5749,13 +5723,12 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_TRN','RFO','T_HDV_WTOIL_N',2050,'TMDHDV_WT_OIL',0.064,'#kt/btm','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_HDV_WTDSL_N',2050,'TMDHDV_WT_DSL',0.271,'#kt/btm','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_TRN','DSL','T_HDV_WTDSL_N',2050,'TMDHDV_WT_DSL',0.0718,'#kt/btm','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGASTM_R',2015,'ELCP',176.2,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGASTM_R',2015,'ELCP',0.41,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGASTM_R',2015,'ELCP',0.903,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPTRNGAS',2017,'GAS',0.00611,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPTRNGAS',2017,'GAS',0.00723,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPTRNGAS',2017,'GAS',72.62,'#kt/PJout',NULL);
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',7.3,'#kt/PJout','In 2015 Natural Gas Systems" emitted 42 MT combustion related CO2 and 162.4 MT CO2-e methane, collectively 205 MTCO2-e. US total NG consumption in the same period was around 28000 PJ, giving an emission factor equal to 205000/28000=7.3 ktons/PJ"');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',57.3,'#kt/PJout','In 2015 Natural Gas Systems" emitted 42 MT combustion related CO2 and 162.4 MT CO2-e methane, collectively 205 MTCO2-e. US total NG consumption in the same period was around 28000 PJ, giving an emission factor equal to 205000/28000=7.3 ktons/PJ". 50 kt/PJ for combustion.');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_SUP','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',0.0107,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_SUP','ethos','IMPELCNGA_S3',2017,'E_NGA_EA',0.0176,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','O_NG','NonManDEM',2017,'INDNMNG',50.0,'#NULL','#NULL');
@@ -5978,6 +5951,13 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2040,'ETH_CORN',27.67,'#kt/PJout','#NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2045,'ETH_CORN',27.67,'#kt/PJout','#NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CORN','DRY_MILL',2050,'ETH_CORN',27.67,'#kt/PJout','#NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2020,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2025,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2030,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2035,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2040,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2045,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2050,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
 CREATE TABLE Efficiency (
   input_comm text,
   tech text,
