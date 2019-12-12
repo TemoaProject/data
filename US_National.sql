@@ -655,6 +655,7 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COABL_R',
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COABH_R','p','electric',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('DRY_MILL','p','supply',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPCORN','p','supply',NULL);
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('CCS_EA','p','supply',NULL);
 CREATE TABLE `tech_renewable` (
   `tech`  TEXT
 );
@@ -1425,6 +1426,8 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('ROTHER','d','#Othe
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('O_SNG','p',NULL);
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('T_SNG','p',NULL);
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('CORN','p','');
+INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('co2_CCS','p','#output of the CCS technologies, phyisical commodity because it is either used to generate synthetic natural gas or is buried underground.');
+INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('co2_to_fuel','p','#similar to atmospheric co2, this is the input for synthetic fuel production');
 CREATE TABLE `Zones` (
 	`zones`	TEXT,
 	`zones_note`	TEXT,
@@ -5958,6 +5961,7 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2040,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2045,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2050,'ELCP',-98.89,'#kt/PJout','Total co2 emission per kwh is 109.89 kt out of which 11 kt is not captured.');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','co2_CCS','CCS_EA',2017,'co2_to_fuel',1.0,'#kt/PJout','NULL');
 CREATE TABLE Efficiency (
   input_comm text,
   tech text,
@@ -9244,7 +9248,7 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_Batt8hr',2040,'ELC',0.9,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_Batt8hr',2045,'ELC',0.9,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_Batt8hr',2050,'ELC',0.9,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2','CO2_BLND',2017,'CO2_SNG',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_to_fuel','CO2_BLND',2017,'CO2_SNG',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ATM','CO2_Capture',2017,'ATM_CO2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ATM_CO2','CO2_BLND',2017,'CO2_SNG',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ATM','CO2_Capture',2020,'ATM_CO2',1.0,NULL);
@@ -9465,6 +9469,43 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2040,'ETH_CORN',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2045,'ETH_CORN',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2050,'ETH_CORN',0.48,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2020,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2025,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2030,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2035,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2040,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2045,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E_NGA','E_NGACC_CCS_N',2050,'co2_CCS',50.0,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2020,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2025,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2030,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2035,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2040,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2045,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('COALIGCC_CCS_N','E_COALIGCC_CCS_N',2050,'co2_CCS',93.98,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2020,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2020,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2020,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2025,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2025,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2025,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2030,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2030,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2030,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2035,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2035,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2035,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2040,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2040,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2040,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2045,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2045,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2045,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('AGR','E_BECCS_N',2050,'co2_CCS',110.1914074,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECG','E_BECCS_N',2050,'co2_CCS',111.12,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ECA','E_BECCS_N',2050,'co2_CCS',118.2250667,'#efficiency=input fuel emission factor');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2017,'co2_to_fuel',1.0,'#to synthetic gas production, this pathway emits co2 (as if synthetic fuel gets burnt)');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2017,'CORFO',0.0001,'#take out co2_CCS of sysyem (this pathway is associated with when only CCS technology is chosen and not synthetic fuel production technology (no additional emissions because CCS technology already has negative emission).');
 CREATE TABLE DiscountRate (
    tech text,
    vintage integer,
