@@ -654,6 +654,7 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('E_FGD_COABH_R',
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('DRY_MILL','p','supply',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPCORN','p','supply',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('CCS_EA','p','supply',NULL);
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('hydrogen_dist','p','supply','');
 CREATE TABLE `tech_renewable` (
   `tech`  TEXT
 );
@@ -1426,6 +1427,7 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('T_SNG','p',NULL);
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('CORN','p','');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('co2_CCS','e','#output of the CCS technologies, phyisical commodity because it is either used to generate synthetic natural gas or is buried underground.');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('co2_to_fuel','p','#similar to atmospheric co2, this is the input for synthetic fuel production');
+INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('hydrogen','p','#hydrogen output from electrolysis technologies and before being distribution');
 CREATE TABLE `Zones` (
 	`zones`	TEXT,
 	`zones_note`	TEXT,
@@ -9003,7 +9005,7 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2017,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2017,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2017,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2017,'H2_10',0.663,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2017,'hydrogen',0.663,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2017,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2017,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','C_NGA_H2BL',2017,'C_NGA',1.0,NULL);
@@ -9029,8 +9031,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2020,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2020,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2020,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2020,'H2_10',0.676,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2020,'H2_10',0.821,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2020,'hydrogen',0.676,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2020,'hydrogen',0.821,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2020,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2020,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2020,'H2_700',0.95,NULL);
@@ -9042,8 +9044,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2025,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2025,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2025,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2025,'H2_10',0.689,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2025,'H2_10',0.821,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2025,'hydrogen',0.689,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2025,'hydrogen',0.821,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2025,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2025,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2025,'H2_700',0.95,NULL);
@@ -9055,8 +9057,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2030,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2030,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2030,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2030,'H2_10',0.703,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2030,'H2_10',0.838,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2030,'hydrogen',0.703,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2030,'hydrogen',0.838,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2030,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2030,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2030,'H2_700',0.95,NULL);
@@ -9068,8 +9070,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2035,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2035,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2035,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2035,'H2_10',0.71,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2035,'H2_10',0.838,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2035,'hydrogen',0.71,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2035,'hydrogen',0.838,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2035,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2035,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2035,'H2_700',0.95,NULL);
@@ -9081,8 +9083,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2040,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2040,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2040,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2040,'H2_10',0.717,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2040,'H2_10',0.856,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2040,'hydrogen',0.717,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2040,'hydrogen',0.856,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2040,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2040,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2040,'H2_700',0.95,NULL);
@@ -9094,8 +9096,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2045,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2045,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2045,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2045,'H2_10',0.717,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2045,'H2_10',0.856,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2045,'hydrogen',0.717,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2045,'hydrogen',0.856,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2045,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2045,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2045,'H2_700',0.95,NULL);
@@ -9107,8 +9109,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP100700',2050,'H2_700',0.95,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','H2_COMP10100',2050,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','SNG_COMP20100',2050,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2050,'H2_10',0.717,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2050,'H2_10',0.856,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECAL',2050,'hydrogen',0.717,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2050,'hydrogen',0.856,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','E_TRS_DC',2050,'ELCP_DC',0.99,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_10','H2_COMP10100',2050,'H2_100',0.94,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_COMP100700',2050,'H2_700',0.95,NULL);
@@ -9117,7 +9119,7 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','SNGSYN',2050,'SNG_20',0.81,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('MEOH','MEOH_STO',2050,'MEOH',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('SNG_20','SNG_COMP20100',2050,'SNG_100',0.98,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2017,'H2_10',0.821,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELCP_DC','E_ELECPEM',2017,'hydrogen',0.821,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_GSL_MEOH','O_GSL_BLND',2017,'O_GSL',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_700','H2700_FC',2017,'H2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','NGA_H2BL',2017,'E_NGA',1.0,NULL);
@@ -9501,6 +9503,14 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2040,'ATM_CO2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2045,'ATM_CO2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2050,'ATM_CO2',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2017,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2020,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2025,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2030,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2035,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2040,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2045,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2050,'H2_10',1.0,NULL);
 CREATE TABLE DiscountRate (
    tech text,
    vintage integer,
@@ -16223,6 +16233,14 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2045,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2050,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,1618.0,'#M$/GW',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2017,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2020,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2025,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2030,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2035,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2040,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2045,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2050,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
 CREATE TABLE "CostFixed" (
 	`periods`	INTEGER NOT NULL,
 	`tech`	text NOT NULL,
