@@ -11470,6 +11470,14 @@ INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2040,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2045,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2050,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2017,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2020,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2025,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2030,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2035,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2040,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2045,0.06,NULL);
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('hydrogen_dist',2050,0.06,NULL);
 CREATE TABLE DemandSpecificDistribution (
    season_name text,
    time_of_day_name text,
