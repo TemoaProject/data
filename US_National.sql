@@ -2315,6 +2315,14 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
 CREATE TABLE `StorageInit` (
 	`storage_tech`	TEXT,
 	`storage_tech_note`	TEXT,
@@ -3249,7 +3257,7 @@ INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_Batt',15.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('HEFA',20.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('FISCH_TROP',20.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('TRANSEST',20.0,NULL);
-INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_OTH',20.0,NULL);
+INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_OTH',10.0,'https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('CELL_ETH_SYN',20.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_Batt8hr',15.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_H2CC_N',30.0,NULL);
@@ -6000,7 +6008,7 @@ CREATE TABLE Efficiency (
   FOREIGN KEY(tech) REFERENCES technologies(tech),
   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods), 
   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name) );
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2017,'O_OTH_H2',1.0,'#same as the efficiency of the fischer troph process');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2017,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDCOAL',2017,'O_COAL',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDDFO',2017,'O_DFO',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDLPG',2017,'O_LPG',1.0,'NULL');
@@ -9245,13 +9253,13 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('SOY','HEFA',2050,'BIO_JTF',0.84,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDNG',2017,'O_NG_EA',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDGSL',2017,'O_GSL_EA',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2020,'O_OTH_H2',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2025,'O_OTH_H2',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2030,'O_OTH_H2',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2035,'O_OTH_H2',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2040,'O_OTH_H2',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2045,'O_OTH_H2',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2050,'O_OTH_H2',1.0,'NULL');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2020,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2025,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2030,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2035,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2040,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2045,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2050,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_HDV_TCELC_N',2020,'TMDHDV_CT_ELC',0.44,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_HDV_TCELC_N',2025,'TMDHDV_CT_ELC',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_HDV_TCELC_N',2030,'TMDHDV_CT_ELC',0.52,NULL);
@@ -9282,14 +9290,14 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ATM','CO2_Capture',2040,'ATM_CO2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ATM','CO2_Capture',2045,'ATM_CO2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ATM','CO2_Capture',2050,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2017,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2020,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2025,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2030,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2035,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2040,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2045,'SNG_20',0.01,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2050,'SNG_20',0.01,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2017,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2020,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2025,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2030,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2035,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2040,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2045,'SNG_20',0.0001,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','SNGSYN',2050,'SNG_20',0.0001,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','E_H2CC_N',2020,'ELCP',0.53,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','E_H2CC_N',2025,'ELCP',0.53,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','E_H2CC_N',2030,'ELCP',0.53,'NULL');
@@ -9511,6 +9519,14 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2040,'H2_10',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2045,'H2_10',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2050,'H2_10',1.0,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2017,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2020,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2025,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2030,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2035,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2040,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2045,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2050,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
 CREATE TABLE DiscountRate (
    tech text,
    vintage integer,
@@ -13893,33 +13909,6 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'E_SOLPVCEN_N',2045,0.0,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'E_SOLPVCEN_N',2045,0.0,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'E_SOLPVCEN_N',2050,0.0,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'H2_OTH',2017,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'H2_OTH',2017,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'H2_OTH',2017,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'H2_OTH',2017,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'H2_OTH',2017,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'H2_OTH',2020,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'H2_OTH',2020,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'H2_OTH',2020,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'H2_OTH',2020,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'H2_OTH',2025,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'H2_OTH',2025,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'H2_OTH',2025,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'H2_OTH',2025,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'H2_OTH',2030,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'H2_OTH',2030,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'H2_OTH',2030,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'H2_OTH',2030,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'H2_OTH',2035,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'H2_OTH',2035,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'H2_OTH',2035,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'H2_OTH',2035,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'H2_OTH',2040,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'H2_OTH',2040,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'H2_OTH',2040,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'H2_OTH',2045,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'H2_OTH',2045,11.03,'#M$/PJ',NULL);
-INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'H2_OTH',2050,11.03,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'IMPTRNJTF',2017,11.8,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'IMPTRNJTF',2017,16.2,'#M$/PJ','');
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'IMPTRNJTF',2017,16.21,'#M$/PJ','');
@@ -16195,14 +16184,6 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('HEFA',2050,76.64,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('TRANSEST',2050,29.11,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('CELL_ETH_SYN',2050,99.68,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2017,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2020,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2025,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2030,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2035,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2040,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2045,275.0,'#M$/PJ','NULL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2050,275.0,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('T_HDV_TCELC_N',2020,6178.97,NULL,NULL);
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('T_HDV_TCELC_N',2025,5357.98,NULL,NULL);
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('T_HDV_TCELC_N',2030,4537.0,NULL,NULL);
@@ -16249,6 +16230,30 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2040,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2045,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2050,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2017,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2020,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2025,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2030,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2035,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2040,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2045,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2050,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
 CREATE TABLE "CostFixed" (
 	`periods`	INTEGER NOT NULL,
 	`tech`	text NOT NULL,
@@ -18071,33 +18076,22 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'HEFA',2050,10.16,'#M$/PJ',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'TRANSEST',2050,2.6,'#M$/PJ',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'CELL_ETH_SYN',2050,24.57,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'H2_OTH',2017,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_OTH',2017,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_OTH',2017,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_OTH',2017,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2017,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_OTH',2020,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_OTH',2020,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_OTH',2020,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2020,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_OTH',2025,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_OTH',2025,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2025,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_OTH',2025,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_OTH',2030,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2030,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_OTH',2030,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_OTH',2030,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2035,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_OTH',2035,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_OTH',2035,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_OTH',2035,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_OTH',2040,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_OTH',2040,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_OTH',2040,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_OTH',2045,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_OTH',2045,16.37,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_OTH',2050,16.37,'#M$/PJ',NULL);
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'H2_OTH',2017,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_OTH',2017,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_OTH',2017,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_OTH',2020,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_OTH',2020,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_OTH',2025,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_OTH',2025,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_OTH',2030,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2030,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_OTH',2035,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_OTH',2035,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_OTH',2040,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_OTH',2040,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_OTH',2045,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_OTH',2045,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_OTH',2050,3.6,'#M$/PJ','#4% of capital cost');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'T_HDV_THCNG_N',2020,274.73,'NULL',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'T_HDV_THCNG_N',2020,274.73,'NULL',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'T_HDV_THCNG_N',2020,274.73,'NULL',NULL);
