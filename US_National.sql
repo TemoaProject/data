@@ -2307,14 +2307,6 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDLPGOTH','O_INDOTH',0.0,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDELCOTH','O_INDOTH',0.0,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'INDOTHOTH','O_INDOTH',0.0,NULL);
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
-INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'O_NG','CO2_Capture',0.00881,'#Specs of plant B of Table 2 from https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3#tbl2: 8.81 GJ gas input/t-CO2');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'H2_100','H2_OTH',0.018,'#Table 3 from Zeman and Keith (2007)');
@@ -2672,6 +2664,34 @@ INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_WNDCL1_N',246.0585,NULL,NULL);
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_WNDCL1_N',246.0585,NULL,NULL);
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_WNDCL1_N',246.0585,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_URNLWR_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_BECCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_NGACC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_NGACC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_NGACC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_NGACC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_NGACC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_NGACC_CCS_N',0.0,NULL,NULL);
+INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_NGACC_CCS_N',0.0,NULL,NULL);
 CREATE TABLE MaxActivity (
    periods integer,
    tech text,
@@ -9503,14 +9523,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2050,'ETH_CORN',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2017,'co2_to_fuel',1.0,'#to synthetic gas production, this pathway emits co2 (as if synthetic fuel gets burnt)');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2017,'CORFO',0.0001,'#take out co2_CCS of sysyem (this pathway is associated with when only CCS technology is chosen and not synthetic fuel production technology (no additional emissions because CCS technology already has negative emission).');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2017,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2020,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2025,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2030,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2035,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2040,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2045,'ATM_CO2',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('O_NG','CO2_Capture',2050,'ATM_CO2',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2017,'H2_10',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2020,'H2_10',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2025,'H2_10',1.0,NULL);
