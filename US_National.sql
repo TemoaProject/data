@@ -3283,6 +3283,7 @@ INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_Batt8hr',15.0,NULL)
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_H2CC_N',30.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('DRY_MILL',20.0,'');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('CO2_Capture',25.0,'https://www.cell.com/action/showFullTableHTML?isHtml=true&tableId=tbl2&pii=S2542-4351%2818%2930225-3');
+INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('hydrogen_dist',20.0,NULL);
 CREATE TABLE LifetimeProcess (
    tech text,
    vintage integer,
@@ -11483,14 +11484,14 @@ INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_B
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_Batt8hr',2030,0.06,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_Batt8hr',2025,0.06,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_Batt8hr',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2017,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2020,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2025,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2030,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2035,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2040,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2045,0.125,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2050,0.125,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2017,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2020,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2025,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2030,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2035,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2040,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2045,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2050,0.075,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2020,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2025,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2030,0.06,'');
@@ -14027,6 +14028,36 @@ INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_uni
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'DRY_MILL',2045,14.16,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'DRY_MILL',2045,14.16,'#M$/PJ',NULL);
 INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'DRY_MILL',2050,14.16,'#M$/PJ',NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2017,'CO2_Capture',2017,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'CO2_Capture',2017,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'CO2_Capture',2017,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'CO2_Capture',2017,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'CO2_Capture',2017,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2020,'CO2_Capture',2020,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'CO2_Capture',2020,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'CO2_Capture',2020,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'CO2_Capture',2020,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'CO2_Capture',2020,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2025,'CO2_Capture',2025,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'CO2_Capture',2025,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'CO2_Capture',2025,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'CO2_Capture',2025,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'CO2_Capture',2025,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2030,'CO2_Capture',2030,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'CO2_Capture',2030,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'CO2_Capture',2030,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'CO2_Capture',2030,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'CO2_Capture',2030,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2035,'CO2_Capture',2035,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'CO2_Capture',2035,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'CO2_Capture',2035,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'CO2_Capture',2035,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2040,'CO2_Capture',2040,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'CO2_Capture',2040,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'CO2_Capture',2040,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2045,'CO2_Capture',2045,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'CO2_Capture',2045,0.03,NULL,NULL);
+INSERT INTO `CostVariable` (periods,tech,vintage,cost_variable,cost_variable_units,cost_variable_notes) VALUES (2050,'CO2_Capture',2050,0.03,NULL,NULL);
 CREATE TABLE CostInvest (
    tech text,
    vintage integer,
@@ -16234,14 +16265,14 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2045,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2050,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,1618.0,'#M$/GW',NULL);
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2017,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2020,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2025,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2030,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2035,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2040,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2045,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2050,36.38,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2017,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2020,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2025,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2030,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2035,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2040,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2045,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2050,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2017,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
 
 43 M Euro for 14000 t/a capacity',NULL);
@@ -18498,36 +18529,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'DRY_MILL',2045,2.41,'#M$/PJ',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'DRY_MILL',2045,2.41,'#M$/PJ',NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'DRY_MILL',2050,2.41,'#M$/PJ',NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'CO2_Capture',2017,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'CO2_Capture',2017,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'CO2_Capture',2017,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'CO2_Capture',2017,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'CO2_Capture',2017,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'CO2_Capture',2020,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'CO2_Capture',2020,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'CO2_Capture',2020,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'CO2_Capture',2020,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'CO2_Capture',2020,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'CO2_Capture',2025,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'CO2_Capture',2025,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'CO2_Capture',2025,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'CO2_Capture',2025,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'CO2_Capture',2025,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'CO2_Capture',2030,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'CO2_Capture',2030,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'CO2_Capture',2030,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'CO2_Capture',2030,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'CO2_Capture',2030,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'CO2_Capture',2035,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'CO2_Capture',2035,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'CO2_Capture',2035,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'CO2_Capture',2035,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'CO2_Capture',2040,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'CO2_Capture',2040,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'CO2_Capture',2040,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'CO2_Capture',2045,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'CO2_Capture',2045,0.03,NULL,NULL);
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'CO2_Capture',2050,0.03,NULL,NULL);
 CREATE TABLE CapacityToActivity (
    tech text primary key,
    c2a real,
