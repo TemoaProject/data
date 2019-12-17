@@ -18958,6 +18958,18 @@ INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_t
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_H2CC_N',0.85,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_H2CC_N',0.85,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','E_H2CC_N',0.85,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','pm','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','night','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','am','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','peak','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','pm','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','night','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','am','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','H2_OTH',0.8,NULL);
+INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','H2_OTH',0.8,NULL);
 CREATE TABLE CapacityFactorProcess (
    season_name text,
    time_of_day_name text,
