@@ -1123,6 +1123,8 @@ INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL5_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL1_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL2_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL3_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVENDUSE_N');
+INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVENDUSE_R');
 CREATE TABLE sector_labels (
   sector text primary key);
 INSERT INTO `sector_labels` (sector) VALUES ('supply');
@@ -2664,34 +2666,6 @@ INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_WNDCL1_N',246.0585,NULL,NULL);
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_WNDCL1_N',246.0585,NULL,NULL);
 INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_WNDCL1_N',246.0585,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_URNLWR_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_COALIGCC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_BECCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2020,'E_NGACC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2025,'E_NGACC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2030,'E_NGACC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2035,'E_NGACC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2040,'E_NGACC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2045,'E_NGACC_CCS_N',0.0,NULL,NULL);
-INSERT INTO `MaxCapacity` (periods,tech,maxcap,maxcap_units,maxcap_notes) VALUES (2050,'E_NGACC_CCS_N',0.0,NULL,NULL);
 CREATE TABLE MaxActivity (
    periods integer,
    tech text,
@@ -3283,7 +3257,6 @@ INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_Batt8hr',15.0,NULL)
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_H2CC_N',30.0,NULL);
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('DRY_MILL',20.0,'');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('CO2_Capture',25.0,'https://www.cell.com/action/showFullTableHTML?isHtml=true&tableId=tbl2&pii=S2542-4351%2818%2930225-3');
-INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('hydrogen_dist',20.0,NULL);
 CREATE TABLE LifetimeProcess (
    tech text,
    vintage integer,
@@ -6029,7 +6002,7 @@ CREATE TABLE Efficiency (
   FOREIGN KEY(tech) REFERENCES technologies(tech),
   FOREIGN KEY(vintage) REFERENCES time_periods(t_periods), 
   FOREIGN KEY(output_comm) REFERENCES commodities(comm_name) );
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2017,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2017,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDCOAL',2017,'O_COAL',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDDFO',2017,'O_DFO',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDLPG',2017,'O_LPG',1.0,'NULL');
@@ -9274,13 +9247,13 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('SOY','HEFA',2050,'BIO_JTF',0.84,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDNG',2017,'O_NG_EA',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos_I','IMPINDGSL',2017,'O_GSL_EA',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2020,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2025,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2030,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2035,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2040,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2045,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2050,'O_OTH_H2',0.693,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2020,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2025,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2030,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2035,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2040,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2045,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2050,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_HDV_TCELC_N',2020,'TMDHDV_CT_ELC',0.44,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_HDV_TCELC_N',2025,'TMDHDV_CT_ELC',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_HDV_TCELC_N',2030,'TMDHDV_CT_ELC',0.52,NULL);
@@ -11484,14 +11457,14 @@ INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_B
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_Batt8hr',2030,0.06,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_Batt8hr',2025,0.06,NULL);
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_Batt8hr',2020,0.06,NULL);
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2017,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2020,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2025,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2030,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2035,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2040,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2045,0.075,'');
-INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2050,0.075,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2017,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2020,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2025,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2030,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2035,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2040,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2045,0.06,'');
+INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('CO2_Capture',2050,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2020,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2025,0.06,'');
 INSERT INTO `DiscountRate` (tech,vintage,tech_rate,tech_rate_notes) VALUES ('E_H2CC_N',2030,0.06,'');
@@ -16265,14 +16238,14 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2045,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('DRY_MILL',2050,36.38,'#M$/PJ','NULL');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('E_SOLPVENDUSE_N',2035,1618.0,'#M$/GW',NULL);
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2017,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2020,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2025,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2030,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2035,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2040,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2045,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
-INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2050,212.0,'#M$/PJ','#average of delivery costs for three categories: urbunized areas, urban cluster, and rural area. Source: EPA MARKAL');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2017,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2020,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2025,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2030,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2035,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2040,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2045,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('hydrogen_dist',2050,21.99,'#M$/PJ','#700 $/kg H2/day source: EPA MARKAL'' (2000 $ ----> 2015 $ coefficient=1.38)');
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2017,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
 
 43 M Euro for 14000 t/a capacity',NULL);
@@ -18959,18 +18932,6 @@ INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_t
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','E_H2CC_N',0.85,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','E_H2CC_N',0.85,NULL);
 INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','E_H2CC_N',0.85,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','am','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','peak','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','pm','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Intermediate','night','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','am','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','peak','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','pm','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Summer','night','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','am','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','peak','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','pm','H2_OTH',0.8,NULL);
-INSERT INTO `CapacityFactorTech` (season_name,time_of_day_name,tech,cf_tech,cf_tech_notes) VALUES ('Winter','night','H2_OTH',0.8,NULL);
 CREATE TABLE CapacityFactorProcess (
    season_name text,
    time_of_day_name text,
@@ -19215,20 +19176,20 @@ INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2035,'
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2040,'E_H2CC_N',0.95,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2045,'E_H2CC_N',0.95,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2050,'E_H2CC_N',0.95,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2017,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2017,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2017,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2020,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2020,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2020,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2025,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2025,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2025,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2030,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2030,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2030,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2035,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2035,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2035,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2040,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2040,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2040,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2045,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2045,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2045,'E_SOLTH_R',0.46,NULL);
-INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2050,'E_SOLTHCEN_N',0.67,NULL);
+INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2050,'E_SOLTHCEN_N',0.3,NULL);
 INSERT INTO `CapacityCredit` (periods,tech,cf_tech,cf_tech_notes) VALUES (2050,'E_SOLTH_R',0.46,NULL);
 COMMIT;
