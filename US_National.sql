@@ -655,6 +655,44 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('DRY_MILL','p','
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('IMPCORN','p','supply',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('CCS_EA','p','supply',NULL);
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('hydrogen_dist','p','supply','');
+CREATE TABLE "tech_reserve" (
+	`tech`	text,
+	`notes`	text,
+	PRIMARY KEY(tech)
+);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_WNDCL4_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_WND_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_URNLWR_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_URNLWR_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_SOLTHCEN_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_SOLTH_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_SOLPVCEN_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_SOLPV_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_NGASTM_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_NGACT_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_NGACC_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_NGACC_CCS_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_NGAACT_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_NGAACC_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_HYDREV_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_HYDCONV_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_GEOBCFS_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_GEO_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_COALSTM_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_COALSTM_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_COALIGCC_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_COALIGCC_CCS_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_BIOIGCC_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_SOLPVENDUSE_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_SOLPVENDUSE_R',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_WNDCL1_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_WNDCL2_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_WNDCL3_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_WNDCL5_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_BECCS_N',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_Batt',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_Batt8hr',NULL);
+INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_H2CC_N',NULL);
 CREATE TABLE `tech_renewable` (
   `tech`  TEXT
 );
@@ -1110,6 +1148,28 @@ INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z7');
 INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO');
 INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z9');
 INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDGSL');
+CREATE TABLE `tech_groups` (
+	`tech`	text,
+	`notes`	text,
+	PRIMARY KEY(tech)
+);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WNDCL4_N',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WND_R',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLTHCEN_N',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLTH_R',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLPVCEN_N',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLPV_R ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_HYDCONV_R ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_GEOBCFS_N ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_GEO_R ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_BIOIGCC_N ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WNDCL5_N',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WNDCL1_N',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WNDCL2_N',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WNDCL3_N ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_BECCS_N ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLPVENDUSE_R ',NULL);
+INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLPVENDUSE_N ',NULL);
 CREATE TABLE `tech_curtailment` (
 	`technology`	text,
 	PRIMARY KEY(technology),
@@ -1134,6 +1194,12 @@ INSERT INTO `sector_labels` (sector) VALUES ('transport');
 INSERT INTO `sector_labels` (sector) VALUES ('commercial');
 INSERT INTO `sector_labels` (sector) VALUES ('residential');
 INSERT INTO `sector_labels` (sector) VALUES ('industrial');
+CREATE TABLE `groups` (
+	`group_name`	text,
+	`notes`	text,
+	PRIMARY KEY(group_name)
+);
+INSERT INTO `groups` (group_name,notes) VALUES ('RPS_MTN',NULL);
 CREATE TABLE commodity_labels (
   comm_labels text primary key,
   comm_labels_desc text);
@@ -2357,45 +2423,6 @@ INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUE
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','peak',0.0032,'# A-P from 12pm-3pm');
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','pm',0.1087,'# A-DPM from 3pm to 9pm');
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','night',0.1381,'# A-N from 9pm to 6am');
-CREATE TABLE "ReserveMargin" (
-	`tech`	text,
-	`reservemargin_group`	TEXT,
-	`notes`	text,
-	PRIMARY KEY(tech)
-);
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL4_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WND_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_URNLWR_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_URNLWR_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLTHCEN_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLTH_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPVCEN_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPV_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGASTM_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACT_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACC_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGACC_CCS_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGAACT_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_NGAACC_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_HYDREV_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_HYDCONV_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_GEOBCFS_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_GEO_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALSTM_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALSTM_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALIGCC_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_COALIGCC_CCS_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_BIOIGCC_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPVENDUSE_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_SOLPVENDUSE_R','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL1_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL2_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL3_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_WNDCL5_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_BECCS_N','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_Batt','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_Batt8hr','Z8','#NULL');
-INSERT INTO `ReserveMargin` (tech,reservemargin_group,notes) VALUES ('E_H2CC_N','Z8','#NULL');
 CREATE TABLE `RPS_standards` (
   `Periods` INTEGER,
   `RPS` REAL
@@ -2407,11 +2434,10 @@ INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2035,0.01);
 INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2040,0.01);
 INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2045,0.01);
 INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2050,0.01);
-CREATE TABLE "PlanningReserveMargin" (
-  zones TEXT,
-  ReserveMargin  real,
-  PRIMARY KEY(zones));
-INSERT INTO `PlanningReserveMargin` (zones,ReserveMargin) VALUES ('Z8',0.35);
+CREATE TABLE `PlanningReserveMargin` (
+	`reserve_margin`	real
+);
+INSERT INTO `PlanningReserveMargin` (reserve_margin) VALUES (0.35);
 CREATE TABLE Output_V_Capacity (
    scenario text,
    sector text,
@@ -2517,43 +2543,44 @@ CREATE TABLE Output_CapacityByPeriodAndTech (
    FOREIGN KEY(sector) REFERENCES sector_labels(sector), 
    FOREIGN KEY(t_periods) REFERENCES time_periods(t_periods),   
    FOREIGN KEY(tech) REFERENCES technologies(tech));
-CREATE TABLE "MinGenGroupOfTechnologies_Data" (
-	`period`	integer,
-	`flag`	text,
-	`min_act_g`	real,
-	PRIMARY KEY(period,flag)
-);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2020,'RPS_MTN',219.96);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2025,'RPS_MTN',240.48);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2030,'RPS_MTN',261.0);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2035,'RPS_MTN',271.44);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2040,'RPS_MTN',281.88);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2045,'RPS_MTN',294.48);
-INSERT INTO `MinGenGroupOfTechnologies_Data` (period,flag,min_act_g) VALUES (2050,'RPS_MTN',307.08);
-CREATE TABLE "MinGenGroupOfTechnologies" (
+CREATE TABLE `MinGenGroupWeight` (
 	`tech`	text,
-	`flag`	text,
+	`group_name`	text,
 	`act_fraction`	REAL,
 	`tech_desc`	text,
-	PRIMARY KEY(tech,flag)
+	PRIMARY KEY(tech,group_name)
 );
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_WNDCL4_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_WND_R','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_SOLTHCEN_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_SOLTH_R','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_SOLPVCEN_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_SOLPV_R','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_HYDCONV_R','RPS_MTN',0.28,'#fraction of hydro generation considered "renewable"');
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_GEOBCFS_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_GEO_R','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_BIOIGCC_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_WNDCL5_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_WNDCL1_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_WNDCL2_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_WNDCL3_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_BECCS_N','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_SOLPVENDUSE_R','RPS_MTN',1.0,NULL);
-INSERT INTO `MinGenGroupOfTechnologies` (tech,flag,act_fraction,tech_desc) VALUES ('E_SOLPVENDUSE_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_WNDCL4_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_WND_R','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLTHCEN_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLTH_R','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLPVCEN_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLPV_R ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_HYDCONV_R ','RPS_MTN',0.28,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_GEOBCFS_N ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_GEO_R ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_BIOIGCC_N ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_WNDCL5_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_WNDCL1_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_WNDCL2_N','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_WNDCL3_N ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_BECCS_N ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLPVENDUSE_R ','RPS_MTN',1.0,NULL);
+INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLPVENDUSE_N ','RPS_MTN',1.0,NULL);
+CREATE TABLE `MinGenGroupTarget` (
+	`period`	integer,
+	`group_name`	text,
+	`min_act_g`	real,
+	`notes`	text,
+	PRIMARY KEY(period,group_name)
+);
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2020,'RPS_MTN',219.96,' ');
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2025,'RPS_MTN',240.48,' ');
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2030,'RPS_MTN',261.0,' ');
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2035,'RPS_MTN',271.44,' ');
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2040,'RPS_MTN',281.88,' ');
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2045,'RPS_MTN',294.48,' ');
+INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2050,'RPS_MTN',307.08,' ');
 CREATE TABLE MinCapacity (
    periods integer,
    tech text,
