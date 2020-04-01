@@ -663,14 +663,14 @@ INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_WTDSL_HYB
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_BBIODSL_10_N','p','transport','#new biodiesel bus 2010');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_BBIODSL_HYB_N','p','transport','#new biodiesel hybrid bus ');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_BBIODSL_N','p','transport','#new biodisel bus');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES (' T_HDV_RFBIODSL_N','p','transport','#new biodiesel rail freight');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_CRBIODSL_N','p','transport','#new biodiesel commuter rail');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_CRDM_N','p','transport','#new dual mode commuter rail ');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_CRDM_R','p','transport','#residual dual mode commuter rail');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_CRDSL_R','p','transport','#existing diesel commuter rail');
-INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES (' T_HDV_RFBIODSL_R','p','transport','#existing rail frieght biodiesel');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_CRBIODSL_R','p','transport','#existing commuter rail biodiesel ');
 INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_FT','p','transport','#Technology to convert hydrogen to transportation liquid fuels through Fischer Tropch');
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_RFBIODSL_N','p','transport','#new biodiesel rail freight');
+INSERT INTO `technologies` (tech,flag,sector,tech_desc) VALUES ('T_HDV_RFBIODSL_R','p','transport','#existing rail frieght biodiesel');
 CREATE TABLE "tech_reserve" (
 	`tech`	text,
 	`notes`	text,
@@ -3223,7 +3223,7 @@ INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_ELECAL',25.0,'#NULL
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('E_ELECPEM',25.0,'#NULL');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_COMP10100',15.0,'#NULL');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_COMP100700',15.0,'#NULL');
-INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_STO150',30.0,'#NULL');
+INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('H2_STO150',40.0,'#NULL');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('SNGSYN',20.0,'#NULL');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('SNG_COMP20100',15.0,'#NULL');
 INSERT INTO `LifetimeTech` (tech,life,life_notes) VALUES ('MEOHSYN',20.0,'#NULL');
