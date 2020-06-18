@@ -1201,6 +1201,238 @@ INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL2_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL3_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVENDUSE_N');
 INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVENDUSE_R');
+CREATE TABLE `tech_annual` (
+	`tech`	text,
+	PRIMARY KEY(`tech`),
+	FOREIGN KEY(`tech`) REFERENCES `technologies`(`tech`)
+);
+INSERT INTO `tech_annual` (tech) VALUES ('H2_OTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_OTH_dummy');
+INSERT INTO `tech_annual` (tech) VALUES ('IMPINDOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_INDOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_GSLDEM');
+INSERT INTO `tech_annual` (tech) VALUES ('O_OTHDEM');
+INSERT INTO `tech_annual` (tech) VALUES ('O_COALPRH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_COALCHP');
+INSERT INTO `tech_annual` (tech) VALUES ('O_COALOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_DFOPRH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_DFOCHP');
+INSERT INTO `tech_annual` (tech) VALUES ('O_DFOOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_LPGPRH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_LPGCHP');
+INSERT INTO `tech_annual` (tech) VALUES ('O_LPGOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_NGPRH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_NGCHP');
+INSERT INTO `tech_annual` (tech) VALUES ('O_NGOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_RFOPRH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_RFOCHP');
+INSERT INTO `tech_annual` (tech) VALUES ('O_RFOOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_RENCHP');
+INSERT INTO `tech_annual` (tech) VALUES ('O_ELCPRH');
+INSERT INTO `tech_annual` (tech) VALUES ('O_ELCOTH');
+INSERT INTO `tech_annual` (tech) VALUES ('NonManDEM');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_DSLELC_CR');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_DSLBIODSL_B20');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_E10_PHEV10');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_E10_PHEV40');
+INSERT INTO `tech_annual` (tech) VALUES ('T_EA_CNG');
+INSERT INTO `tech_annual` (tech) VALUES ('T_EA_DSL');
+INSERT INTO `tech_annual` (tech) VALUES ('T_EA_JTF');
+INSERT INTO `tech_annual` (tech) VALUES ('T_EA_LPG');
+INSERT INTO `tech_annual` (tech) VALUES ('T_EA_RFO');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AGA_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AGA_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BCNG_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BCNG_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BDSL_10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BE10_10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDDEM_A');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDDEM_B');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDDEM_CT');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDDEM_HT');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDDEM_RP');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDDEM_WT');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRELC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_ICRDSLELC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_ICRDSLELC_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_RFDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_RFDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_SUBELC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_SUBELC_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCBIODSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCE10_HYB_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCE10_IMP_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCH2FC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCLPG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THCNG_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL20_10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL20_20_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL20_40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL20_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL_10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL_20_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THE1020_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THELC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_THLPG_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTOIL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTOIL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_BLNDDEM');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_PHEV10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_PHEV40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE85X_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CH2FC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FCNG_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_PHEV10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_PHEV40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE85X_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE85X_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FELC_100_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FH2FC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE10_PHEV10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE10_PHEV40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE85X_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_LSH2FC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MCE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MCE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE10_PHEV10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE10_PHEV40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE85X_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MVH2FC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PCNG_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE10_PHEV10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE10_PHEV40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE85X_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_PE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSDSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE10_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE10_PHEV10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE10_PHEV40_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE85X_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE85X_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSH2FC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_OH_DSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_OH_E10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_ETH');
+INSERT INTO `tech_annual` (tech) VALUES ('IMPTRNGAS');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_ETHGAS_E10');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_ETHGAS_E85');
+INSERT INTO `tech_annual` (tech) VALUES ('T_BLND_ETH_ACTIVITY_CONTROL');
+INSERT INTO `tech_annual` (tech) VALUES ('O_EAG_NG');
+INSERT INTO `tech_annual` (tech) VALUES ('T_EAG_CNG');
+INSERT INTO `tech_annual` (tech) VALUES ('CNG_H2BL');
+INSERT INTO `tech_annual` (tech) VALUES ('O_NG_H2BL');
+INSERT INTO `tech_annual` (tech) VALUES ('T_E10MEOHBL');
+INSERT INTO `tech_annual` (tech) VALUES ('T_JTFMEOHBL');
+INSERT INTO `tech_annual` (tech) VALUES ('T_E85MEOHBL');
+INSERT INTO `tech_annual` (tech) VALUES ('O_GSLMEOHBL');
+INSERT INTO `tech_annual` (tech) VALUES ('O_GSL_BLND');
+INSERT INTO `tech_annual` (tech) VALUES ('H2700_FC');
+INSERT INTO `tech_annual` (tech) VALUES ('O_GSL_EA_dummy');
+INSERT INTO `tech_annual` (tech) VALUES ('BLEND_BIOJTF_JTF');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCELC_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDFUEL_ELCE10');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BLNDFUEL_ELCDSL');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRELC_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CELC_100_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSELC_100_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FELC_100_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MCELC_100_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CELC_200_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSELC_200_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FELC_200_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CELC_300_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FELC_300_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MCELC_300_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_MCELC_200_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSELC_300_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_HYB_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_HYB_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_SSE10_HYB_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_CE10_PHEV10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_LDV_FE10_PHEV10_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_WT');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_APU');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_BW');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_AE');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_AJP_GE');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCBIODSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_TCDSL_IMP_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTOIL_RFI_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTOIL_RBL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTDSL_FI_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_WTDSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BBIODSL_10_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BBIODSL_HYB_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_BBIODSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRBIODSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRDM_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRDM_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRDSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_CRBIODSL_R');
+INSERT INTO `tech_annual` (tech) VALUES ('T_FT');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_RFBIODSL_N');
+INSERT INTO `tech_annual` (tech) VALUES ('T_HDV_RFBIODSL_R');
 CREATE TABLE sector_labels (
   sector text primary key);
 INSERT INTO `sector_labels` (sector) VALUES ('supply');
@@ -2365,26 +2597,16 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'TMDHDV_RP_CRDM','T_HDV_BLNDDEM_RP',0.0124,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'TMDHDV_RP_CRDM','T_HDV_BLNDDEM_RP',0.0124,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'TMDHDV_RP_CRDM','T_HDV_BLNDDEM_RP',0.0124,NULL);
-CREATE TABLE `StorageInit` (
-	`storage_tech`	TEXT,
-	`storage_tech_note`	TEXT,
-	PRIMARY KEY(`storage_tech`)
-);
-INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('MEOH_STO','0.5');
-INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('H2_STO150','0.5');
-INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('E_HYDREV_R','0.5');
-INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('E_Batt','0.5');
-INSERT INTO `StorageInit` (storage_tech,storage_tech_note) VALUES ('E_Batt8hr','0.5');
 CREATE TABLE "StorageDuration" (
    tech text,
    duration real,
    duration_notes text,
    PRIMARY KEY(tech) );
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('MEOH_STO',0.034246575,'#according to NC storage study');
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('H2_STO150',0.228310502,'#according to NC storage study');
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_HYDREV_R',0.000913242,'');
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt',0.000456621,NULL);
-INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt8hr',0.000913242,NULL);
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('MEOH_STO',300.0,'');
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('H2_STO150',2000.0,'');
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_HYDREV_R',8.0,'');
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt',4.0,NULL);
+INSERT INTO `StorageDuration` (tech,duration,duration_notes) VALUES ('E_Batt8hr',8.0,NULL);
 CREATE TABLE "SegFrac" (
    season_name text,
    time_of_day_name text,
@@ -2405,17 +2627,6 @@ INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUE
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','peak',0.0032,'# A-P from 12pm-3pm');
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','pm',0.1087,'# A-DPM from 3pm to 9pm');
 INSERT INTO `SegFrac` (season_name,time_of_day_name,segfrac,segfrac_notes) VALUES ('Winter','night',0.1381,'# A-N from 9pm to 6am');
-CREATE TABLE `RPS_standards` (
-  `Periods` INTEGER,
-  `RPS` REAL
-);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2020,0.01);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2025,0.01);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2030,0.01);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2035,0.01);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2040,0.01);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2045,0.01);
-INSERT INTO `RPS_standards` (Periods,RPS) VALUES (2050,0.01);
 CREATE TABLE "PlanningReserveMargin" (
 	`reserve_margin`	REAL
 );
@@ -16598,6 +16809,19 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('T_FT',2050,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
 
 43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('H2_OTH',2017,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_DFOCHP',2017,19.17,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_LPGCHP',2017,34.95,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_NGCHP',2017,20.06,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_RENCHP',2017,8.32,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_COALPRH',2017,48.87,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_DFOPRH',2017,61.27,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_LPGPRH',2017,46.49,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_NGPRH',2017,46.58,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_RFOPRH',2017,56.73,'#$M/PJ',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_ELCPRH',2017,49.52,'#$M/P',NULL);
 CREATE TABLE "CostFixed" (
 	`periods`	INTEGER NOT NULL,
 	`tech`	text NOT NULL,
@@ -18090,7 +18314,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'SNGSYN',2017,44.51,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'SNG_COMP20100',2017,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'MEOHSYN',2017,155.77,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'H2_STO150',2017,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_ELECAL',2017,61.1,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_ELECPEM',2017,90.22,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_COMP10100',2017,4.55,'','');
@@ -18098,7 +18321,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'SNGSYN',2017,44.51,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'SNG_COMP20100',2017,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'MEOHSYN',2017,155.77,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_STO150',2017,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_ELECAL',2017,61.1,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_ELECPEM',2017,90.22,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_COMP10100',2017,4.55,'','');
@@ -18106,17 +18328,12 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'SNGSYN',2017,44.51,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'SNG_COMP20100',2017,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'MEOHSYN',2017,155.77,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_STO150',2017,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECAL',2017,61.1,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECPEM',2017,90.22,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNGSYN',2017,44.51,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'MEOHSYN',2017,155.77,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_STO150',2017,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECAL',2017,61.1,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECPEM',2017,90.22,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_STO150',2017,35.0,'#5% of CostInvest','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_STO150',2017,35.0,'#5% of CostInvest','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2017,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_ELECAL',2020,40.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_ELECPEM',2020,53.08,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_COMP10100',2020,4.55,'','');
@@ -18124,7 +18341,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'SNGSYN',2020,40.05,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'SNG_COMP20100',2020,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'MEOHSYN',2020,135.99,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'H2_STO150',2020,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_ELECAL',2020,40.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_ELECPEM',2020,53.08,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_COMP10100',2020,4.55,'','');
@@ -18132,7 +18348,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'SNGSYN',2020,40.05,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'SNG_COMP20100',2020,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'MEOHSYN',2020,135.99,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_STO150',2020,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECAL',2020,40.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECPEM',2020,53.08,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_COMP10100',2020,4.55,'','');
@@ -18140,16 +18355,12 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNGSYN',2020,40.05,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNG_COMP20100',2020,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'MEOHSYN',2020,135.99,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_STO150',2020,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECAL',2020,40.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECPEM',2020,53.08,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNGSYN',2020,40.05,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'MEOHSYN',2020,135.99,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_STO150',2020,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECAL',2020,40.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECPEM',2020,53.08,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_STO150',2020,35.0,'#5% of CostInvest','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2020,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_ELECAL',2025,38.57,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_ELECPEM',2025,46.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_COMP10100',2025,4.55,'','');
@@ -18157,7 +18368,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'SNGSYN',2025,35.6,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'SNG_COMP20100',2025,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'MEOHSYN',2025,118.68,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'H2_STO150',2025,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECAL',2025,38.57,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECPEM',2025,46.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_COMP10100',2025,4.55,'','');
@@ -18165,7 +18375,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNGSYN',2025,35.6,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNG_COMP20100',2025,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'MEOHSYN',2025,118.68,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_STO150',2025,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECAL',2025,38.57,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECPEM',2025,46.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_COMP10100',2025,4.55,'','');
@@ -18173,16 +18382,12 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNGSYN',2025,35.6,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNG_COMP20100',2025,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'MEOHSYN',2025,118.68,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_STO150',2025,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECAL',2025,38.57,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECPEM',2025,46.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNGSYN',2025,35.6,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'MEOHSYN',2025,118.68,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_STO150',2025,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECAL',2025,38.57,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECPEM',2025,46.15,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2025,35.0,'#5% of CostInvest','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_STO150',2025,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECAL',2030,35.93,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_ELECPEM',2030,39.45,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_COMP10100',2030,4.55,'','');
@@ -18190,7 +18395,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNGSYN',2030,31.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'SNG_COMP20100',2030,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'MEOHSYN',2030,103.85,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'H2_STO150',2030,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECAL',2030,35.93,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECPEM',2030,39.45,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_COMP10100',2030,4.55,'','');
@@ -18198,7 +18402,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNGSYN',2030,31.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNG_COMP20100',2030,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'MEOHSYN',2030,103.85,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_STO150',2030,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECAL',2030,35.93,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECPEM',2030,39.45,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_COMP10100',2030,4.55,'','');
@@ -18206,15 +18409,12 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNGSYN',2030,31.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNG_COMP20100',2030,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'MEOHSYN',2030,103.85,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_STO150',2030,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECAL',2030,35.93,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECPEM',2030,39.45,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNGSYN',2030,31.15,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'MEOHSYN',2030,103.85,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2030,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECAL',2030,35.93,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECPEM',2030,39.45,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_STO150',2030,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECAL',2035,34.95,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'E_ELECPEM',2035,34.84,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_COMP10100',2035,4.55,'','');
@@ -18222,7 +18422,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNGSYN',2035,26.7,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'SNG_COMP20100',2035,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'MEOHSYN',2035,92.31,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2035,'H2_STO150',2035,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECAL',2035,34.95,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECPEM',2035,34.84,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_COMP10100',2035,4.55,'','');
@@ -18230,7 +18429,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNGSYN',2035,26.7,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNG_COMP20100',2035,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'MEOHSYN',2035,92.31,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_STO150',2035,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECAL',2035,34.95,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECPEM',2035,34.84,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_COMP10100',2035,4.55,'','');
@@ -18238,12 +18436,10 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNGSYN',2035,26.7,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNG_COMP20100',2035,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'MEOHSYN',2035,92.31,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2035,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECAL',2035,34.95,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECPEM',2035,34.84,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNGSYN',2035,26.7,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'MEOHSYN',2035,92.31,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_STO150',2035,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECAL',2040,33.96,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'E_ELECPEM',2040,30.44,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_COMP10100',2040,4.55,'','');
@@ -18251,7 +18447,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNGSYN',2040,22.25,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'SNG_COMP20100',2040,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'MEOHSYN',2040,82.42,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2040,'H2_STO150',2040,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECAL',2040,33.96,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECPEM',2040,30.44,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_COMP10100',2040,4.55,'','');
@@ -18259,7 +18454,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNGSYN',2040,22.25,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNG_COMP20100',2040,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'MEOHSYN',2040,82.42,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2040,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECAL',2040,33.96,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECPEM',2040,30.44,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_COMP10100',2040,4.55,'','');
@@ -18267,7 +18461,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNGSYN',2040,22.25,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNG_COMP20100',2040,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'MEOHSYN',2040,82.42,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_STO150',2040,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECAL',2045,33.96,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'E_ELECPEM',2045,30.44,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_COMP10100',2045,4.55,'','');
@@ -18275,7 +18468,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNGSYN',2045,22.25,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'SNG_COMP20100',2045,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'MEOHSYN',2045,82.42,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'H2_STO150',2045,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECAL',2045,33.96,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECPEM',2045,30.44,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_COMP10100',2045,4.55,'','');
@@ -18283,7 +18475,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNGSYN',2045,22.25,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNG_COMP20100',2045,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'MEOHSYN',2045,82.42,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_STO150',2045,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECAL',2050,33.96,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'E_ELECPEM',2050,30.44,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_COMP10100',2050,4.55,'','');
@@ -18291,7 +18482,6 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNGSYN',2050,22.25,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'SNG_COMP20100',2050,4.55,'','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'MEOHSYN',2050,82.42,'','');
-INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'H2_STO150',2050,35.0,'#5% of CostInvest','');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'E_Batt',2020,32.10162309,NULL,NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'E_Batt',2020,32.10162309,NULL,NULL);
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2030,'E_Batt',2020,32.10162309,NULL,NULL);
