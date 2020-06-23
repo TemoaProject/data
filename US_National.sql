@@ -5301,53 +5301,29 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','E10','T_OH_E10_N',2017,'TMDOH_E10',0.27,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_TRN','E10','T_OH_E10_N',2017,'TMDOH_E10',0.0014,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_LPG_EA','R_EA_LPG',2017,'R_LPG',65.71,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_LPG_EA','R_EA_LPG',2020,'R_LPG',65.71,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_LPG_EA','R_EA_LPG',2017,'R_LPG',0.0628,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_LPG_EA','R_EA_LPG',2020,'R_LPG',0.0628,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_LPG_EA','R_EA_LPG',2017,'R_LPG',0.00028,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_LPG_EA','R_EA_LPG',2020,'R_LPG',0.00028,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_NGA_EA','R_EA_NGA',2017,'R_NGA',50.0,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_NGA_EA','R_EA_NGA',2020,'R_NGA',50.0,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_KER_EA','R_EA_KER',2017,'R_KER',76.3,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_KER_EA','R_EA_KER',2020,'R_KER',76.3,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_KER_EA','R_EA_KER',2017,'R_KER',0.057,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_KER_EA','R_EA_KER',2020,'R_KER',0.057,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_KER_EA','R_EA_KER',2017,'R_KER',0.1357,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_KER_EA','R_EA_KER',2020,'R_KER',0.1357,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_DISTOIL_EA','R_EA_DISTOIL',2017,'R_DISTOIL',77.2,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','R_DISTOIL_EA','R_EA_DISTOIL',2020,'R_DISTOIL',77.2,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_DISTOIL_EA','R_EA_DISTOIL',2017,'R_DISTOIL',0.056,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_DISTOIL_EA','R_EA_DISTOIL',2020,'R_DISTOIL',0.056,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_DISTOIL_EA','R_EA_DISTOIL',2017,'R_DISTOIL',0.132,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_DISTOIL_EA','R_EA_DISTOIL',2020,'R_DISTOIL',0.132,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_BIO_EA','R_EA_BIO',2017,'R_BIO',0.127,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_RES','R_BIO_EA','R_EA_BIO',2020,'R_BIO',0.127,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_BIO_EA','R_EA_BIO',2017,'R_BIO',0.0107,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_RES','R_BIO_EA','R_EA_BIO',2020,'R_BIO',0.0107,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_LPG_EA','C_EA_LPG',2017,'C_LPG',65.71,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_LPG_EA','C_EA_LPG',2020,'C_LPG',65.71,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_LPG_EA','C_EA_LPG',2017,'C_LPG',0.0667,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_LPG_EA','C_EA_LPG',2020,'C_LPG',0.0667,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_LPG_EA','C_EA_LPG',2017,'C_LPG',0.00677,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_LPG_EA','C_EA_LPG',2020,'C_LPG',0.00677,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_NGA_EA','C_EA_NGA',2017,'C_NGA',50.0,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_NGA_EA','C_EA_NGA',2020,'C_NGA',50.0,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_NGA_EA','C_EA_NGA',2017,'C_NGA',0.0418,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_NGA_EA','C_EA_NGA',2020,'C_NGA',0.0418,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_NGA_EA','C_EA_NGA',2017,'C_NGA',0.000251,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_NGA_EA','C_EA_NGA',2020,'C_NGA',0.000251,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_DISTOIL_EA','C_EA_DISTOIL',2017,'C_DISTOIL',77.2,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_DISTOIL_EA','C_EA_DISTOIL',2020,'C_DISTOIL',77.2,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_DISTOIL_EA','C_EA_DISTOIL',2017,'C_DISTOIL',0.047,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_DISTOIL_EA','C_EA_DISTOIL',2020,'C_DISTOIL',0.047,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_DISTOIL_EA','C_EA_DISTOIL',2017,'C_DISTOIL',0.133,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_DISTOIL_EA','C_EA_DISTOIL',2020,'C_DISTOIL',0.133,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_RFO_EA','C_EA_RFO',2017,'C_RFO',83.14,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','C_RFO_EA','C_EA_RFO',2020,'C_RFO',83.14,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_RFO_EA','C_EA_RFO',2017,'C_RFO',0.1536,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_COM','C_RFO_EA','C_EA_RFO',2020,'C_RFO',0.1536,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_RFO_EA','C_EA_RFO',2017,'C_RFO',1.0146,'#kt/PJ','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_COM','C_RFO_EA','C_EA_RFO',2020,'C_RFO',1.0146,'#kt/PJ','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGASTM_R',2005,'ELCP',0.41,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_ELC','E_NGA','E_NGASTM_R',2005,'ELCP',0.903,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGASTM_R',2010,'ELCP',0.41,'#kt/PJout','NULL');
@@ -6723,10 +6699,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_NGA','C_CK_RANGE_NGA_R',2000,'CCKNGA',0.45,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_NGA','C_CK_RANGE_NGA_R',2005,'CCKNGA',0.45,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_NGA','C_CK_RANGE_NGA_R',2010,'CCKNGA',0.45,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_DISTOIL_EA','C_EA_DISTOIL',2020,'C_DISTOIL',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_LPG_EA','C_EA_LPG',2020,'C_LPG',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_NGA_EA','C_EA_NGA',2020,'C_NGA',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('C_RFO_EA','C_EA_RFO',2020,'C_RFO',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','C_LT_CFL23W_ELC_N',2020,'CLTCFL',1.41,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','C_LT_CFL23W_ELC_N',2025,'CLTCFL',1.41,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','C_LT_CFL23W_ELC_N',2030,'CLTCFL',1.48,'NULL');
@@ -7267,11 +7239,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('RWHNGA','R_BLND_FUEL_WH',2020,'RWH',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('RWHSOL','R_BLND_FUEL_WH',2020,'RWH',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('RWHLPG','R_BLND_FUEL_WH',2020,'RWH',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('R_BIO_EA','R_EA_BIO',2020,'R_BIO',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('R_DISTOIL_EA','R_EA_DISTOIL',2020,'R_DISTOIL',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('R_KER_EA','R_EA_KER',2020,'R_KER',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('R_LPG_EA','R_EA_LPG',2020,'R_LPG',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('R_NGA_EA','R_EA_NGA',2020,'R_NGA',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','R_FZ_CELC_N',2020,'RFZ',1.17,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','R_FZ_CELC_N',2025,'RFZ',1.17,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','R_FZ_CELC_N',2030,'RFZ',1.17,'NULL');
@@ -9971,6 +9938,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNGAS',2017,'GAS',1.0,'#FT liquids');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2017,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2017,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','T_FT',2017,'T_Liquids',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','T_FT',2017,'T_Liquids',0.0001,'#CO2 is needed for FT ');
 CREATE TABLE DiscountRate (
    tech text,
    vintage integer,
@@ -16822,6 +16791,9 @@ INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_NGPRH',2017,46.58,'#$M/PJ',NULL);
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_RFOPRH',2017,56.73,'#$M/PJ',NULL);
 INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('O_ELCPRH',2017,49.52,'#$M/P',NULL);
+INSERT INTO `CostInvest` (tech,vintage,cost_invest,cost_invest_units,cost_invest_notes) VALUES ('T_FT',2017,92.82,'#Tabe 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3
+
+43 M Euro for 14000 t/a capacity',NULL);
 CREATE TABLE "CostFixed" (
 	`periods`	INTEGER NOT NULL,
 	`tech`	text NOT NULL,
@@ -19252,6 +19224,9 @@ INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_f
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2045,'T_FT',2045,3.6,'#M$/PJ','#4% of capital cost');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'T_FT',2045,3.6,'#M$/PJ','#4% of capital cost');
 INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2050,'T_FT',2050,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2020,'T_FT',2017,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2025,'T_FT',2017,3.6,'#M$/PJ','#4% of capital cost');
+INSERT INTO `CostFixed` (periods,tech,vintage,cost_fixed,cost_fixed_units,cost_fixed_notes) VALUES (2017,'T_FT',2017,3.6,'#M$/PJ','#4% of capital cost');
 CREATE TABLE CapacityToActivity (
    tech text primary key,
    c2a real,
