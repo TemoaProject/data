@@ -5622,9 +5622,7 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2035,'ELCP',0.0104,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_ELC','E_NGA','E_NGACC_CCS_N',2040,'ELCP',0.0104,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','DSL_EA','T_EA_DSL',2017,'DSL',69.35,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','DSL_EA','T_EA_DSL',2020,'DSL',69.35,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CNG_EA','T_EA_CNG',2017,'CNG',50.3,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CNG_EA','T_EA_CNG',2020,'CNG',50.3,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_CDSL_N',2020,'TMDLDV_C',0.1887,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_CDSL_N',2025,'TMDLDV_C',0.1731,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','DSL','T_LDV_CDSL_N',2030,'TMDLDV_C',0.1593,'#kt/bvmt','NULL');
@@ -6202,11 +6200,8 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_TRN','CNG','T_LDV_FCNG_R',2005,'TMDLDV_F',0.0012,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('so2_TRN','CNG','T_LDV_FCNG_R',2010,'TMDLDV_F',0.0012,'#kt/bvmt','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','JTF_EA','T_EA_JTF',2017,'JTF',67.2,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','JTF_EA','T_EA_JTF',2020,'JTF',67.2,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','T_LPG_EA','T_EA_LPG',2017,'T_LPG',59.8,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','T_LPG_EA','T_EA_LPG',2020,'T_LPG',59.8,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','RFO_EA','T_EA_RFO',2017,'RFO',71.18,'#kt/PJout','NULL');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','RFO_EA','T_EA_RFO',2020,'RFO',71.18,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','JTF','T_HDV_AJP_R',2000,'TMDHDV_A_JP',0.065,'#kt/bpm','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','JTF','T_HDV_AJP_R',2005,'TMDHDV_A_JP',0.065,'#kt/bpm','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('nox_TRN','JTF','T_HDV_AJP_R',2010,'TMDHDV_A_JP',0.065,'#kt/bpm','NULL');
@@ -9830,11 +9825,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E10','T_BLND_E10_PHEV10',2020,'E10ELC',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ELC','T_BLND_E10_PHEV40',2020,'E10ELC',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E10','T_BLND_E10_PHEV40',2020,'E10ELC',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CNG_EA','T_EA_CNG',2020,'CNG',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('DSL_EA','T_EA_DSL',2020,'DSL',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('JTF_EA','T_EA_JTF',2020,'JTF',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_LPG_EA','T_EA_LPG',2020,'T_LPG',1.0,'NULL');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('RFO_EA','T_EA_RFO',2020,'RFO',1.0,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E10','T_HDV_AGA_N',2020,'TMDHDV_A_GA',0.276,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E10','T_HDV_AGA_N',2025,'TMDHDV_A_GA',0.276,'NULL');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('E10','T_HDV_AGA_N',2030,'TMDHDV_A_GA',0.276,'NULL');
@@ -12080,12 +12070,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','T_FT',2040,'T_Liquids',0.0001,'#CO2 is needed for FT ');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','T_FT',2045,'T_Liquids',0.0001,'#CO2 is needed for FT ');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','T_FT',2050,'T_Liquids',0.0001,'#CO2 is needed for FT ');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNCNG',2017,'CNG_EA',1.0,'#FT liquids');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNDSL',2017,'DSL_EA',1.0,'#FT liquids');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNJTF',2017,'JTF_EA',1.0,'#FT liquids');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNLPG',2017,'T_LPG_EA',1.0,'#FT liquids');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNRFO',2017,'RFO_EA',1.0,'#FT liquids');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNGAS',2017,'GAS',1.0,'#FT liquids');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','H2_OTH',2017,'O_OTH_H2',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CO2_SNG','H2_OTH',2017,'O_OTH_H2',0.0001,'#CO2 is needed for FT ');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('H2_100','T_FT',2017,'T_Liquids',0.83,'#Table 3 of https://www.sciencedirect.com/science/article/pii/S0360319915001652#sec3');
@@ -12650,7 +12634,6 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('TMDHDV_WTO','T_HDV_BLNDDEM_WT_F',2017,'TMDHDV_WT_F',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('MGO_EA','T_EA_MGO',2017,'MGO',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('ethos','IMPTRNMGO',2017,'MGO_EA',1.0,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNMGO',2017,'MGO_EA',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('TMDHDV_HTS_ELC','T_HDV_BLNDDEM_HTS',2017,'TMDHDV_HTS',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('TMDHDV_HTS_B20','T_HDV_BLNDDEM_HTS',2017,'TMDHDV_HTS',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('TMDHDV_HTS_CNG','T_HDV_BLNDDEM_HTS',2017,'TMDHDV_HTS',1.0,NULL);
@@ -12661,6 +12644,12 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('TMDHDV_HTL_B20','T_HDV_BLNDDEM_HTL',2017,'TMDHDV_HTL',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('TMDHDV_HTL_LPG','T_HDV_BLNDDEM_HTL',2017,'TMDHDV_HTL',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_LPG','T_MDV_TMLPG_R',2000,'TMDMDV_MT_LPG',0.068,NULL);
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','T_EA_DSL',2017,'DSL',1.0,'#FT liquids');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','T_EA_JTF',2017,'JTF',1.0,'#FT liquids');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','T_EA_LPG',2017,'T_LPG',1.0,'#FT liquids');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','T_EA_RFO',2017,'RFO',1.0,'#FT liquids');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','T_EA_MGO',2017,'MGO',1.0,'#FT liquids');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('T_Liquids','IMPTRNGAS',2017,'GAS',1.0,'#FT liquids');
 CREATE TABLE DiscountRate (
    tech text,
    vintage integer,
