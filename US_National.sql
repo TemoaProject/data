@@ -2138,6 +2138,7 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('MGO','p','"# marin
 ');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('MGO_EA','p','# marine gas oil to co2 emission accounting
 ');
+INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('co2_to_ground','d','#the co2 taken out of the system through CCS_EA technology');
 CREATE TABLE `Zones` (
 	`zones`	TEXT,
 	`zones_note`	TEXT,
@@ -3138,6 +3139,30 @@ INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) V
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'TMDMDV_MT_ELC','T_MDV_BLNDDEM_MT',0.001,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'TMDMDV_MT_ELC','T_MDV_BLNDDEM_MT',0.001,NULL);
 INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'TMDMDV_MT_ELC','T_MDV_BLNDDEM_MT',0.001,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'CO2_SNG','H2_OTH',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'CO2_SNG','T_FT',0.982,NULL);
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2017,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2020,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2025,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2030,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2035,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2040,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2045,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
+INSERT INTO `TechInputSplit` (periods,input_comm,tech,ti_split,ti_split_notes) VALUES (2050,'H2_100','T_FT',0.018,'#Table 3 from Zeman and Keith (2007)');
 CREATE TABLE "StorageDuration" (
    tech text,
    duration real,
@@ -7019,7 +7044,7 @@ INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,em
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2040,'ELCP',-98.89,'#kt/PJout','Total co2 emission per PJ is 109.89 kt out of which 11 kt is not captured.');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2045,'ELCP',-98.89,'#kt/PJout','Total co2 emission per PJ is 109.89 kt out of which 11 kt is not captured.');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','E_NGA','E_NGACC_CCS_N',2050,'ELCP',-98.89,'#kt/PJout','Total co2 emission per PJ is 109.89 kt out of which 11 kt is not captured.');
-INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','co2_CCS','CCS_EA',2017,'co2_to_fuel',1.0,'#kt/PJout','NULL');
+INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','co2_CCS','CCS_EA',2020,'co2_to_fuel',1.0,'#kt/PJout','NULL');
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2','CNG_EA','CNG_H2BL',2017,'CNG',50.3,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2_CCS','E_NGA','E_NGACC_CCS_N',2020,'ELCP',98.89,'#kt/PJout',NULL);
 INSERT INTO `EmissionActivity` (emis_comm,input_comm,tech,vintage,output_comm,emis_act,emis_act_units,emis_act_notes) VALUES ('co2_CCS','E_NGA','E_NGACC_CCS_N',2025,'ELCP',98.89,'#kt/PJout',NULL);
@@ -11852,8 +11877,8 @@ INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_not
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2040,'ETH_CORN',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2045,'ETH_CORN',0.48,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('CORN','DRY_MILL',2050,'ETH_CORN',0.48,NULL);
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2017,'co2_to_fuel',1.0,'#to synthetic gas production, this pathway emits co2 (as if synthetic fuel gets burnt)');
-INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2017,'CORFO',0.0001,'#take out co2_CCS of sysyem (this pathway is associated with when only CCS technology is chosen and not synthetic fuel production technology (no additional emissions because CCS technology already has negative emission).');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2020,'co2_to_fuel',1.0,'#to synthetic gas production, this pathway emits co2 (as if synthetic fuel gets burnt)');
+INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('co2_CCS','CCS_EA',2020,'co2_to_ground',1.0,'#take out co2_CCS of sysyem (this pathway is associated with when only CCS technology is chosen and not synthetic fuel production technology (no additional emissions because CCS technology already has negative emission).');
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2017,'H2_10',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2020,'H2_10',1.0,NULL);
 INSERT INTO `Efficiency` (input_comm,tech,vintage,output_comm,efficiency,eff_notes) VALUES ('hydrogen','hydrogen_dist',2025,'H2_10',1.0,NULL);
@@ -15225,6 +15250,13 @@ INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALU
 INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2045,'TMDMDV_MT',199.84996,'#billion vmt
 ','# AEO 2020');
 INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2050,'TMDMDV_MT',214.391662,'#billion vmt','# AEO 2020');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2020,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2025,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2030,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2035,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2040,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2045,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
+INSERT INTO `Demand` (periods,demand_comm,demand,demand_units,demand_notes) VALUES (2050,'co2_to_ground',0.0,NULL,'#dummy demand. Serves as the sink for the co2 coming from CCS plant when there''s not air to fuel use.');
 CREATE TABLE CostVariable (
    periods integer NOT NULL,
    tech text NOT NULL,
