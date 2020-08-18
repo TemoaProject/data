@@ -912,461 +912,6 @@ INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_BECCS_N',NULL);
 INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_Batt',NULL);
 INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_Batt8hr',NULL);
 INSERT INTO `tech_reserve` (tech,notes) VALUES ('E_H2CC_N',NULL);
-CREATE TABLE `tech_renewable` (
-  `tech`  TEXT
-);
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPINDREN');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOLST_ELC_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL1_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL2_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL2_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL2_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL2_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL3_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL3_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL3_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL5_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL5_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL5_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL4_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL4_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLTHCEN_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WNDCL4_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLTHCEN_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_GEOBCFS_N');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLTHCEN_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVCEN_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_GEOBCFS_N_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPRESBIO_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNBIODSL_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLTH_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_GEO_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_WND_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLTH_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPVENDUSE_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_SOLPV_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_HYDCONV_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_GEO_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOL_ELC_R_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_R_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_R_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('C_WH_SOL_ELC_R_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_R_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_R');
-INSERT INTO `tech_renewable` (tech) VALUES ('R_WH_SOLELC_R_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CE_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z2');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z3');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z4');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z5');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z6');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z7');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO');
-INSERT INTO `tech_renewable` (tech) VALUES ('IMPTRNETH_CO_Z9');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z9
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z7
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z6
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z5
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z4
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z3
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z2
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BIOIGCC_N_Z1
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z9
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z7
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z6
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z5
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z4
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z3
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z2
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('E_BECCS_N_Z1');
-INSERT INTO `tech_renewable` (tech) VALUES ('FISCH_TROP
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('TRANSEST
-');
-INSERT INTO `tech_renewable` (tech) VALUES ('HEFA');
-INSERT INTO `tech_renewable` (tech) VALUES ('CELL_ETH_SYN');
-CREATE TABLE `tech_nonrenewable` (
-  `tech`  TEXT
-);
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDCOAL');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDDFO');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDLPG');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDNG');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDRFO');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDOTH');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_OILSTM_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_OILSTM_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_URNLWR_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGASTM_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACT_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGACC_CCS_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACT_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_NGAACC_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDREV_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_HYDCONV_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_R_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALSTM_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('E_COALIGCC_CCS_N_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMDISTOIL_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMLPG_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMNGA_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPCOMRFO_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESDISTOIL_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESKER_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESLPG_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPRESNGA_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNCNG_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNDSL_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNGAS_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNJTF_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNLPG_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z1');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z2');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z3');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z4');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z5');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z6');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z7');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPTRNRFO_Z9');
-INSERT INTO `tech_nonrenewable` (tech) VALUES ('IMPINDGSL');
 CREATE TABLE `tech_groups` (
 	`tech`	text,
 	`notes`	text,
@@ -1389,21 +934,22 @@ INSERT INTO `tech_groups` (tech,notes) VALUES ('E_WNDCL3_N ',NULL);
 INSERT INTO `tech_groups` (tech,notes) VALUES ('E_BECCS_N ',NULL);
 INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLPVENDUSE_R ',NULL);
 INSERT INTO `tech_groups` (tech,notes) VALUES ('E_SOLPVENDUSE_N ',NULL);
-CREATE TABLE `tech_curtailment` (
-	`technology`	text,
-	PRIMARY KEY(technology),
-	FOREIGN KEY(`technology`) REFERENCES `technologies`(`tech`)
+CREATE TABLE "tech_curtailment" (
+	`tech`	text,
+	`tech_notes`	TEXT,
+	PRIMARY KEY(`tech`),
+	FOREIGN KEY(`tech`) REFERENCES `technologies`(`tech`)
 );
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL4_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_WND_R');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVCEN_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPV_R');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL5_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL1_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL2_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_WNDCL3_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVENDUSE_N');
-INSERT INTO `tech_curtailment` (technology) VALUES ('E_SOLPVENDUSE_R');
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_WNDCL4_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_WND_R',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_SOLPVCEN_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_SOLPV_R',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_WNDCL5_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_WNDCL1_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_WNDCL2_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_WNDCL3_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_SOLPVENDUSE_N',NULL);
+INSERT INTO `tech_curtailment` (tech,tech_notes) VALUES ('E_SOLPVENDUSE_R',NULL);
 CREATE TABLE `tech_annual` (
 	`tech`	text,
 	PRIMARY KEY(`tech`),
@@ -1732,6 +1278,12 @@ INSERT INTO `sector_labels` (sector) VALUES ('transport');
 INSERT INTO `sector_labels` (sector) VALUES ('commercial');
 INSERT INTO `sector_labels` (sector) VALUES ('residential');
 INSERT INTO `sector_labels` (sector) VALUES ('industrial');
+CREATE TABLE "regions" (
+	`regions`	TEXT,
+	`regions_note`	TEXT,
+	PRIMARY KEY(`regions`)
+);
+INSERT INTO `regions` (regions,regions_note) VALUES ('Z8','Mountain');
 CREATE TABLE `groups` (
 	`group_name`	text,
 	`notes`	text,
@@ -2129,12 +1681,6 @@ INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('MGO','p','"# marin
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('MGO_EA','p','# marine gas oil to co2 emission accounting
 ');
 INSERT INTO `commodities` (comm_name,flag,comm_desc) VALUES ('co2_to_ground','d','#the co2 taken out of the system through CCS_EA technology');
-CREATE TABLE `Zones` (
-	`zones`	TEXT,
-	`zones_note`	TEXT,
-	PRIMARY KEY(`zones`)
-);
-INSERT INTO `Zones` (zones,zones_note) VALUES ('Z8','Mountain');
 CREATE TABLE TechOutputSplit (
    periods integer,
    tech text,
@@ -3276,20 +2822,20 @@ INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES 
 INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_BECCS_N ','RPS_MTN',1.0,NULL);
 INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLPVENDUSE_R ','RPS_MTN',1.0,NULL);
 INSERT INTO `MinGenGroupWeight` (tech,group_name,act_fraction,tech_desc) VALUES ('E_SOLPVENDUSE_N ','RPS_MTN',1.0,NULL);
-CREATE TABLE `MinGenGroupTarget` (
-	`period`	integer,
+CREATE TABLE "MinGenGroupTarget" (
+	`periods`	integer,
 	`group_name`	text,
 	`min_act_g`	real,
 	`notes`	text,
-	PRIMARY KEY(period,group_name)
+	PRIMARY KEY(`periods`,`group_name`)
 );
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2020,'RPS_MTN',219.96,' ');
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2025,'RPS_MTN',240.48,' ');
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2030,'RPS_MTN',261.0,' ');
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2035,'RPS_MTN',271.44,' ');
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2040,'RPS_MTN',281.88,' ');
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2045,'RPS_MTN',294.48,' ');
-INSERT INTO `MinGenGroupTarget` (period,group_name,min_act_g,notes) VALUES (2050,'RPS_MTN',307.08,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2020,'RPS_MTN',219.96,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2025,'RPS_MTN',240.48,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2030,'RPS_MTN',261.0,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2035,'RPS_MTN',271.44,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2040,'RPS_MTN',281.88,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2045,'RPS_MTN',294.48,' ');
+INSERT INTO `MinGenGroupTarget` (periods,group_name,min_act_g,notes) VALUES (2050,'RPS_MTN',307.08,' ');
 CREATE TABLE MinCapacity (
    periods integer,
    tech text,
