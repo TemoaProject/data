@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.8.0
+    rev: 0.8.8
     hooks:
       # Dependency management
       - id: uv-lock
@@ -9,7 +9,7 @@ repos:
 
     # Code quality and formatting
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -23,7 +23,7 @@ repos:
 
     # Python Linting & Formatting with Ruff
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.4
+    rev: v0.12.8
     hooks:
       - id: ruff
         name: ruff (linter)
@@ -33,7 +33,7 @@ repos:
 
     # Type checking with MyPy
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.17.0
+    rev: v1.17.1
     hooks:
       - id: mypy
         args: ["--config-file", "pyproject.toml"]
