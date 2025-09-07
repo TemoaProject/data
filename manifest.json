@@ -31,5 +31,21 @@
         "description": "updating test_database to get multiple versions"
       }
     ]
+  },
+  {
+    "fileName": "US_9R_8D_v3_stability.sqlite",
+    "latestVersion": "v1",
+    "history": [
+      {
+        "version": "v1",
+        "timestamp": "2025-09-07T20:14:13.872121Z",
+        "sha256": "a3b3a8f27bf422a8a15ca2e0ae3b08cc43956c73de0e0a766d754e8a46e032c4",
+        "r2_object_key": "US_9R_8D_v3_stability/v1-a3b3a8f27bf422a8a15ca2e0ae3b08cc43956c73de0e0a766d754e8a46e032c4.sqlite",
+        "staging_key": "staging-uploads/a3b3a8f27bf422a8a15ca2e0ae3b08cc43956c73de0e0a766d754e8a46e032c4.sqlite",
+        "diffFromPrevious": null,
+        "commit": "pending-merge",
+        "description": "pending-merge"
+      }
+    ]
   }
 ]
