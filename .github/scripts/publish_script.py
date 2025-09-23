@@ -12,6 +12,7 @@ ACCESS_KEY_ID = os.environ["R2_ACCESS_KEY_ID"]
 SECRET_ACCESS_KEY = os.environ["R2_SECRET_ACCESS_KEY"]
 PROD_BUCKET = os.environ["R2_PRODUCTION_BUCKET"]
 STAGING_BUCKET = os.environ["R2_STAGING_BUCKET"]
+INTERNAL_BUCKET = os.environ["R2_INTERNAL_BUCKET"]
 ENDPOINT_URL = f"https://{ACCOUNT_ID}.r2.cloudflarestorage.com"
 MANIFEST_FILE = "manifest.json"
 DATASETS_DOC_PATH = "docs/source/datasets.md"
@@ -134,23 +135,32 @@ def handle_deletions(manifest_data: list[dict[str, Any]]) -> bool:
     processed_deletion = False
 
     for dataset in manifest_data:
+        # Get the bucket type for this dataset
+        bucket_type = dataset.get("bucket", "production")
+        target_bucket = INTERNAL_BUCKET if bucket_type == "internal" else PROD_BUCKET
+        bucket_name = "internal" if bucket_type == "internal" else "production"
+
         if dataset.get("status") == "pending-deletion":
             processed_deletion = True
-            print(f"Found dataset marked for full deletion: {dataset['fileName']}")
+            print(
+                f"Found dataset marked for full deletion: {dataset['fileName']} from {bucket_name} bucket"
+            )
             for entry in dataset.get("history", []):
                 if "r2_object_key" in entry:
-                    objects_to_delete_from_r2.append({"Key": entry["r2_object_key"]})
+                    objects_to_delete_from_r2.append(
+                        {"Key": entry["r2_object_key"], "Bucket": target_bucket}
+                    )
         else:
             versions_to_keep = []
             for entry in dataset.get("history", []):
                 if entry.get("status") == "pending-deletion":
                     processed_deletion = True
                     print(
-                        f"Found version marked for deletion: {dataset['fileName']} v{entry['version']}"
+                        f"Found version marked for deletion: {dataset['fileName']} v{entry['version']} from {bucket_name} bucket"
                     )
                     if "r2_object_key" in entry:
                         objects_to_delete_from_r2.append(
-                            {"Key": entry["r2_object_key"]}
+                            {"Key": entry["r2_object_key"], "Bucket": target_bucket}
                         )
                 else:
                     versions_to_keep.append(entry)
@@ -162,18 +172,44 @@ def handle_deletions(manifest_data: list[dict[str, Any]]) -> bool:
         return False
 
     if objects_to_delete_from_r2:
-        print(
-            f"\nDeleting {len(objects_to_delete_from_r2)} objects from production R2 bucket..."
-        )
-        for i in range(0, len(objects_to_delete_from_r2), 1000):
-            chunk: Any = objects_to_delete_from_r2[i : i + 1000]
-            response = client.delete_objects(
-                Bucket=PROD_BUCKET, Delete={"Objects": chunk, "Quiet": True}
+        # Group objects by bucket for deletion
+        prod_objects = [
+            obj for obj in objects_to_delete_from_r2 if obj["Bucket"] == PROD_BUCKET
+        ]
+        internal_objects = [
+            obj for obj in objects_to_delete_from_r2 if obj["Bucket"] == INTERNAL_BUCKET
+        ]
+
+        if prod_objects:
+            print(
+                f"\nDeleting {len(prod_objects)} objects from production R2 bucket..."
             )
-            if response.get("Errors"):
-                print("  ❌ ERROR during batch deletion:", response["Errors"])
-                exit(1)
-        print("✅ Successfully deleted objects from R2.")
+            for i in range(0, len(prod_objects), 1000):
+                chunk: Any = prod_objects[i : i + 1000]
+                objects_only = [{"Key": obj["Key"]} for obj in chunk]
+                response = client.delete_objects(
+                    Bucket=PROD_BUCKET, Delete={"Objects": objects_only, "Quiet": True}
+                )
+                if response.get("Errors"):
+                    print("  ❌ ERROR during batch deletion:", response["Errors"])
+                    exit(1)
+            print("✅ Successfully deleted objects from production R2 bucket.")
+
+        if internal_objects:
+            print(
+                f"\nDeleting {len(internal_objects)} objects from internal R2 bucket..."
+            )
+            for i in range(0, len(internal_objects), 1000):
+                chunk: Any = internal_objects[i : i + 1000]
+                objects_only = [{"Key": obj["Key"]} for obj in chunk]
+                response = client.delete_objects(
+                    Bucket=INTERNAL_BUCKET,
+                    Delete={"Objects": objects_only, "Quiet": True},
+                )
+                if response.get("Errors"):
+                    print("  ❌ ERROR during batch deletion:", response["Errors"])
+                    exit(1)
+            print("✅ Successfully deleted objects from internal R2 bucket.")
 
     finalize_manifest(datasets_to_keep, "ci: Finalize manifest after data deletion")
     return True
@@ -186,6 +222,11 @@ def handle_publications(manifest_data: list[dict[str, Any]]) -> bool:
     """
     print("\n--- Phase 2: Checking for pending publications ---")
     for dataset in manifest_data:
+        # Get the bucket type for this dataset
+        bucket_type = dataset.get("bucket", "production")
+        target_bucket = INTERNAL_BUCKET if bucket_type == "internal" else PROD_BUCKET
+        bucket_name = "internal" if bucket_type == "internal" else "production"
+
         for i, entry in enumerate(dataset["history"]):
             if entry.get("commit") == "pending-merge":
                 commit_details = get_commit_details()
@@ -197,7 +238,9 @@ def handle_publications(manifest_data: list[dict[str, Any]]) -> bool:
                 if "staging_key" in entry and entry["staging_key"]:
                     staging_key = entry.pop("staging_key")
                     final_key = entry["r2_object_key"]
-                    print(f"Publishing: {dataset['fileName']} v{entry['version']}")
+                    print(
+                        f"Publishing: {dataset['fileName']} v{entry['version']} to {bucket_name} bucket"
+                    )
                     print(f"  Description: {entry['description']}")
                     try:
                         copy_source: Any = {
@@ -205,9 +248,11 @@ def handle_publications(manifest_data: list[dict[str, Any]]) -> bool:
                             "Key": staging_key,
                         }
                         client.copy_object(
-                            CopySource=copy_source, Bucket=PROD_BUCKET, Key=final_key
+                            CopySource=copy_source, Bucket=target_bucket, Key=final_key
                         )
-                        print("  ✅ Server-side copy successful.")
+                        print(
+                            f"  ✅ Server-side copy to {bucket_name} bucket successful."
+                        )
                         client.delete_object(Bucket=STAGING_BUCKET, Key=staging_key)
                         print("  ✅ Staging object deleted.")
                     except ClientError as e:
@@ -215,14 +260,14 @@ def handle_publications(manifest_data: list[dict[str, Any]]) -> bool:
                         exit(1)
                 else:
                     print(
-                        f"Finalizing rollback: {dataset['fileName']} v{entry['version']}"
+                        f"Finalizing rollback: {dataset['fileName']} v{entry['version']} in {bucket_name} bucket"
                     )
                     print(f"  Description: {entry['description']}")
 
                 dataset["history"][i] = entry
                 finalize_manifest(
                     manifest_data,
-                    f"ci: Publish {dataset['fileName']} {entry['version']}",
+                    f"ci: Publish {dataset['fileName']} {entry['version']} to {bucket_name}",
                 )
                 return True  # Process only one publication per run
 

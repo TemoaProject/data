@@ -58,8 +58,11 @@ def hash_file(file_path: Path) -> str:
     return h.hexdigest()
 
 
-def upload_to_r2(client: S3Client, file_path: Path, object_key: str) -> None:
+def upload_to_r2(
+    client: S3Client, file_path: Path, object_key: str, bucket: str = None
+) -> None:
     """Uploads a file to R2 with a progress bar."""
+    target_bucket = bucket or settings.bucket
     file_size = file_path.stat().st_size
     with Progress() as progress:
         task = progress.add_task(
@@ -67,7 +70,7 @@ def upload_to_r2(client: S3Client, file_path: Path, object_key: str) -> None:
         )
         client.upload_file(
             str(file_path),
-            settings.bucket,
+            target_bucket,
             object_key,
             Callback=lambda bytes_transferred: progress.update(
                 task, advance=bytes_transferred
@@ -75,10 +78,13 @@ def upload_to_r2(client: S3Client, file_path: Path, object_key: str) -> None:
         )
 
 
-def download_from_r2(client: S3Client, object_key: str, download_path: Path) -> None:
+def download_from_r2(
+    client: S3Client, object_key: str, download_path: Path, bucket: str = None
+) -> None:
     """Downloads a file from R2 with a progress bar."""
+    target_bucket = bucket or settings.bucket
     try:
-        file_size = client.head_object(Bucket=settings.bucket, Key=object_key)[
+        file_size = client.head_object(Bucket=target_bucket, Key=object_key)[
             "ContentLength"
         ]
         with Progress() as progress:
@@ -86,7 +92,7 @@ def download_from_r2(client: S3Client, object_key: str, download_path: Path) -> 
                 f"[cyan]Downloading {download_path.name}...", total=file_size
             )
             client.download_file(
-                settings.bucket,
+                target_bucket,
                 object_key,
                 str(download_path),
                 Callback=lambda bytes_transferred: progress.update(
@@ -99,7 +105,9 @@ def download_from_r2(client: S3Client, object_key: str, download_path: Path) -> 
         raise
 
 
-def pull_and_verify(object_key: str, expected_hash: str, output_path: Path) -> bool:
+def pull_and_verify(
+    object_key: str, expected_hash: str, output_path: Path, bucket: str = None
+) -> bool:
     """
     Downloads a file from R2, verifies its hash, and cleans up on failure.
 
@@ -108,7 +116,7 @@ def pull_and_verify(object_key: str, expected_hash: str, output_path: Path) -> b
     """
     client = get_r2_client()
     try:
-        download_from_r2(client, object_key, output_path)
+        download_from_r2(client, object_key, output_path, bucket)
     except Exception:
         return False  # Error message is printed inside download_from_r2
 
@@ -192,11 +200,12 @@ def generate_sql_diff(old_file: Path, new_file: Path) -> tuple[str, str]:
     return full_diff, summary
 
 
-def delete_from_r2(client: S3Client, object_key: str) -> None:
+def delete_from_r2(client: S3Client, object_key: str, bucket: str = None) -> None:
     """Deletes an object from the R2 bucket."""
+    target_bucket = bucket or settings.bucket
     console.print(f"Attempting to delete [yellow]{object_key}[/] from R2...")
     try:
-        client.delete_object(Bucket=settings.bucket, Key=object_key)
+        client.delete_object(Bucket=target_bucket, Key=object_key)
         console.print("✅ Rollback deletion successful.")
     except Exception as e:
         # This is a best-effort cleanup. We notify the user if it fails.
@@ -270,7 +279,7 @@ def _check_bucket_permissions(client: Any, bucket_name: str) -> VerificationResu
 
 def verify_r2_access() -> list[VerificationResult]:
     """
-    Verifies granular permissions for both production and staging buckets.
+    Verifies granular permissions for production, staging, and internal buckets.
 
     Returns:
         A list of result dictionaries, one for each bucket check.
@@ -282,6 +291,8 @@ def verify_r2_access() -> list[VerificationResult]:
         results.append(_check_bucket_permissions(client, settings.bucket))
         # Check Staging Bucket
         results.append(_check_bucket_permissions(client, settings.staging_bucket))
+        # Check Internal Bucket
+        results.append(_check_bucket_permissions(client, settings.internal_bucket))
     except Exception as e:
         # Catches errors during client creation (e.g., bad endpoint)
         connection_error: VerificationResult = {
@@ -304,6 +315,23 @@ def upload_to_staging(client: S3Client, file_path: Path, object_key: str) -> Non
         client.upload_file(
             str(file_path),
             settings.staging_bucket,
+            object_key,
+            Callback=lambda bytes_transferred: progress.update(
+                task, advance=bytes_transferred
+            ),
+        )
+
+
+def upload_to_internal(client: S3Client, file_path: Path, object_key: str) -> None:
+    """Uploads a file to the INTERNAL R2 bucket with a progress bar."""
+    file_size = file_path.stat().st_size
+    with Progress() as progress:
+        task = progress.add_task(
+            f"[blue]Uploading to internal: {file_path.name}...", total=file_size
+        )
+        client.upload_file(
+            str(file_path),
+            settings.internal_bucket,
             object_key,
             Callback=lambda bytes_transferred: progress.update(
                 task, advance=bytes_transferred

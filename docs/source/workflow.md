@@ -41,8 +41,8 @@ Go to GitHub and open a pull request from your feature branch to `main`. The dif
 
 Once the PR is reviewed, approved, and all status checks pass, merge it. The CI/CD pipeline takes over automatically:
 
-- It copies the data from the staging bucket to the production bucket.
+- It copies the data from the staging bucket to the appropriate target bucket (production or internal).
 - It finalizes the `manifest.json` with the new commit hash and description.
 - It pushes a final commit back to `main`.
 
-The new data version is now live and available to all users via `datamanager pull`.
+The new data version is now live and available via `datamanager pull`. **Note:** Internal datasets are only accessible to team members with appropriate R2 bucket permissions.

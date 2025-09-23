@@ -43,6 +43,7 @@ def test_repo(tmp_path: Path) -> Generator[Path, Any, None]:
     manifest_data = [
         {
             "fileName": "core-dataset.sqlite",
+            "bucket": "production",
             "latestVersion": "v2",
             "history": [
                 {

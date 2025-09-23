@@ -30,6 +30,7 @@ def test_prepare_for_create_success(test_repo: Path, mocker: MockerFixture) -> N
     # Verify the manifest entry was created correctly with no diff
     dataset = manifest.get_dataset("new-dataset.sqlite")
     assert dataset is not None
+    assert dataset["bucket"] == "production"  # Should default to production
     assert dataset["history"][0]["diffFromPrevious"] is None
     assert dataset["history"][0]["description"] == "pending-merge"
 
@@ -229,7 +230,7 @@ def test_prepare_interactive_success(test_repo: Path, mocker: MockerFixture) -> 
     main_app._prepare_interactive(mock_ctx)
 
     mock_run_logic.assert_called_once_with(
-        mock_ctx, name="new-dataset.sqlite", file=new_file
+        mock_ctx, name="new-dataset.sqlite", file=new_file, bucket="production"
     )
 
 
@@ -295,6 +296,7 @@ def test_pull_interactive_success(test_repo: Path, mocker: MockerFixture) -> Non
         name="core-dataset.sqlite",
         version="v1",
         output=Path("./pulled-file.sqlite"),
+        bucket="production",
     )
 
 
@@ -469,3 +471,44 @@ def test_prune_versions_no_op(test_repo: Path, mocker: MockerFixture) -> None:
 
     assert result.exit_code == 0, result.stdout
     assert "No action needed" in result.stdout
+
+
+def test_prepare_internal_bucket(test_repo: Path, mocker: MockerFixture) -> None:
+    """Test the 'prepare' command for internal bucket."""
+    os.chdir(test_repo)
+    new_file = test_repo / "internal_dataset.sqlite"
+    new_file.touch()
+
+    mocker.patch("datamanager.core.get_r2_client")
+    mock_upload = mocker.patch("datamanager.core.upload_to_staging")
+
+    result = runner.invoke(
+        app,
+        ["prepare", "internal-dataset.sqlite", str(new_file), "--bucket", "internal"],
+    )
+
+    assert result.exit_code == 0, result.stdout
+    assert "Preparation complete!" in result.stdout
+    mock_upload.assert_called_once()
+
+    # Verify the manifest entry was created correctly for internal bucket
+    dataset = manifest.get_dataset("internal-dataset.sqlite")
+    assert dataset is not None
+    assert dataset["bucket"] == "internal"
+    assert dataset["history"][0]["diffFromPrevious"] is None
+    assert dataset["history"][0]["description"] == "pending-merge"
+
+
+def test_pull_internal_bucket(test_repo: Path, mocker: MockerFixture) -> None:
+    """Test the 'pull' command for internal bucket."""
+    os.chdir(test_repo)
+    mock_pull = mocker.patch("datamanager.core.pull_and_verify", return_value=True)
+
+    result = runner.invoke(app, ["pull", "core-dataset.sqlite", "--bucket", "internal"])
+
+    assert result.exit_code == 0
+    assert "✅ Success!" in result.stdout
+    mock_pull.assert_called_once()
+    call_args = mock_pull.call_args[0]
+    # Should use internal bucket
+    assert call_args[3] == "internal"  # bucket parameter

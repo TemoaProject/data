@@ -1,6 +1,7 @@
 [
   {
     "fileName": "test_database.sqlite",
+    "bucket": "production",
     "latestVersion": "v1",
     "history": [
       {
@@ -29,6 +30,23 @@
         "diffFromPrevious": "diffs/test_database.sqlite/diff-v1-to-v2.diff",
         "commit": "a621125",
         "description": "updating test_database to get multiple versions"
+      }
+    ]
+  },
+  {
+    "fileName": "internal_test_database.sqlite",
+    "bucket": "internal",
+    "latestVersion": "v1",
+    "history": [
+      {
+        "version": "v1",
+        "timestamp": "2025-09-23T21:36:33.540270Z",
+        "sha256": "6d60f0035a80de92c3f3df433212699e0584a09a7d4943693ae0889d98640641",
+        "r2_object_key": "internal/v1-6d60f0035a80de92c3f3df433212699e0584a09a7d4943693ae0889d98640641.sqlite",
+        "staging_key": "staging-uploads/6d60f0035a80de92c3f3df433212699e0584a09a7d4943693ae0889d98640641.sqlite",
+        "diffFromPrevious": null,
+        "commit": "pending-merge",
+        "description": "pending-merge"
       }
     ]
   }

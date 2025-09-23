@@ -88,12 +88,20 @@ def test_verify_r2_access_full_permissions(mocker: MockerFixture) -> None:
 
     results = core.verify_r2_access()
 
-    # Should return results for both production and staging buckets
-    assert len(results) == 2
+    # Should return results for production, staging, and internal buckets
+    assert len(results) == 3
     prod_result = results[0]
+    staging_result = results[1]
+    internal_result = results[2]
     assert prod_result["exists"] is True
+    assert staging_result["exists"] is True
+    assert internal_result["exists"] is True
     assert all(prod_result["permissions"].values())
+    assert all(staging_result["permissions"].values())
+    assert all(internal_result["permissions"].values())
     assert "Full access" in prod_result["message"]
+    assert "Full access" in staging_result["message"]
+    assert "Full access" in internal_result["message"]
 
 
 def test_verify_r2_access_read_only(mocker: MockerFixture) -> None:

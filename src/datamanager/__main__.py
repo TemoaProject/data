@@ -67,6 +67,10 @@ def verify(ctx: typer.Context) -> None:
         title="R2 Bucket Permissions Report",
     )
 
+    # Update table headers to be more descriptive
+    table.columns[0].header = "Bucket"
+    table.columns[1].header = "Status"
+
     overall_success = True
     for res in results:
         status_icon = (
@@ -97,11 +101,14 @@ def verify(ctx: typer.Context) -> None:
 def list_datasets(ctx: typer.Context) -> None:
     """Lists all datasets tracked in the manifest."""
     data = manifest.read_manifest()
-    table = Table("Dataset Name", "Latest Version", "Last Updated", "SHA256")
+    table = Table("Dataset Name", "Bucket", "Latest Version", "Last Updated", "SHA256")
     for item in data:
         latest = item["history"][0]
+        bucket_type = item.get("bucket", "production")
+        bucket_display = "🔒 Internal" if bucket_type == "internal" else "🌐 Production"
         table.add_row(
             item["fileName"],
+            bucket_display,
             latest["version"],
             # latest["timestamp"],
             f"{_rel(latest['timestamp'])} ({latest['timestamp']})",
@@ -110,9 +117,13 @@ def list_datasets(ctx: typer.Context) -> None:
     console.print(table)
 
 
-def _run_pull_logic(name: str, version: str, output: Optional[Path]) -> None:
+def _run_pull_logic(
+    name: str, version: str, output: Optional[Path], bucket: str = "production"
+) -> None:
     """The core logic for pulling and verifying a dataset."""
-    console.print(f"🔎 Locating version '{version}' for dataset '{name}'...")
+    console.print(
+        f"🔎 Locating version '{version}' for dataset '{name}' from {bucket} bucket..."
+    )
     version_entry = manifest.get_version_entry(name, version)
 
     if not version_entry:
@@ -132,8 +143,16 @@ def _run_pull_logic(name: str, version: str, output: Optional[Path]) -> None:
         f"Pulling version [magenta]{version_entry['version']}[/] (commit: {version_entry['commit']}) to [cyan]{final_path}[/]"
     )
 
+    # Determine which bucket to use
+    target_bucket = (
+        settings.internal_bucket if bucket == "internal" else settings.bucket
+    )
+
     success = core.pull_and_verify(
-        version_entry["r2_object_key"], version_entry["sha256"], final_path
+        version_entry["r2_object_key"],
+        version_entry["sha256"],
+        final_path,
+        target_bucket,
     )
 
     if success:
@@ -162,9 +181,15 @@ def pull(
         "-o",
         help="Output path for the file. Defaults to the dataset name in the current directory.",
     ),
+    bucket: str = typer.Option(
+        "production",
+        "--bucket",
+        "-b",
+        help="Bucket to pull from: 'production' or 'internal'. Defaults to production.",
+    ),
 ) -> None:
     """Pulls a specific version of a dataset from R2 and verifies its integrity."""
-    _run_pull_logic(name, version, output)
+    _run_pull_logic(name, version, output, bucket)
 
 
 def _pull_interactive(ctx: typer.Context) -> None:
@@ -176,19 +201,32 @@ def _pull_interactive(ctx: typer.Context) -> None:
         console.print("[yellow]No datasets found in the manifest to pull.[/]")
         return
 
-    dataset_names = [ds["fileName"] for ds in all_datasets]
-    selected_name = questionary.select(
-        "Which dataset would you like to pull?", choices=dataset_names
+    # Show datasets with bucket information
+    dataset_choices = []
+    for ds in all_datasets:
+        bucket_type = ds.get("bucket", "production")
+        bucket_icon = "🔒" if bucket_type == "internal" else "🌐"
+        bucket_name = "Internal" if bucket_type == "internal" else "Production"
+        dataset_choices.append(f"{ds['fileName']} ({bucket_icon} {bucket_name})")
+
+    selected_choice = questionary.select(
+        "Which dataset would you like to pull?", choices=dataset_choices
     ).ask()
 
-    if selected_name is None:
+    if selected_choice is None:
         console.print("Pull cancelled.")
         return
+
+    # Extract dataset name from choice
+    selected_name = selected_choice.split(" (")[0]
 
     dataset = manifest.get_dataset(selected_name)
     if not dataset or not dataset["history"]:
         console.print(f"[red]Error: No version history found for {selected_name}.[/]")
         return
+
+    # Determine which bucket this dataset belongs to
+    dataset_bucket = dataset.get("bucket", "production")
 
     version_choices = [
         f"{entry['version']} (commit: {entry['commit']}, {_rel(entry['timestamp'])})"
@@ -218,14 +256,17 @@ def _pull_interactive(ctx: typer.Context) -> None:
             name=selected_name,
             version=version_to_pull,
             output=Path(output_path_str),
+            bucket=dataset_bucket,  # Use the dataset's actual bucket
         )
     except typer.Exit:
         pass
 
 
-def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
+def _run_prepare_logic(
+    ctx: typer.Context, name: str, file: Path, bucket: str = "production"
+) -> None:
     """The core logic for preparing a dataset for release."""
-    console.print(f"🚀 Preparing update for [cyan]{name}[/]...")
+    console.print(f"🚀 Preparing update for [cyan]{name}[/] to {bucket} bucket...")
 
     new_hash = core.hash_file(file)
     dataset = manifest.get_dataset(name)
@@ -257,8 +298,13 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
         diff_git_path: Optional[Path] = None
         with tempfile.TemporaryDirectory() as tempdir:
             old_path = Path(tempdir) / "prev.sqlite"
-            # Download from the PRODUCTION bucket
-            core.download_from_r2(client, latest_version["r2_object_key"], old_path)
+            # Download from the appropriate bucket
+            target_bucket = (
+                settings.internal_bucket if bucket == "internal" else settings.bucket
+            )
+            core.download_from_r2(
+                client, latest_version["r2_object_key"], old_path, target_bucket
+            )
 
             full_diff, summary = core.generate_sql_diff(old_path, file)
 
@@ -293,8 +339,13 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
 
     else:
         # --- This is for CREATE ---
+        # Determine the bucket prefix for the R2 object key
+        bucket_prefix = (
+            "internal" if bucket == "internal" else Path(Path(name).stem).as_posix()
+        )
         new_dataset_obj = {
             "fileName": name,
+            "bucket": bucket,  # Track which bucket this dataset belongs to
             "latestVersion": "v1",
             "history": [
                 {
@@ -303,7 +354,7 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
                     .isoformat()
                     .replace("+00:00", "Z"),
                     "sha256": new_hash,
-                    "r2_object_key": f"{Path(Path(name).stem)}/v1-{new_hash}.sqlite",
+                    "r2_object_key": f"{bucket_prefix}/v1-{new_hash}.sqlite",
                     "staging_key": staging_key,
                     "diffFromPrevious": None,  # Explicitly None for new datasets
                     "commit": "pending-merge",
@@ -331,18 +382,24 @@ def prepare(
     name: str = typer.Argument(..., help="The logical name of the dataset."),
     file: Path = typer.Argument(..., help="Path to the .sqlite file.", exists=True),
     no_prompt: bool = COMMON_OPTIONS["no_prompt"],
+    bucket: str = typer.Option(
+        "production",
+        "--bucket",
+        "-b",
+        help="Target bucket: 'production' or 'internal'. Defaults to production.",
+    ),
 ) -> None:
     """
     Prepares a dataset for release: uploads to staging and updates the manifest.
     This is the first step in the CI/CD-driven workflow.
     """
     ctx.obj["no_prompt"] = no_prompt or ctx.obj.get("no_prompt")
-    _run_prepare_logic(ctx, name, file)
+    _run_prepare_logic(ctx, name, file, bucket)
 
 
 def _prepare_interactive(ctx: typer.Context) -> None:
-    """Guides the user through preparing a dataset for release."""
-    console.print("\n[bold]Interactive Dataset Preparation[/]")
+    """Guides the user through preparing a dataset for production release."""
+    console.print("\n[bold]Interactive Dataset Preparation (Production)[/]")
 
     selected_file_str = questionary.path(
         "Enter the path to the .sqlite file:",
@@ -363,7 +420,7 @@ def _prepare_interactive(ctx: typer.Context) -> None:
         return
 
     console.print(
-        f"\nYou are about to prepare dataset [cyan]{selected_name}[/] from file [green]{selected_file_str}[/]."
+        f"\nYou are about to prepare dataset [cyan]{selected_name}[/] for [bold green]PRODUCTION[/] release from file [green]{selected_file_str}[/]."
     )
     proceed = _ask_confirm(ctx, "Do you want to continue?", default=False)
     if not proceed:
@@ -371,7 +428,50 @@ def _prepare_interactive(ctx: typer.Context) -> None:
         return
 
     try:
-        _run_prepare_logic(ctx, name=selected_name, file=Path(selected_file_str))
+        _run_prepare_logic(
+            ctx, name=selected_name, file=Path(selected_file_str), bucket="production"
+        )
+    except typer.Exit:
+        pass
+
+
+def _prepare_internal_interactive(ctx: typer.Context) -> None:
+    """Guides the user through preparing a dataset for internal release."""
+    console.print("\n[bold]Interactive Dataset Preparation (Internal)[/]")
+
+    selected_file_str = questionary.path(
+        "Enter the path to the .sqlite file:",
+        validate=lambda path: Path(path).is_file(),
+    ).ask()
+    if selected_file_str is None:
+        console.print("Preparation cancelled.")
+        return
+
+    default_name = Path(selected_file_str).name
+    selected_name = questionary.text(
+        "Enter the logical name for this dataset:",
+        default=default_name,
+        validate=lambda text: len(text) > 0 or "Name cannot be empty.",
+    ).ask()
+    if selected_name is None:
+        console.print("Preparation cancelled.")
+        return
+
+    console.print(
+        f"\nYou are about to prepare dataset [cyan]{selected_name}[/] for [bold blue]INTERNAL[/] release from file [green]{selected_file_str}[/]."
+    )
+    console.print(
+        "[bold yellow]Note:[/] Internal datasets are only accessible to team members."
+    )
+    proceed = _ask_confirm(ctx, "Do you want to continue?", default=False)
+    if not proceed:
+        console.print("Preparation cancelled.")
+        return
+
+    try:
+        _run_prepare_logic(
+            ctx, name=selected_name, file=Path(selected_file_str), bucket="internal"
+        )
     except typer.Exit:
         pass
 
@@ -684,7 +784,8 @@ def main(ctx: typer.Context, no_prompt: bool = COMMON_OPTIONS["no_prompt"]) -> N
 
     actions: dict[str, Callable[[typer.Context], None] | str] = {
         "List all datasets": list_datasets,
-        "Prepare a dataset for release": _prepare_interactive,
+        "Prepare a dataset for production release": _prepare_interactive,
+        "Prepare a dataset for internal release": _prepare_internal_interactive,
         "Pull a dataset version": _pull_interactive,
         "Rollback a dataset to a previous version": _rollback_interactive,
         "Delete a dataset": _delete_interactive,

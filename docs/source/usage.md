@@ -54,7 +54,7 @@ uv run datamanager list-datasets
 
 ### `pull`
 
-Downloads a dataset from the **production** R2 bucket and verifies its integrity.
+Downloads a dataset from the appropriate R2 bucket (production or internal) and verifies its integrity. The bucket is determined by the dataset's configuration in the manifest.
 
 ```bash
 # Pull the latest version
@@ -94,7 +94,7 @@ uv run datamanager prune-versions <dataset-name.sqlite> --keep 5
 
 ### `verify`
 
-Checks R2 credentials and reports granular read/write/delete permissions for both production and staging buckets.
+Checks R2 credentials and reports granular read/write/delete permissions for all three buckets (production, staging, and internal).
 
 ```bash
 uv run datamanager verify

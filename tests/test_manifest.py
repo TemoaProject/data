@@ -33,6 +33,7 @@ def test_get_dataset(test_repo: Path) -> None:
     dataset = manifest.get_dataset("core-dataset.sqlite")
     assert dataset is not None
     assert dataset["latestVersion"] == "v2"
+    assert dataset["bucket"] == "production"  # Should have bucket field
 
     non_existent = manifest.get_dataset("non-existent.sqlite")
     assert non_existent is None
@@ -48,3 +49,27 @@ def test_update_latest_history_entry(test_repo: Path) -> None:
     assert data[0]["history"][0]["version"] == "v2"
     assert data[0]["history"][0]["commit"] == "abcdef"
     assert data[0]["latestVersion"] == "v2"
+    assert data[0]["bucket"] == "production"  # Should preserve bucket field
+
+
+def test_get_dataset_bucket(test_repo: Path) -> None:
+    """Test getting the bucket type for a dataset."""
+    os.chdir(test_repo)
+    bucket = manifest.get_dataset_bucket("core-dataset.sqlite")
+    assert bucket == "production"
+
+    # Test non-existent dataset
+    bucket = manifest.get_dataset_bucket("non-existent.sqlite")
+    assert bucket == "production"  # Should default to production
+
+
+def test_update_dataset_bucket(test_repo: Path) -> None:
+    """Test updating the bucket type for a dataset."""
+    os.chdir(test_repo)
+    manifest.update_dataset_bucket("core-dataset.sqlite", "internal")
+
+    data = manifest.read_manifest()
+    assert data[0]["bucket"] == "internal"
+
+    # Test non-existent dataset (should not crash)
+    manifest.update_dataset_bucket("non-existent.sqlite", "production")

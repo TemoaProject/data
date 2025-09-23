@@ -21,6 +21,8 @@ __all__ = [
     "get_version_entry",
     "add_new_dataset",
     "update_dataset",
+    "get_dataset_bucket",
+    "update_dataset_bucket",
 ]
 
 # Initialize console for any feedback
@@ -196,6 +198,38 @@ def add_new_dataset(dataset_object: dict[str, Any]) -> None:
     """
     data = read_manifest()
     data.append(dataset_object)
+    write_manifest(data)
+
+
+def get_dataset_bucket(name: str) -> str:
+    """
+    Gets the bucket type for a dataset.
+
+    Args:
+        name: The 'fileName' of the dataset.
+
+    Returns:
+        The bucket type ('production' or 'internal'), defaults to 'production'.
+    """
+    dataset = get_dataset(name)
+    if not dataset:
+        return "production"  # Default for existing datasets
+    return dataset.get("bucket", "production")
+
+
+def update_dataset_bucket(name: str, bucket: str) -> None:
+    """
+    Updates the bucket type for a dataset.
+
+    Args:
+        name: The 'fileName' of the dataset.
+        bucket: The bucket type ('production' or 'internal').
+    """
+    data = read_manifest()
+    for item in data:
+        if item.get("fileName") == name:
+            item["bucket"] = bucket
+            break
     write_manifest(data)
 
 

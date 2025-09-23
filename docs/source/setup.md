@@ -1,5 +1,11 @@
 # Setup and Installation
 
+This tool requires three Cloudflare R2 buckets:
+
+- **Production bucket**: For publicly accessible datasets
+- **Staging bucket**: For temporary uploads during the review process
+- **Internal bucket**: For team-only datasets with restricted access
+
 1. **Clone the Repository:**
 
     ```bash
@@ -37,6 +43,7 @@
     R2_SECRET_ACCESS_KEY="your_r2_secret_key"
     R2_PRODUCTION_BUCKET="your-production-bucket-name"
     R2_STAGING_BUCKET="your-staging-bucket-name"
+    R2_INTERNAL_BUCKET="your-internal-bucket-name"
     ```
 
 4. **Verify Configuration:**

@@ -59,19 +59,41 @@ flowchart TD
 
 ## Features
 
+- **Multi-Bucket Support:** Choose between production (public) and internal (team-only) buckets for different data access levels.
 - **CI/CD-Driven Publishing:** Data publication is transactional and automated via GitHub Actions after a pull request is merged, preventing inconsistent states.
 - **Enhanced Security:** Production credentials are never stored on developer machines; they are only used by the trusted GitHub Actions runner.
 - **Interactive TUI:** Run `datamanager` with no arguments for a user-friendly, menu-driven interface.
 - **Data Lifecycle Management:** A full suite of commands for rollback, deletion, and pruning, all gated by the same secure PR workflow.
 - **Integrity Verification:** All downloaded files are automatically checked against their SHA256 hash from the manifest.
-- **Credential Verification:** A detailed verify command reports read/write/delete permissions for both production and staging buckets.
+- **Credential Verification:** A detailed verify command reports read/write/delete permissions for production, staging, and internal buckets.
+
+## Bucket Types
+
+The system supports two types of data storage buckets:
+
+### Production Bucket (Public)
+
+- **Access Level:** Publicly accessible
+- **Use Case:** Data intended for public consumption
+- **Default:** Used by default for all operations
+- **Permissions:** Requires appropriate public access settings in Cloudflare R2
+
+### Internal Bucket (Team-Only)
+
+- **Access Level:** Team members only
+- **Use Case:** Sensitive or internal data not for public consumption
+- **Security:** Private access, team credentials required
+- **Usage:** Specify `--bucket internal` when using commands
 
 ## Prerequisites
 
 - Python 3.12+
 - Git
 - `sqlite3` command-line tool
-- An active Cloudflare account with **two** R2 buckets (one for production, one for staging).
+- An active Cloudflare account with **three** R2 buckets:
+  - Production bucket (publicly accessible)
+  - Staging bucket (for temporary uploads)
+  - Internal bucket (team-only access)
 - For the data in this repo, contact the OEO team for access to the R2 buckets.
 
 ## ⚙️ Setup and Installation
@@ -113,6 +135,7 @@ flowchart TD
     R2_SECRET_ACCESS_KEY="your_r2_secret_key"
     R2_PRODUCTION_BUCKET="your-production-bucket-name"
     R2_STAGING_BUCKET="your-staging-bucket-name"
+    R2_INTERNAL_BUCKET="your-internal-bucket-name"
     ```
 
 4. **Verify Configuration:**
@@ -143,8 +166,11 @@ git checkout -b feat/update-energy-data
 Use the `datamanager` tool to stage your changes. The `prepare` command handles both creating new datasets and updating existing ones.
 
 ```bash
-# This uploads the file to the staging bucket and updates manifest.json locally
+# Prepare for production bucket (default)
 uv run datamanager prepare energy-data.sqlite ./local-files/new-energy.sqlite
+
+# Prepare for internal bucket
+uv run datamanager prepare energy-data.sqlite ./local-files/new-energy.sqlite --bucket internal
 ```
 
 The tool will guide you through the process. For other maintenance tasks like `rollback` or `delete`, use the corresponding command.
@@ -191,7 +217,7 @@ This will launch a menu where you can choose your desired action, including the 
 
 ### Command-Line Interface (CLI)
 
-You can also use the command-line interface directly for specific tasks or for scripting purposes.
+You can also use the command-line interface directly for specific tasks or for scripting purposes. Use the `--bucket` option to specify whether to work with production or internal data.
 
 ![CLI](assets/cli.png)
 
@@ -231,11 +257,17 @@ uv run datamanager list-datasets
 Downloads a dataset from the **production** R2 bucket and verifies its integrity.
 
 ```bash
-# Pull the latest version
+# Pull the latest version from production (default)
 uv run datamanager pull user-profiles.sqlite
 
-# Pull a specific version
+# Pull from internal bucket
+uv run datamanager pull user-profiles.sqlite --bucket internal
+
+# Pull a specific version from production
 uv run datamanager pull user-profiles.sqlite --version v2
+
+# Pull a specific version from internal bucket
+uv run datamanager pull user-profiles.sqlite --version v2 --bucket internal
 ```
 
 ![pull](assets/pull.png)
@@ -268,7 +300,7 @@ uv run datamanager prune-versions <dataset-name.sqlite> --keep 5
 
 #### `verify`
 
-Checks R2 credentials and reports granular read/write/delete permissions for both production and staging buckets.
+Checks R2 credentials and reports granular read/write/delete permissions for production, staging, and internal buckets.
 
 ```bash
 uv run datamanager verify
