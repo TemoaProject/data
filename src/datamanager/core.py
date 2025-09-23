@@ -59,7 +59,7 @@ def hash_file(file_path: Path) -> str:
 
 
 def upload_to_r2(
-    client: S3Client, file_path: Path, object_key: str, bucket: str = None
+    client: S3Client, file_path: Path, object_key: str, bucket: str | None = None
 ) -> None:
     """Uploads a file to R2 with a progress bar."""
     target_bucket = bucket or settings.bucket
@@ -79,7 +79,7 @@ def upload_to_r2(
 
 
 def download_from_r2(
-    client: S3Client, object_key: str, download_path: Path, bucket: str = None
+    client: S3Client, object_key: str, download_path: Path, bucket: str | None = None
 ) -> None:
     """Downloads a file from R2 with a progress bar."""
     target_bucket = bucket or settings.bucket
@@ -106,7 +106,7 @@ def download_from_r2(
 
 
 def pull_and_verify(
-    object_key: str, expected_hash: str, output_path: Path, bucket: str = None
+    object_key: str, expected_hash: str, output_path: Path, bucket: str | None = None
 ) -> bool:
     """
     Downloads a file from R2, verifies its hash, and cleans up on failure.
@@ -200,7 +200,9 @@ def generate_sql_diff(old_file: Path, new_file: Path) -> tuple[str, str]:
     return full_diff, summary
 
 
-def delete_from_r2(client: S3Client, object_key: str, bucket: str = None) -> None:
+def delete_from_r2(
+    client: S3Client, object_key: str, bucket: str | None = None
+) -> None:
     """Deletes an object from the R2 bucket."""
     target_bucket = bucket or settings.bucket
     console.print(f"Attempting to delete [yellow]{object_key}[/] from R2...")

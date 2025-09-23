@@ -214,7 +214,8 @@ def get_dataset_bucket(name: str) -> str:
     dataset = get_dataset(name)
     if not dataset:
         return "production"  # Default for existing datasets
-    return dataset.get("bucket", "production")
+    bucket = dataset.get("bucket", "production")
+    return bucket if bucket is not None else "production"
 
 
 def update_dataset_bucket(name: str, bucket: str) -> None:
