@@ -49,6 +49,41 @@ def get_r2_client() -> S3Client:
     )
 
 
+def resolve_bucket_alias(bucket_alias: str) -> str:
+    """
+    Resolves a bucket alias to the actual bucket name.
+
+    Args:
+        bucket_alias: The bucket alias ("production" or "internal")
+
+    Returns:
+        The actual bucket name from settings
+    """
+    if bucket_alias == "internal":
+        return settings.internal_bucket
+    else:
+        return settings.bucket
+
+
+def _resolve_bucket(bucket: str | None) -> str:
+    """
+    Resolves bucket parameter to actual bucket name.
+
+    Args:
+        bucket: Bucket name, alias, or None
+
+    Returns:
+        The actual bucket name from settings
+    """
+    if bucket is None or bucket == "production":
+        return settings.bucket
+    elif bucket == "internal":
+        return settings.internal_bucket
+    else:
+        # Return raw bucket name if it's not an alias
+        return bucket
+
+
 def hash_file(file_path: Path) -> str:
     """Calculates and returns the SHA-256 hash of a file."""
     h = hashlib.sha256()
@@ -62,7 +97,7 @@ def upload_to_r2(
     client: S3Client, file_path: Path, object_key: str, bucket: str | None = None
 ) -> None:
     """Uploads a file to R2 with a progress bar."""
-    target_bucket = bucket or settings.bucket
+    target_bucket = _resolve_bucket(bucket)
     file_size = file_path.stat().st_size
     with Progress() as progress:
         task = progress.add_task(
@@ -82,7 +117,7 @@ def download_from_r2(
     client: S3Client, object_key: str, download_path: Path, bucket: str | None = None
 ) -> None:
     """Downloads a file from R2 with a progress bar."""
-    target_bucket = bucket or settings.bucket
+    target_bucket = _resolve_bucket(bucket)
     try:
         file_size = client.head_object(Bucket=target_bucket, Key=object_key)[
             "ContentLength"
@@ -108,6 +143,30 @@ def download_from_r2(
 def pull_and_verify(
     object_key: str, expected_hash: str, output_path: Path, bucket: str | None = None
 ) -> bool:
+    """
+    Downloads a file from R2, verifies its hash, and cleans up on failure.
+
+    Returns:
+        True if download and verification succeed, False otherwise.
+    """
+    client = get_r2_client()
+    try:
+        download_from_r2(client, object_key, output_path, bucket)
+    except Exception:
+        return False  # Error message is printed inside download_from_r2
+
+    console.print("Verifying file integrity...")
+    downloaded_hash = hash_file(output_path)
+
+    if downloaded_hash == expected_hash:
+        return True
+    else:
+        console.print("[bold red]Integrity check FAILED![/]")
+        console.print(f"  Expected SHA256: {expected_hash}")
+        console.print(f"  Actual SHA256:   {downloaded_hash}")
+        console.print(f"Deleting corrupted file: [yellow]{output_path}[/]")
+        os.remove(output_path)
+        return False
     """
     Downloads a file from R2, verifies its hash, and cleans up on failure.
 
@@ -204,7 +263,7 @@ def delete_from_r2(
     client: S3Client, object_key: str, bucket: str | None = None
 ) -> None:
     """Deletes an object from the R2 bucket."""
-    target_bucket = bucket or settings.bucket
+    target_bucket = _resolve_bucket(bucket)
     console.print(f"Attempting to delete [yellow]{object_key}[/] from R2...")
     try:
         client.delete_object(Bucket=target_bucket, Key=object_key)

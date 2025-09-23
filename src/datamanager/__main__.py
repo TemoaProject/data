@@ -143,16 +143,11 @@ def _run_pull_logic(
         f"Pulling version [magenta]{version_entry['version']}[/] (commit: {version_entry['commit']}) to [cyan]{final_path}[/]"
     )
 
-    # Determine which bucket to use
-    target_bucket = (
-        settings.internal_bucket if bucket == "internal" else settings.bucket
-    )
-
     success = core.pull_and_verify(
         version_entry["r2_object_key"],
         version_entry["sha256"],
         final_path,
-        target_bucket,
+        bucket,
     )
 
     if success:
@@ -298,12 +293,9 @@ def _run_prepare_logic(
         diff_git_path: Optional[Path] = None
         with tempfile.TemporaryDirectory() as tempdir:
             old_path = Path(tempdir) / "prev.sqlite"
-            # Download from the appropriate bucket
-            target_bucket = (
-                settings.internal_bucket if bucket == "internal" else settings.bucket
-            )
+            # Download from the appropriate bucket using core helper
             core.download_from_r2(
-                client, latest_version["r2_object_key"], old_path, target_bucket
+                client, latest_version["r2_object_key"], old_path, bucket
             )
 
             full_diff, summary = core.generate_sql_diff(old_path, file)
