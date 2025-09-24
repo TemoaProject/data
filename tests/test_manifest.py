@@ -73,3 +73,59 @@ def test_update_dataset_bucket(test_repo: Path) -> None:
 
     # Test non-existent dataset (should not crash)
     manifest.update_dataset_bucket("non-existent.sqlite", "production")
+
+
+def test_get_dataset_bucket_default(test_repo: Path) -> None:
+    """Test getting bucket type for a dataset that doesn't have bucket field."""
+    os.chdir(test_repo)
+
+    # Create a dataset without bucket field (simulate old manifest)
+    data = manifest.read_manifest()
+    if data:
+        # Remove bucket field to simulate old dataset
+        del data[0]["bucket"]
+        manifest.write_manifest(data)
+
+        bucket = manifest.get_dataset_bucket("core-dataset.sqlite")
+        assert bucket == "production"  # Should default to production
+
+
+def test_get_dataset_bucket_internal(test_repo: Path) -> None:
+    """Test getting bucket type for internal dataset."""
+    os.chdir(test_repo)
+
+    # Set dataset to internal bucket
+    manifest.update_dataset_bucket("core-dataset.sqlite", "internal")
+
+    bucket = manifest.get_dataset_bucket("core-dataset.sqlite")
+    assert bucket == "internal"
+
+
+def test_get_dataset_bucket_production(test_repo: Path) -> None:
+    """Test getting bucket type for production dataset."""
+    os.chdir(test_repo)
+
+    # Set dataset to production bucket
+    manifest.update_dataset_bucket("core-dataset.sqlite", "production")
+
+    bucket = manifest.get_dataset_bucket("core-dataset.sqlite")
+    assert bucket == "production"
+
+
+def test_get_dataset_bucket_nonexistent() -> None:
+    """Test getting bucket type for non-existent dataset."""
+    bucket = manifest.get_dataset_bucket("non-existent.sqlite")
+    assert bucket == "production"  # Should default to production
+
+
+def test_update_dataset_bucket_invalid_bucket(test_repo: Path) -> None:
+    """Test updating dataset bucket with invalid bucket type."""
+    os.chdir(test_repo)
+
+    # Should not crash with invalid bucket type
+    manifest.update_dataset_bucket("core-dataset.sqlite", "invalid-bucket")
+
+    data = manifest.read_manifest()
+    assert (
+        data[0]["bucket"] == "invalid-bucket"
+    )  # Should still update even with invalid value

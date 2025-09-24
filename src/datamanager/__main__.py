@@ -258,7 +258,7 @@ def _pull_interactive(ctx: typer.Context) -> None:
 
 
 def _run_prepare_logic(
-    ctx: typer.Context, name: str, file: Path, bucket: str = "production"
+    _ctx: typer.Context, name: str, file: Path, bucket: str = "production"
 ) -> None:
     """The core logic for preparing a dataset for release."""
     console.print(f"🚀 Preparing update for [cyan]{name}[/] to {bucket} bucket...")
@@ -331,10 +331,8 @@ def _run_prepare_logic(
 
     else:
         # --- This is for CREATE ---
-        # Determine the bucket prefix for the R2 object key
-        bucket_prefix = (
-            "internal" if bucket == "internal" else Path(Path(name).stem).as_posix()
-        )
+        # Use dataset-based prefix regardless of bucket; bucket is resolved separately
+        bucket_prefix = Path(Path(name).stem).as_posix()
         new_dataset_obj = {
             "fileName": name,
             "bucket": bucket,  # Track which bucket this dataset belongs to

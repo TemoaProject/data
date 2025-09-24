@@ -479,7 +479,8 @@ def test_prepare_internal_bucket(test_repo: Path, mocker: MockerFixture) -> None
     new_file = test_repo / "internal_dataset.sqlite"
     new_file.touch()
 
-    mocker.patch("datamanager.core.get_r2_client")
+    mock_r2_client = mocker.patch("datamanager.core.get_r2_client").return_value
+    mock_r2_client.head_object.return_value = {"ContentLength": 1024}
     mock_upload = mocker.patch("datamanager.core.upload_to_staging")
 
     result = runner.invoke(
@@ -512,3 +513,91 @@ def test_pull_internal_bucket(test_repo: Path, mocker: MockerFixture) -> None:
     call_args = mock_pull.call_args[0]
     # Should use internal bucket
     assert call_args[3] == "internal"  # bucket parameter
+
+
+def test_bucket_prefix_uses_dataset_stem_consistently(
+    test_repo: Path, mocker: MockerFixture
+) -> None:
+    """Test that bucket_prefix logic uses dataset stem for both internal and production buckets."""
+    os.chdir(test_repo)
+    new_file = test_repo / "test-dataset.sqlite"
+    new_file.touch()
+
+    mock_r2_client = mocker.patch("datamanager.core.get_r2_client").return_value
+    mock_r2_client.head_object.return_value = {"ContentLength": 1024}
+    mock_upload = mocker.patch("datamanager.core.upload_to_staging")
+    mocker.patch("datamanager.core.download_from_r2")
+
+    # Test production bucket (default) by calling the core logic directly
+    mock_ctx = mocker.MagicMock()
+    mock_ctx.obj = {}
+    main_app._run_prepare_logic(mock_ctx, "test-dataset.sqlite", new_file, "production")
+
+    dataset_prod = manifest.get_dataset("test-dataset.sqlite")
+    assert dataset_prod is not None
+    prod_r2_key = dataset_prod["history"][0]["r2_object_key"]
+    # Should use dataset stem as prefix, not "production"
+    assert prod_r2_key.startswith("test-dataset/"), (
+        f"Expected dataset stem prefix, got: {prod_r2_key}"
+    )
+
+    # Reset mocks for internal bucket test
+    mock_upload.reset_mock()
+
+    # Test internal bucket by calling the core logic directly
+    main_app._run_prepare_logic(mock_ctx, "test-dataset.sqlite", new_file, "internal")
+
+    dataset_internal = manifest.get_dataset("test-dataset.sqlite")
+    assert dataset_internal is not None
+    internal_r2_key = dataset_internal["history"][0]["r2_object_key"]
+    # Should use same dataset stem as prefix, not "internal"
+    assert internal_r2_key.startswith("test-dataset/"), (
+        f"Expected dataset stem prefix, got: {internal_r2_key}"
+    )
+
+    # Both should use the same prefix structure (dataset stem)
+    assert prod_r2_key.split("/")[0] == internal_r2_key.split("/")[0] == "test-dataset"
+
+
+def test_update_logic_works_with_dataset_stem_prefix(
+    test_repo: Path, mocker: MockerFixture
+) -> None:
+    """Test that update logic correctly derives r2_dir from existing r2_object_key."""
+    os.chdir(test_repo)
+
+    # Mock R2 client and operations
+    mock_r2_client = mocker.patch("datamanager.core.get_r2_client").return_value
+    mock_r2_client.head_object.return_value = {"ContentLength": 1024}
+    mocker.patch("datamanager.core.upload_to_staging")
+    mocker.patch("datamanager.core.download_from_r2")
+
+    # Mock diff generation
+    fake_diff = "--- old\n+++ new\n-old line\n+new line\n"
+    fake_summary = "# summary: 1 add, 1 del\n"
+    mocker.patch(
+        "datamanager.core.generate_sql_diff", return_value=(fake_diff, fake_summary)
+    )
+
+    # Create a new version file
+    v2_file = test_repo / "update-test.sqlite"
+    v2_file.write_text("updated content")
+
+    # Prepare an update (this will create v3)
+    mock_ctx = mocker.MagicMock()
+    mock_ctx.obj = {}
+    main_app._run_prepare_logic(mock_ctx, "core-dataset.sqlite", v2_file, "production")
+
+    # Verify the update was created correctly
+    dataset = manifest.get_dataset("core-dataset.sqlite")
+    assert dataset is not None
+
+    # Should have 3 versions now (v1, v2, v3)
+    assert len(dataset["history"]) == 3
+    latest_entry = dataset["history"][0]
+
+    # The new version should derive its directory from the previous r2_object_key
+    # Previous key was "core-dataset/v2-<hash>.sqlite", so new should be "core-dataset/v3-<hash>.sqlite"
+    assert latest_entry["r2_object_key"].startswith("core-dataset/v3-"), (
+        f"Update should derive from existing key: {latest_entry['r2_object_key']}"
+    )
+    assert latest_entry["version"] == "v3"

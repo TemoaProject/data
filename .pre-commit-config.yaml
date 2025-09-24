@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.8.19
+    rev: 0.8.22
     hooks:
       # Dependency management
       - id: uv-lock
@@ -20,6 +20,11 @@ repos:
       - id: check-added-large-files
         args: ["--maxkb=1024"]
       - id: debug-statements
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.20.0
+    hooks:
+      - id: pyupgrade
 
     # Python Linting & Formatting with Ruff
   - repo: https://github.com/astral-sh/ruff-pre-commit

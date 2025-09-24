@@ -59,10 +59,7 @@ def resolve_bucket_alias(bucket_alias: str) -> str:
     Returns:
         The actual bucket name from settings
     """
-    if bucket_alias == "internal":
-        return settings.internal_bucket
-    else:
-        return settings.bucket
+    return _resolve_bucket(bucket_alias)
 
 
 def _resolve_bucket(bucket: str | None) -> str:
@@ -152,32 +149,9 @@ def pull_and_verify(
     client = get_r2_client()
     try:
         download_from_r2(client, object_key, output_path, bucket)
-    except Exception:
-        return False  # Error message is printed inside download_from_r2
-
-    console.print("Verifying file integrity...")
-    downloaded_hash = hash_file(output_path)
-
-    if downloaded_hash == expected_hash:
-        return True
-    else:
-        console.print("[bold red]Integrity check FAILED![/]")
-        console.print(f"  Expected SHA256: {expected_hash}")
-        console.print(f"  Actual SHA256:   {downloaded_hash}")
-        console.print(f"Deleting corrupted file: [yellow]{output_path}[/]")
-        os.remove(output_path)
+    except (ClientError, FileNotFoundError, OSError, PermissionError) as e:
+        console.print(f"[bold red]Error downloading file: {e}[/]")
         return False
-    """
-    Downloads a file from R2, verifies its hash, and cleans up on failure.
-
-    Returns:
-        True if download and verification succeed, False otherwise.
-    """
-    client = get_r2_client()
-    try:
-        download_from_r2(client, object_key, output_path, bucket)
-    except Exception:
-        return False  # Error message is printed inside download_from_r2
 
     console.print("Verifying file integrity...")
     downloaded_hash = hash_file(output_path)
@@ -385,16 +359,4 @@ def upload_to_staging(client: S3Client, file_path: Path, object_key: str) -> Non
 
 def upload_to_internal(client: S3Client, file_path: Path, object_key: str) -> None:
     """Uploads a file to the INTERNAL R2 bucket with a progress bar."""
-    file_size = file_path.stat().st_size
-    with Progress() as progress:
-        task = progress.add_task(
-            f"[blue]Uploading to internal: {file_path.name}...", total=file_size
-        )
-        client.upload_file(
-            str(file_path),
-            settings.internal_bucket,
-            object_key,
-            Callback=lambda bytes_transferred: progress.update(
-                task, advance=bytes_transferred
-            ),
-        )
+    upload_to_r2(client, file_path, object_key, bucket="internal")
