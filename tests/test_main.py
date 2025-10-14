@@ -21,6 +21,12 @@ def test_prepare_for_create_success(test_repo: Path, mocker: MockerFixture) -> N
     mocker.patch("datamanager.core.get_r2_client")
     mock_upload = mocker.patch("datamanager.core.upload_to_staging")
 
+    # Mock the temoa hash prompt to return empty (skip)
+    mocker.patch(
+        "questionary.text",
+        return_value=mocker.Mock(ask=mocker.Mock(return_value="")),
+    )
+
     result = runner.invoke(app, ["prepare", "new-dataset.sqlite", str(new_file)])
 
     assert result.exit_code == 0, result.stdout
@@ -32,6 +38,7 @@ def test_prepare_for_create_success(test_repo: Path, mocker: MockerFixture) -> N
     assert dataset is not None
     assert dataset["history"][0]["diffFromPrevious"] is None
     assert dataset["history"][0]["description"] == "pending-merge"
+    assert dataset["history"][0]["temoaRepoHash"] is None
 
 
 def test_prepare_for_update_with_small_diff(
@@ -43,6 +50,12 @@ def test_prepare_for_update_with_small_diff(
     mock_r2_client.head_object.return_value = {"ContentLength": 1024}
     mocker.patch("datamanager.core.upload_to_staging")
     mocker.patch("datamanager.core.download_from_r2")
+
+    # Mock the temoa hash prompt to return empty (skip)
+    mocker.patch(
+        "questionary.text",
+        return_value=mocker.Mock(ask=mocker.Mock(return_value="")),
+    )
 
     # Prepare a fake summary and full diff
     fake_summary = "# summary: 1 add, 1 del\n"
@@ -80,6 +93,13 @@ def test_prepare_for_update_with_large_diff(
     mock_r2_client.head_object.return_value = {"ContentLength": 1024}
     mocker.patch("datamanager.core.upload_to_staging")
     mocker.patch("datamanager.core.download_from_r2")
+
+    # Mock the temoa hash prompt to return empty (skip)
+    mocker.patch(
+        "questionary.text",
+        return_value=mocker.Mock(ask=mocker.Mock(return_value="")),
+    )
+
     # Make the full diff larger than the default limit, but still provide a summary
     large_full = "line\n" * (settings.max_diff_lines + 1)
     small_summary = "# summary: huge diff, see details in PR\n"
@@ -114,6 +134,12 @@ def test_prepare_no_changes(test_repo: Path, mocker: MockerFixture) -> None:
     """Test 'prepare' when the file hash is identical to the latest version."""
     os.chdir(test_repo)
     mock_upload = mocker.patch("datamanager.core.upload_to_staging")
+
+    # Mock the temoa hash prompt to return empty (skip)
+    mocker.patch(
+        "questionary.text",
+        return_value=mocker.Mock(ask=mocker.Mock(return_value="")),
+    )
 
     result = runner.invoke(app, ["prepare", "core-dataset.sqlite", "new_data.sqlite"])
 
