@@ -21,7 +21,7 @@ Use the `datamanager` tool to stage your changes. The `prepare` command handles 
 uv run datamanager prepare energy-data.sqlite ./local-files/new-energy.sqlite
 ```
 
-The tool will guide you through the process. For other maintenance tasks like `rollback` or `delete`, use the corresponding command.
+The tool will guide you through the process, including an optional prompt for the **Temoa Repository Hash** (git commit hash) to track which version of the temoa repository this database works against. For other maintenance tasks like `rollback` or `delete`, use the corresponding command.
 
 ## Step 3: Commit and Push
 

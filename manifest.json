@@ -10,6 +10,7 @@
         "r2_object_key": "test_database/v4-6d60f0035a80de92c3f3df433212699e0584a09a7d4943693ae0889d98640641.sqlite",
         "diffFromPrevious": "diffs/test_database.sqlite/diff-v3-to-v4.diff",
         "commit": "5803a97",
+        "temoaRepoHash": null,
         "description": "testing the autogenerating data docs script"
       },
       {
@@ -19,6 +20,7 @@
         "r2_object_key": "test_database/v3-6c37e0744a6f49f8b3e5b24b74080c2ae845b925633ccefa81193201639bee12.sqlite",
         "diffFromPrevious": "diffs/test_database.sqlite/diff-v2-to-v3.diff",
         "commit": "ecc49b5",
+        "temoaRepoHash": null,
         "description": "testing sql diffing with summary"
       },
       {
@@ -28,6 +30,7 @@
         "r2_object_key": "test_database/v2-e287b00772296e3ae8d65699570662ff316d8dae50deef4041fde65ca73202a5.sqlite",
         "diffFromPrevious": "diffs/test_database.sqlite/diff-v1-to-v2.diff",
         "commit": "a621125",
+        "temoaRepoHash": null,
         "description": "updating test_database to get multiple versions"
       }
     ]

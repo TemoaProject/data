@@ -33,6 +33,11 @@ Prepares a dataset for release by uploading it to the staging area and updating 
 uv run datamanager prepare <dataset-name.sqlite> <path/to/local/file.sqlite>
 ```
 
+When preparing a dataset, you will be prompted for an optional **Temoa Repository Hash** (git commit hash). This helps track which version of the temoa repository this database works against. You can:
+
+- Enter a valid git commit hash (e.g., `abc1234` or `a1b2c3d4e5f6...`)
+- Press Enter to skip (optional field)
+
 After running `prepare`, follow the on-screen instructions:
 
 1. `git add manifest.json`
@@ -44,11 +49,19 @@ After running `prepare`, follow the on-screen instructions:
 
 ### `list-datasets`
 
-Lists all datasets currently tracked in `manifest.json`.
+Lists all datasets currently tracked in `manifest.json`, including the latest version, update time, SHA256 hash, and Temoa repository hash (if available).
 
 ```bash
 uv run datamanager list-datasets
 ```
+
+The output includes:
+
+- **Dataset Name**: The logical name of the dataset
+- **Latest Version**: The most recent version tag
+- **Last Updated**: When the latest version was created (relative time and absolute timestamp)
+- **SHA256**: First 12 characters of the file hash
+- **Temoa Hash**: First 12 characters of the temoa repository commit hash (or "N/A" if not specified)
 
 ![list_datasets](../../assets/list_datasets.png)
 

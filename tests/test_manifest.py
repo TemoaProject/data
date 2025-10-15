@@ -5,6 +5,7 @@ import json
 import pytest
 
 from datamanager import manifest
+from datamanager.__main__ import _validate_temoa_hash
 
 
 def test_read_manifest(test_repo: Path) -> None:
@@ -48,3 +49,27 @@ def test_update_latest_history_entry(test_repo: Path) -> None:
     assert data[0]["history"][0]["version"] == "v2"
     assert data[0]["history"][0]["commit"] == "abcdef"
     assert data[0]["latestVersion"] == "v2"
+
+
+def test_validate_temoa_hash() -> None:
+    """Test the temoa hash validation function."""
+    # Valid short hash
+    assert _validate_temoa_hash("abc123")
+    assert _validate_temoa_hash("ABCDEF")
+
+    # Valid long hash
+    assert _validate_temoa_hash("a" * 40)
+    assert _validate_temoa_hash("1234567890abcdef" * 2)
+
+    # Invalid formats
+    assert not _validate_temoa_hash("gggggg")  # 'g' is not hex
+    assert not _validate_temoa_hash("abc123g")  # contains 'g'
+    assert not _validate_temoa_hash("abc12345-")  # contains dash
+    assert _validate_temoa_hash("")  # Empty is allowed (optional)
+    assert _validate_temoa_hash("   ")  # Whitespace only is allowed (optional)
+
+    # Too short
+    assert not _validate_temoa_hash("abc")  # Less than 4 chars
+
+    # Too long
+    assert not _validate_temoa_hash("a" * 41)  # More than 40 chars

@@ -2,6 +2,7 @@
 import subprocess
 from datetime import datetime, timezone
 import tempfile
+import re
 from dateutil.parser import isoparse
 from pathlib import Path
 
@@ -39,6 +40,22 @@ def _rel(iso: str) -> str:
     delta = datetime.now(timezone.utc) - dt
     hours = int(delta.total_seconds() // 3600)
     return f"{hours} h ago"
+
+
+def _validate_temoa_hash(temoa_hash: str) -> bool:
+    """
+    Validates that a temoa repo hash looks like a valid git commit hash.
+    accepts 4-40 hexadecimal characters (case-insensitive).
+    """
+    if not temoa_hash or not temoa_hash.strip():
+        return True  # Empty is allowed (optional field)
+
+    temoa_hash = temoa_hash.strip()
+    # Git commit hashes are hexadecimal and can be 4-40 characters
+    if re.match(r"^[a-fA-F0-9]{4,40}$", temoa_hash):
+        return True
+
+    return False
 
 
 # Initialize Typer app and Rich console
@@ -97,15 +114,26 @@ def verify(ctx: typer.Context) -> None:
 def list_datasets(ctx: typer.Context) -> None:
     """Lists all datasets tracked in the manifest."""
     data = manifest.read_manifest()
-    table = Table("Dataset Name", "Latest Version", "Last Updated", "SHA256")
+    table = Table(
+        "Dataset Name", "Latest Version", "Last Updated", "SHA256", "Temoa Hash"
+    )
     for item in data:
         latest = item["history"][0]
+        temoa_hash_display = "N/A"
+        if latest.get("temoaRepoHash"):
+            temoa_hash_display = (
+                f"{latest['temoaRepoHash'][:12]}..."
+                if len(str(latest["temoaRepoHash"])) > 12
+                else str(latest["temoaRepoHash"])
+            )
+
         table.add_row(
             item["fileName"],
             latest["version"],
             # latest["timestamp"],
             f"{_rel(latest['timestamp'])} ({latest['timestamp']})",
             f"{latest['sha256'][:12]}...",
+            temoa_hash_display,
         )
     console.print(table)
 
@@ -128,8 +156,12 @@ def _run_pull_logic(name: str, version: str, output: Optional[Path]) -> None:
     else:
         final_path = output
 
+    temoa_hash_info = ""
+    if version_entry.get("temoaRepoHash"):
+        temoa_hash_info = f", temoa: {version_entry['temoaRepoHash']}"
+
     console.print(
-        f"Pulling version [magenta]{version_entry['version']}[/] (commit: {version_entry['commit']}) to [cyan]{final_path}[/]"
+        f"Pulling version [magenta]{version_entry['version']}[/] (commit: {version_entry['commit']}{temoa_hash_info}) to [cyan]{final_path}[/]"
     )
 
     success = core.pull_and_verify(
@@ -190,10 +222,12 @@ def _pull_interactive(ctx: typer.Context) -> None:
         console.print(f"[red]Error: No version history found for {selected_name}.[/]")
         return
 
-    version_choices = [
-        f"{entry['version']} (commit: {entry['commit']}, {_rel(entry['timestamp'])})"
-        for entry in dataset["history"]
-    ]
+    version_choices = []
+    for entry in dataset["history"]:
+        temoa_info = f", temoa: {entry.get('temoaRepoHash', 'N/A')}"
+        version_choices.append(
+            f"{entry['version']} (commit: {entry['commit']}, {_rel(entry['timestamp'])}{temoa_info})"
+        )
     selected_version_str = questionary.select(
         "Which version would you like to pull?", choices=version_choices
     ).ask()
@@ -230,6 +264,48 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
     new_hash = core.hash_file(file)
     dataset = manifest.get_dataset(name)
     client = core.get_r2_client()  # Moved up to be available for diffing
+
+    # Prompt for temoa repo hash (optional)
+    temoa_hash = None
+    if not ctx.obj.get("no_prompt"):
+        console.print("\n[bold]Temoa Repository Hash[/]")
+        console.print(
+            "This helps track which version of the temoa repository this database works against."
+        )
+
+        while True:
+            temoa_hash_input = questionary.text(
+                "Enter the temoa repository commit hash (optional, press Enter to skip):",
+                default="",
+            ).ask()
+
+            if not temoa_hash_input or not temoa_hash_input.strip():
+                console.print("Skipping temoa repo hash (optional field).")
+                break
+
+            temoa_hash_candidate = temoa_hash_input.strip()
+            if _validate_temoa_hash(temoa_hash_candidate):
+                temoa_hash = temoa_hash_candidate
+                console.print(f"Using temoa repo hash: [green]{temoa_hash}[/]")
+                break
+            else:
+                console.print(
+                    f"[bold red]Invalid format:[/] '{temoa_hash_candidate}' doesn't look like a valid git commit hash."
+                )
+                console.print(
+                    "Git commit hashes should contain only hexadecimal characters (0-9, a-f, A-F) and be 4-40 characters long."
+                )
+                retry = questionary.confirm(
+                    "Would you like to try again?", default=True
+                ).ask()
+                if not retry:
+                    console.print("Skipping temoa repo hash.")
+                    break
+    else:
+        # In non-interactive mode, temoa hash is not provided
+        console.print(
+            "Running in non-interactive mode - temoa repo hash not specified."
+        )
 
     # Check for changes BEFORE doing any uploads.
     if dataset:
@@ -287,6 +363,7 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
             if diff_git_path
             else None,  # Add path to entry
             "commit": "pending-merge",
+            "temoaRepoHash": temoa_hash,
             "description": "pending-merge",
         }
         manifest.add_history_entry(name, new_entry)
@@ -307,6 +384,7 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
                     "staging_key": staging_key,
                     "diffFromPrevious": None,  # Explicitly None for new datasets
                     "commit": "pending-merge",
+                    "temoaRepoHash": temoa_hash,
                     "description": "pending-merge",
                 }
             ],
@@ -419,6 +497,7 @@ def _run_rollback_logic(ctx: typer.Context, name: str, to_version: str) -> None:
         "r2_object_key": target_entry["r2_object_key"],
         "diffFromPrevious": None,
         "commit": "pending-merge",
+        "temoaRepoHash": target_entry.get("temoaRepoHash"),
         "description": f"Rollback to version {target_entry['version']}",
     }
 
@@ -481,10 +560,12 @@ def _rollback_interactive(ctx: typer.Context) -> None:
         return
 
     # Exclude the latest version from the choices, as you can't roll back to it.
-    version_choices = [
-        f"{entry['version']} (commit: {entry['commit']}, {_rel(entry['timestamp'])})"
-        for entry in dataset["history"][1:]  # Start from the second entry
-    ]
+    version_choices = []
+    for entry in dataset["history"][1:]:  # Start from the second entry
+        temoa_info = f", temoa: {entry.get('temoaRepoHash', 'N/A')}"
+        version_choices.append(
+            f"{entry['version']} (commit: {entry['commit']}, {_rel(entry['timestamp'])}{temoa_info})"
+        )
     selected_version_str = questionary.select(
         "Which version do you want to restore?", choices=version_choices
     ).ask()
