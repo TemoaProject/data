@@ -730,9 +730,9 @@ def _prune_versions_interactive(ctx: typer.Context) -> None:
 
     keep_str = questionary.text(
         "How many of the most recent versions do you want to keep?",
-        validate=lambda text: text.isdigit()
-        and int(text) > 0
-        or "Please enter a positive number.",
+        validate=lambda text: (
+            text.isdigit() and int(text) > 0 or "Please enter a positive number."
+        ),
     ).ask()
 
     if keep_str is None:
