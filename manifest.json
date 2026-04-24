@@ -60,11 +60,10 @@
         "timestamp": "2026-04-21T18:38:39.274925Z",
         "sha256": "7b8bfa0e3a3dfd5a3f7341f9448869d3b4295107a19efe3e6fb5eda9aa46ecdf",
         "r2_object_key": "usp_26z_base/v1-7b8bfa0e3a3dfd5a3f7341f9448869d3b4295107a19efe3e6fb5eda9aa46ecdf.sqlite",
-        "staging_key": "staging-uploads/7b8bfa0e3a3dfd5a3f7341f9448869d3b4295107a19efe3e6fb5eda9aa46ecdf.sqlite",
         "diffFromPrevious": null,
-        "commit": "pending-merge",
+        "commit": "c40f8a4",
         "temoaRepoHash": null,
-        "description": "pending-merge"
+        "description": "First commit of the 26-zone, 20-week US Power System Model (No server demands)"
       }
     ]
   }
