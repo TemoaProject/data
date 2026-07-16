@@ -66,5 +66,22 @@
         "description": "First commit of the 26-zone, 20-week US Power System Model (No server demands)"
       }
     ]
+  },
+  {
+    "fileName": "oeo_9r_8d_base.sqlite",
+    "latestVersion": "v1",
+    "history": [
+      {
+        "version": "v1",
+        "timestamp": "2026-07-16T12:28:03.466538Z",
+        "sha256": "82c325ac430c9678599a438b147ed9cf1c7e4ea0af1f9a9aef282ee981db3b59",
+        "r2_object_key": "oeo_9r_8d_base/v1-82c325ac430c9678599a438b147ed9cf1c7e4ea0af1f9a9aef282ee981db3b59.sqlite",
+        "staging_key": "staging-uploads/82c325ac430c9678599a438b147ed9cf1c7e4ea0af1f9a9aef282ee981db3b59.sqlite",
+        "diffFromPrevious": null,
+        "commit": "pending-merge",
+        "temoaRepoHash": "9d26bd57b81abec5c2632ba2a9d591d91472a99a",
+        "description": "pending-merge"
+      }
+    ]
   }
 ]
