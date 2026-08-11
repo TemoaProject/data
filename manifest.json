@@ -76,11 +76,10 @@
         "timestamp": "2026-08-11T13:44:42.828048Z",
         "sha256": "a9ea341356ad160ea4886fe6ca6599439cbedd8766aca94a10cf68bdf18b08b1",
         "r2_object_key": "oeo_9r_8d_base/v2-a9ea341356ad160ea4886fe6ca6599439cbedd8766aca94a10cf68bdf18b08b1.sqlite",
-        "staging_key": "staging-uploads/a9ea341356ad160ea4886fe6ca6599439cbedd8766aca94a10cf68bdf18b08b1.sqlite",
         "diffFromPrevious": "diffs/oeo_9r_8d_base.sqlite/diff-v1-to-v2.diff",
-        "commit": "pending-merge",
+        "commit": "00b8e32",
         "temoaRepoHash": "9d26bd57b81abec5c2632ba2a9d591d91472a99a",
-        "description": "pending-merge"
+        "description": "Add oeo_9r_8d_base v2: fix one-way capacity_to_activity on inter-regional ties"
       },
       {
         "version": "v1",
