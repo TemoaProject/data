@@ -3,10 +3,10 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 from unittest.mock import MagicMock
-from pytest_mock import MockerFixture
-import pytest
 
+import pytest
 from botocore.exceptions import ClientError
+from pytest_mock import MockerFixture
 
 from datamanager import core
 from datamanager.config import settings

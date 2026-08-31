@@ -1,21 +1,20 @@
 # datamanager/__main__.py
-import subprocess
-from datetime import datetime, timezone
-import tempfile
 import re
-from dateutil.parser import isoparse
+import subprocess
+import tempfile
+from collections.abc import Callable
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 import questionary
 import typer
+from dateutil.parser import isoparse
 from rich.console import Console
 from rich.table import Table
 
-from typing import Callable, Optional, Any
-
-from datamanager.config import settings
 from datamanager import core, manifest
-
+from datamanager.config import settings
 
 # Common options for all commands
 COMMON_OPTIONS = dict(
@@ -31,13 +30,13 @@ COMMON_OPTIONS = dict(
 def _ask_confirm(ctx: typer.Context, prompt: str, default: bool = False) -> bool:
     if ctx.obj.get("no_prompt"):
         return True
-    result: Optional[bool] = questionary.confirm(prompt, default=default).ask()
+    result: bool | None = questionary.confirm(prompt, default=default).ask()
     return bool(result)  # Cast to bool to avoid NoneType issues
 
 
 def _rel(iso: str) -> str:
     dt = isoparse(iso)
-    delta = datetime.now(timezone.utc) - dt
+    delta = datetime.now(UTC) - dt
     hours = int(delta.total_seconds() // 3600)
     return f"{hours} h ago"
 
@@ -138,7 +137,7 @@ def list_datasets(ctx: typer.Context) -> None:
     console.print(table)
 
 
-def _run_pull_logic(name: str, version: str, output: Optional[Path]) -> None:
+def _run_pull_logic(name: str, version: str, output: Path | None) -> None:
     """The core logic for pulling and verifying a dataset."""
     console.print(f"🔎 Locating version '{version}' for dataset '{name}'...")
     version_entry = manifest.get_version_entry(name, version)
@@ -188,7 +187,7 @@ def pull(
         "-v",
         help="Version to pull (e.g., 'v1'). Defaults to latest.",
     ),
-    output: Optional[Path] = typer.Option(
+    output: Path | None = typer.Option(
         None,
         "--output",
         "-o",
@@ -330,7 +329,7 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
         console.print(f"Change detected! Preparing new version: {new_version}")
 
         console.print("Downloading previous version to generate diff...")
-        diff_git_path: Optional[Path] = None
+        diff_git_path: Path | None = None
         with tempfile.TemporaryDirectory() as tempdir:
             old_path = Path(tempdir) / "prev.sqlite"
             # Download from the PRODUCTION bucket
@@ -355,7 +354,7 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
 
         new_entry = {
             "version": new_version,
-            "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "timestamp": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
             "sha256": new_hash,
             "r2_object_key": final_r2_key,
             "staging_key": staging_key,
@@ -376,9 +375,7 @@ def _run_prepare_logic(ctx: typer.Context, name: str, file: Path) -> None:
             "history": [
                 {
                     "version": "v1",
-                    "timestamp": datetime.now(timezone.utc)
-                    .isoformat()
-                    .replace("+00:00", "Z"),
+                    "timestamp": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
                     "sha256": new_hash,
                     "r2_object_key": f"{Path(Path(name).stem)}/v1-{new_hash}.sqlite",
                     "staging_key": staging_key,
@@ -492,7 +489,7 @@ def _run_rollback_logic(ctx: typer.Context, name: str, to_version: str) -> None:
 
     rollback_entry = {
         "version": new_version,
-        "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "timestamp": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "sha256": target_entry["sha256"],
         "r2_object_key": target_entry["r2_object_key"],
         "diffFromPrevious": None,

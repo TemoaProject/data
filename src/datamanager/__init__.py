@@ -16,5 +16,5 @@ from . import core as core
 from . import manifest as manifest
 from .__main__ import app as app  # keeps `python -m datamanager` handy
 
-__all__ = ["app", "core", "manifest", "__version__"]
+__all__ = ["__version__", "app", "core", "manifest"]
 __version__: str = _dist_version("datamanager")
