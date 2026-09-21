@@ -2,25 +2,21 @@
 import difflib
 import hashlib
 import io
+import os
 import shutil
 import sqlite3
 import subprocess
-from pathlib import Path, PurePath
-import os
 import uuid
-
-from botocore.exceptions import ClientError
-
-import boto3
-from rich.progress import Progress
-from rich.console import Console
-
-from types_boto3_s3.client import S3Client
-
+from pathlib import Path, PurePath
 from typing import Any, TypedDict
 
-from datamanager.config import settings
+import boto3
+from botocore.exceptions import ClientError
+from rich.console import Console
+from rich.progress import Progress
+from types_boto3_s3.client import S3Client
 
+from datamanager.config import settings
 
 console = Console()
 

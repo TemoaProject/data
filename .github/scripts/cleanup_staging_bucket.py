@@ -1,6 +1,7 @@
 import os
+from datetime import UTC, datetime, timedelta
+
 import boto3
-from datetime import datetime, timedelta, timezone
 
 DELETION_THRESHOLD_DAYS = 7
 # Load config from environment
@@ -25,7 +26,7 @@ paginator = client.get_paginator("list_objects_v2")
 pages = paginator.paginate(Bucket=STAGING_BUCKET)
 
 objects_to_delete = []
-now = datetime.now(timezone.utc)
+now = datetime.now(UTC)
 threshold = now - timedelta(days=DELETION_THRESHOLD_DAYS)
 
 for page in pages:
@@ -50,7 +51,7 @@ for i in range(0, len(objects_to_delete), 1000):
     response = client.delete_objects(
         Bucket=STAGING_BUCKET, Delete={"Objects": chunk, "Quiet": True}
     )
-    if "Errors" in response and response["Errors"]:
+    if response.get("Errors"):
         print("  ❌ ERROR during batch deletion:")
         for error in response["Errors"]:
             print(
