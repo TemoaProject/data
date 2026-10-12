@@ -1,7 +1,8 @@
 # tests/test_manifest.py
+import json
 import os
 from pathlib import Path
-import json
+
 import pytest
 
 from datamanager import manifest
