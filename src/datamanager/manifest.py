@@ -6,21 +6,21 @@ This module ensures that the manifest is handled safely and consistently.
 
 import json
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from rich.console import Console
 
 from datamanager.config import settings
 
 __all__ = [
-    "read_manifest",
-    "write_manifest",
-    "get_dataset",
     "add_history_entry",
-    "update_latest_history_entry",
-    "get_version_entry",
     "add_new_dataset",
+    "get_dataset",
+    "get_version_entry",
+    "read_manifest",
     "update_dataset",
+    "update_latest_history_entry",
+    "write_manifest",
 ]
 
 # Initialize console for any feedback
@@ -73,7 +73,7 @@ def update_latest_version(name: str, new_version: str) -> None:
     write_manifest(data)
 
 
-def get_dataset(name: str) -> Optional[dict[str, Any]]:
+def get_dataset(name: str) -> dict[str, Any] | None:
     """
     Finds and returns a single dataset from the manifest by its logical name.
 
@@ -158,7 +158,7 @@ def update_latest_history_entry(name: str, final_entry: dict[str, Any]) -> None:
 
 def get_version_entry(
     dataset_name: str, version: str = "latest"
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any] | None:
     """
     Finds the history entry for a specific version of a dataset.
 
