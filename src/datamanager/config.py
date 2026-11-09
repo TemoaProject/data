@@ -1,10 +1,12 @@
 # src/datamanager/config.py
 from __future__ import annotations
+
+import warnings
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from dotenv import find_dotenv, dotenv_values
-import warnings
+
+from dotenv import dotenv_values, find_dotenv
 
 _ENV_PATH = Path(find_dotenv()) if find_dotenv() else None
 _ENV = dotenv_values(_ENV_PATH) if _ENV_PATH else {}
