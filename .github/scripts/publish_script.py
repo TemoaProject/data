@@ -1,8 +1,8 @@
-import os
 import json
+import os
 import subprocess
-
 from typing import Any
+
 import boto3
 from botocore.exceptions import ClientError
 
@@ -194,7 +194,7 @@ def handle_publications(manifest_data: list[dict[str, Any]]) -> bool:
                 if entry.get("description") == "pending-merge":
                     entry["description"] = commit_details["subject"]
 
-                if "staging_key" in entry and entry["staging_key"]:
+                if entry.get("staging_key"):
                     staging_key = entry.pop("staging_key")
                     final_key = entry["r2_object_key"]
                     print(f"Publishing: {dataset['fileName']} v{entry['version']}")
