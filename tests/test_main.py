@@ -5,8 +5,8 @@ from pytest_mock import MockerFixture
 from typer.testing import CliRunner
 
 from datamanager import __main__ as main_app
-from datamanager.__main__ import app
 from datamanager import manifest
+from datamanager.__main__ import app
 from datamanager.config import settings
 
 runner = CliRunner()
